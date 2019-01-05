@@ -1,10 +1,10 @@
+'use scrict';
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema();
 
 mongoose.Promise = global.Promise;
 
-const UserSchema = new Schema({
+const UserSchema = mongoose.Schema({
   username: {
     type: String,
     unique: true,
@@ -49,21 +49,33 @@ const UserSchema = new Schema({
 });
 
 UserSchema.virtual('fullName').get(function() {
-  return `${this.firstName} ${this.lastName}`;
+  return (`${this.firstName} ${this.lastName}`).trim();
 });
 
-UserSchema.methods.serialize = function() {
-  const inches;
+UserSchema.virtual('fullHeight').get(function() {
+  if(!this.height) {
+    return '';
+  }
+
+  let inches;
   if(this.inches) {
-    inches = ` ${this.inches} in.`
+    inches = `${this.inches}''`
   };
+
+  const fullHeight = this.heightUnit === 'ft' ? `${this.height}' ${inches}` :
+    `${this.height} ${this.heightUnit}`;
+
+  return fullHeight.trim();
+})
+
+UserSchema.methods.serialize = function() {
 
   return {
     username: this.username,
-    fullName: this.fullName,
-    height: `${this.height} ${this.heightUnit}${inches || null}`,
-    weight: `${this.weight} ${this.weightUnit}`,
-    bodyFat: `${this.bodyFat} %`
+    name: this.fullName,
+    height: this.fullHeight,
+    weight: (`${this.weight || ''} ${this.weightUnit || ''}`).trim(),
+    bodyFat: `${this.bodyFat || ''}`
   };
 };
 

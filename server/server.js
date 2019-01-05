@@ -1,36 +1,36 @@
+'use strict';
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const passport = require('passport');
+const cors = require('cors')
 
 const { PORT, DATABASE_URL } = require('./config');
-const {router: usersRouter} = require('./users/router');
+const {router: usersRouter} = require('./users');
+const {router: authRouter} = require('./auth');
+const {localStrategy, jwtStrategy} = require('./auth/strategies')
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan('common'));
 
-app.use('/users', )
+// CORS
+app.use(cors());
 
-app.get('/workout', (req, res) => {
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+
+app.get('/', (req, res) => {
   const fakeData = {
     foo: 'bar',
     buzz: 'bang'
   };
   res.json(fakeData);
-});
-
-app.post('/users', (req, res) => {
-  const { 
-    userName, 
-    password, 
-    firstName, 
-    lastName
-  } = req.body;
-  const newUser = {
-    userName, 
-    password, 
-    firstName, 
-    lastName
-  }
 });
 
 let server;
@@ -41,7 +41,7 @@ const runServer = (databaseUrl, port = PORT) => {
 
 app.listen(PORT, () => {
   console.log(`App is listening on port: ${PORT}`);
-  mongoose.connect('mongodb://localhost/test');
+  mongoose.connect(DATABASE_URL);
   
 });
 
