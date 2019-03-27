@@ -1,140 +1,25 @@
 'use strict';
 const express = require('express');
 
-const {User} = require('./model');
+const { User, Profile } = require('./model');
+const { jwtAuth } = require('../auth')
+const { validateUser, validateProfile } = require('./validate');
+const { createError, handleError, sendRes } = require('../utils');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-  // validate required fields
-  const requiredFields = ['username', 'password']; 
-  const missingFields = requiredFields.filter( field => !(field in req.body));
+// create user and profile
+router.post('/', validateUser, validateProfile, (req, res) => {
+  const {username, password, email, profile} = req.body;
 
-  sendErrorMessage(
-    400, 
-    'ValidationError', 
-    'Missing required fields', 
-    missingFields
-  );
-
-  // validate Nonempty fields
-  const nonEmptyFields = ['password', 'username']
-  const emptyFields = nonEmptyFields.filter( field => 
-    req.body[field].trim() === ''
-  );
-
-  sendErrorMessage(
-    400,
-    'ValidationError',
-    'Field cannot be empty',
-    emptyFields
-  );
-
-  // validate trimmed fields
-  const trimmedFields = ['username', 'password'];
-  const nonTrimmedFields = trimmedFields.filter(field => 
-    field in req.body && req.body[field].trim() !== req.body[field]
-  );
-
-  sendErrorMessage(
-    400, 
-    'ValidationError', 
-    'Cannot start or end with white space', 
-    nonTrimmedFields
-  );
-
-  // validate length of username and password
-  const lengthFields = {
-    username: {min: 8},
-    password: {min: 10, max: 72}
-  };
-
-  const lengthFieldKeys = Object.keys(lengthFields);
-  const badLengthFields = lengthFieldKeys.filter( field => 
-    field in req.body && req.body[field].length < lengthFields[field].min ||
-    req.body[field].length > lengthFields[field].max
-  );
-
-  const badLengthMessage = badLengthFields.map(field =>{
-    if(req.body[field].trim().length < lengthFields[field].min) {
-      return `${field} must be at least ${lengthFields[field].min} characters long`
-    } else if(req.body[field].trim().length > lengthFields[field].max) {
-      return `${field} must be no more than ${lengthFields[field].max} characters long`
-    }
-  }).join('; ');
-
-  sendErrorMessage(
-    400,
-    'ValidationError',
-    badLengthMessage,
-    badLengthFields
-  );
-
-  // validate number fields
-  const numberFields = ['height', 'inches', 'weight', 'bodyFat'];
-  const nonNumberFields = numberFields.filter( field => 
-    field in req.body && typeof req.body[field] !== 'number'
-  );
-
-  sendErrorMessage(
-    400, 
-    'ValidationError', 
-    'Field should be a number',
-    nonNumberFields
-  );
-
-  // validate string fields
-  const stringFields = [
-    'username', 'password', 'firstName', 'lastName', 'heightUnit', 'weightUnit'
-  ];
-  const nonStringFields = stringFields.filter(field => 
-    field in req.body && typeof req.body[field] !== 'string'
-  );
-
-  sendErrorMessage(
-    400, 
-    'ValidationError', 
-    'Field should be a string',
-    nonStringFields
-  );
-
-  // validate options
-  const selectOptions = {heightUnit: ['cm', 'ft'], weightUnit: ['lb', 'kg']};
-  const selectFields = Object.keys(selectOptions);
-  const missingOptionFields = selectFields.filter(field => 
-    field in req.body && !selectOptions[field].includes(req.body[field]));
-
-  sendErrorMessage(
-    400, 
-    'ValidationError', 
-    'Field unit is invalid',
-    missingOptionFields
-  );
-
-  if('inches' in req.body && req.body.heightUnit === 'cm') {
-    sendErrorMessage(400, 'ValidationError', 'Incorrect height unit', ['inches'])
-  }
-
-  const {
-    username, 
-    password, 
-    firstName,
-    lastName,
-    height,
-    heightUnit,
-    inches,
-    weight,
-    weightUnit,
-    bodyFat
-  } = req.body;
-
-  return User.find({username})
+  return User
+    .find({username})
     .count()
-    .then( count => {
-      if(count > 0) {
+    .then(count => {
+      if (count > 0) {
         return Promise.reject({
           code: 400,
-          reason: 'ValidationError',
+          reason: 'validationError',
           message: 'username already exists!',
           location: 'username'
         });
@@ -142,42 +27,121 @@ router.post('/', (req, res) => {
       return User.hashPassword(password);
     })
     .then(hash => {
-      return User.create({
+      return User
+        .create({
           username, 
           password: hash, 
-          firstName,
-          lastName,
-          height,
-          heightUnit,
-          inches,
-          weight,
-          weightUnit,
-          bodyFat
-      })
+          email
+        });
     })
     .then(user => {
-      return res.status(201).json(user.serialize());
+      console.log('=== user ===\n', user)
+      return Profile
+        .create({userId: user._id, ...profile});
+    })
+    .then(profile => {
+      console.log('===profile ===\n', profile)
+      return res.status(201).json(profile.serialize());
     })
     .catch(err => {
-      if(err.reason === 'ValidationError') {
+      if(err.reason === 'validationError') {
         return res.status(err.code).json(err);
       }
-      console.error('ERROR:', err);
+      console.error('=== ERROR ===\n', err);
       return res.status(500).json({message:'internal server error'})
     });
-
-  function sendErrorMessage(code, reason, message, location) {
-    const locationString = location.join(', ');
-    if(locationString) {
-      console.log('LOCATION:', location);
-      return res.status(code).json({
-        code,
-        reason,
-        message,
-        location: locationString
-      });
-    };
-  };
 });
 
-module.exports = {router};
+// update user password or email
+router.put('/:userId', jwtAuth,(req, res) => {
+  return User
+    .findByIdAndUpdate(
+      req.params.userId,
+      req.body
+    )
+    .then(() => {
+      return res.status(204);
+    })
+    .catch(err => {
+      console.error('=== Error === \n');
+      return res.status(500).json({message: 'Something went wrong'})
+    });
+
+});
+
+// get profile
+router.get('/profile/:userId/', jwtAuth,(req, res) => {
+  return Profile
+    .findOne({userId: req.params.userId})
+    .populate('workouts')
+    .then(profile => {
+      if (!profile) {
+        createError('validationError', 'profile not found', 404);
+      }
+      return res.status(200).json(profile.serialize());
+    })
+    .catch(err => {
+      return handleError(err, res)
+    })
+})
+
+//update profile
+router.put('/profile/:userId/', jwtAuth, validateProfile, (req, res) => {
+
+  return Profile
+    .findOneAndUpdate(
+      {userId: req.params.userId},
+      req.body
+    )
+    .then(() => {
+      return res.status(200).json({message: 'profile has been updated'});
+    })
+    .catch(err => {
+      return handleError(err, res);
+    });
+});
+
+// TODO: route for new password request
+router.post('/lost-credentials', (req, res) => {
+  const { username, email } = req.body;
+
+  if (!(username || email)) {
+    return sendRes(res, 400, 'invalid fields')
+  }
+
+  function newPasswordWith(field){
+    let query = req.body[field];
+    return User
+      .findOne({[field]:query})
+      .then(user => {
+        if (!user) {
+          return createError(
+            'validationError', 
+            `no account associated with this ${field}`,
+            404
+          )
+        };
+        let tempPassword = `${username}${Date.now()}${email}`
+        user.password = User.hashPassword(tempPassword);
+        user.save();
+        return res.status(200).json(user);
+      })
+      .catch(err => {
+        return handleError(err, res);
+      })
+  };
+
+  return username? newPasswordWith('username') : newPasswordWith('email');
+});
+
+// show all users for debugging only
+// router.get('/', (req, res) => {
+//   return User.find()
+//     .then(users => res.json(users))
+//     .catch(err => {
+//       console.error(err);
+//       res.json({message: 'An error has occured'});
+//     })
+// });
+
+module.exports = { router };

@@ -1,5 +1,6 @@
-//import actions 
+// import actions 
 import {} from '../actions/index'
+
 
 const initialState = [
     {
@@ -51,8 +52,8 @@ const initialState = [
 
 const workoutReducer = (state = initialState, action) => {
   switch(action.type){
-    case ACTION: //some action
-      return; //do something with action
+    // case ACTION: //some action
+    //   return; //do something with action
       
     default:
       return state;

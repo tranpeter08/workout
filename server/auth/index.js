@@ -1,3 +1,3 @@
-const {router} = require('./router');
+const {router, jwtAuth} = require('./router');
 
-module.exports = {router};
+module.exports = {router, jwtAuth};

@@ -1,14 +1,20 @@
 import React from 'react';
+import {connect} from 'react-redux'
+
 import UserInfo from '../container/user-info';
 import WorkoutList from '../container/workout-list';
+import requiresLogin from '../container/requires-login';
 
-const UserPage = (props) => {
-  return (
-    <div>
-      <UserInfo />
-      <WorkoutList />
-    </div>
-  )
+export class UserPage extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <UserInfo />
+        <WorkoutList />
+      </div>
+    )
+  }
 };
 
 export default UserPage;

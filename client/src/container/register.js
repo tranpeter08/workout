@@ -6,27 +6,34 @@ import UserInput from '../components/user-input';
 import Select from  '../components/select';
 import { 
   required, 
-  notEmpty, 
-  length, 
+  notEmpty,
+  noSpaceInside, 
+  length,
   matching, 
   isTrimmed,
   selected
 } from '../validators';
-import validate from '../validate';
+
+import {createUser} from '../actions/user'
+import {logIn} from '../actions/auth'
 
 export class Register extends Component {
   onSubmit(data) {
-    //submit user data to DB, update state with user logged in
-    //redirect to user page on success
     console.log('register data:', data);
+    const {username, password, email, ...profile} = data;
+    return this.props.dispatch(createUser({
+        username,
+        password,
+        email,
+        profile
+      }))
+      .then(() => this.props.dispatch(logIn(username, password)))
   };
 
   render() {
-    console.log('register props:',this.props)
+    // console.log('register props:',this.props)
     const { 
-      heightValue, 
-      heightUnitValue,
-      weightValue, 
+      heightUnitValue, 
       handleSubmit,
       pristine,
       submitting 
@@ -39,74 +46,94 @@ export class Register extends Component {
     />
 
     return (
-      <form action="" onSubmit={handleSubmit((values) => this.onSubmit(values))}>
+      <form 
+        action="" 
+        onSubmit={handleSubmit((data) => this.onSubmit(data))}
+      >
         <Field 
-          name='firstName'
-          label='First Name'
-          type='text'
+            name='username'
+            label='Username'
+            type='text'
+            component={UserInput}
+            validate={[
+              required, 
+              notEmpty,
+              isTrimmed,
+              noSpaceInside,
+              length(8,20),
+            ]}
+          />
+          <Field 
+            name='password'
+            label='Password'
+            type='password'
+            component={UserInput}
+            validate={[
+              required, 
+              notEmpty,
+              isTrimmed,
+              noSpaceInside,
+              length(10),
+            ]}
+          />
+          <Field 
+            name='confirmPassword'
+            label='Confirm Password'
+            type='password'
+            component={UserInput}
+            validate={[required, matching('password')]}
+          />
+          <Field
+          name='email'
+          label='Email'
+          type='email'
           component={UserInput}
-          validate={[notEmpty, isTrimmed]}
-        />
-        <Field 
-          name='lastName'
-          label='Last Name'
-          type='text'
-          component={UserInput}
-          validate={[required, notEmpty, isTrimmed]}
-        />
-        <Field 
-          name='height'
-          label='Height'
-          type='number'
-          component={UserInput}
-        />
-        <Field
-          name='heightUnit'
-          options={['ft', 'cm']}
-          component={Select}
-          validate={selected(heightValue)}
-        />
-        { heightUnitValue === 'ft'? inches : null}
-        <Field 
-          name='weight'
-          label='Weight'
-          type='number'
-          component={UserInput}
-        />
-        <Field
-          name='weightUnit'
-          options={['lb', 'kg']}
-          component={Select}
-          validate={selected(weightValue)}
-        />
-        <Field 
-          name='bodyFat'
-          label='Body Fat'
-          type='number'
-          component={UserInput}
-        />
-        <Field 
-          name='username'
-          label='Username'
-          type='text'
-          component={UserInput}
-          validate={[required, notEmpty, length({min:8}), isTrimmed]}
-        />
-        <Field 
-          name='password'
-          label='Password'
-          type='password'
-          component={UserInput}
-          validate={[required, notEmpty, isTrimmed, length({min:12, max:72})]}
-        />
-        <Field 
-          name='confirmPassword'
-          label='Confirm Password'
-          type='password'
-          component={UserInput}
-          validate={[required, notEmpty, isTrimmed, matching('password')]}
-        />
-        <button disabled={pristine || submitting}>Submit</button>
+          validate={required}
+          />
+          <Field 
+            name='firstName'
+            label='First Name'
+            type='text'
+            component={UserInput}
+          />
+          <Field 
+            name='lastName'
+            label='Last Name'
+            type='text'
+            component={UserInput}
+          />
+          <Field 
+            name='height'
+            label='Height'
+            type='number'
+            component={UserInput}
+          />
+          <Field
+            name='heightUnit'
+            options={['ft', 'cm']}
+            component={Select}
+            validate={selected('height')}
+          />
+          { heightUnitValue === 'ft'? inches : null }
+          <Field 
+            name='weight'
+            label='Weight'
+            type='number'
+            component={UserInput}
+          />
+          <Field
+            name='weightUnit'
+            options={['lb', 'kg']}
+            component={Select}
+            validate={selected('weight')}
+          />
+          <Field 
+            name='bodyFat'
+            label='Body Fat'
+            type='number'
+            component={UserInput}
+          />
+          <button disabled={pristine || submitting}>Submit</button>
       </form>
     );
   };
@@ -115,10 +142,8 @@ export class Register extends Component {
 const selector = formValueSelector('register');
 
 const mapStateToProps = (state, props) => {
-  const heightValue = selector(state, 'height');
   const heightUnitValue = selector(state, 'heightUnit');
-  const weightValue = selector(state, 'weight')
-  return {heightValue, heightUnitValue, weightValue};
+  return {heightUnitValue};
 }
 
 const initialValues = {

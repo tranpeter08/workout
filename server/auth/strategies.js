@@ -14,7 +14,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       if(!user) {
         return Promise.reject({
           reason: 'LoginError',
-          message: 'incorrect username or password'
+          message: `username doesn't exist`
         });
       }
       return user.validatePassword(password);
@@ -40,10 +40,11 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
 const jwtStrategy = new JwtStrategy(
   {
     secretOrKey: JWT_SECRET,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('bearer'),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     algorithms: ['HS256']
   },
   (payload, callback) => {
+    console.log('payload ====\n', payload);
     callback(null, payload.user);
   }
 );

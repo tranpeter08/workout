@@ -14,6 +14,25 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
+    email: {
+      type: String,
+      required: true
+    }
+});
+
+UserSchema.methods.serialize = function() {
+  return {
+    username: this.username,
+    userId: this._id,
+  };
+};
+
+const ProfileSchema = mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User',
+    required: true
+  },
   firstName: {
     type: String,
     default: ''
@@ -24,60 +43,77 @@ const UserSchema = mongoose.Schema({
   },
   height: {
     type: Number,
-    default: ''
   },
   heightUnit: {
     type: String,
-    default: ''
+    default: 'ft'
   },
   inches: {
     type: Number,
-    default: ''
   },
   weight: {
     type: Number,
-    default: ''
   },
   weightUnit: {
     type: String,
-    default: ''
+    default: 'lb'
   },
   bodyFat: {
     type: Number,
-    default: ''
-  }
+  },
+  workouts: [
+    {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Workout'
+    }
+  ]
 });
 
-UserSchema.virtual('fullName').get(function() {
-  return (`${this.firstName} ${this.lastName}`).trim();
+ProfileSchema.virtual('fullName').get(function() {
+  
+  return (this.firstName + ' ' + this.lastName).trim();
 });
 
-UserSchema.virtual('fullHeight').get(function() {
+ProfileSchema.virtual('fullHeight').get(function() {
   if(!this.height) {
     return '';
   }
 
-  let inches;
+  let inches = '';
   if(this.inches) {
-    inches = `${this.inches}''`
+    inches = ` ${this.inches}''`
   };
 
-  const fullHeight = this.heightUnit === 'ft' ? `${this.height}' ${inches}` :
+  const fullHeight = this.heightUnit === 'ft' ? `${this.height}'${inches}` :
     `${this.height} ${this.heightUnit}`;
 
-  return fullHeight.trim();
+  return fullHeight;
 })
 
-UserSchema.methods.serialize = function() {
+ProfileSchema.virtual('fullWeight').get(function() {
+  if (!this.weight) {
+    return '';
+  };
+
+  return `${this.weight} ${this.weightUnit}`
+});
+
+ProfileSchema.methods.serialize = function() {
 
   return {
-    username: this.username,
+    userId: this.userId,
     name: this.fullName,
     height: this.fullHeight,
-    weight: (`${this.weight || ''} ${this.weightUnit || ''}`).trim(),
-    bodyFat: `${this.bodyFat || ''}`
+    weight: this.fullWeight,
+    bodyFat: this.bodyFat,
+    workouts: this.workouts
   };
 };
+
+// ProfileSchema.pre('findOne', function(next) {
+//   this.populate('user', '-password',);
+//   next();
+// })
 
 UserSchema.methods.validatePassword = function(password) {
   return bcrypt.compare(password, this.password);
@@ -87,6 +123,12 @@ UserSchema.statics.hashPassword = function(password) {
   return bcrypt.hash(password, 10);
 }
 
-const User = mongoose.model('User', UserSchema);
+// UserSchema.pre('findOne', function(next){
+//   this.populate('workouts');
+//   next();
+// });
 
-module.exports = {User};
+const User = mongoose.model('User', UserSchema);
+const Profile = mongoose.model('Profile', ProfileSchema);
+
+module.exports = { User, Profile };
