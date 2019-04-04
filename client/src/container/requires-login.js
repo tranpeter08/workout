@@ -10,7 +10,7 @@ const requiresLogin = Component => {
     } else if (user) {
       return <Component {...passThruProps} />;
     } else {
-      return <div>Something went wrong...</div>;
+      return <div>Something went wrong... T_T</div>;
     };
   };
 

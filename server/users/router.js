@@ -9,19 +9,31 @@ const { createError, handleError, sendRes } = require('../utils');
 const router = express.Router();
 
 // create user and profile
+// jwt
 router.post('/', validateUser, validateProfile, (req, res) => {
   const {username, password, email, profile} = req.body;
 
   return User
-    .find({username})
-    .count()
+    .findOne({email})
+    .then(user => {
+      console.log('user\n:', user)
+      if (user) {
+        return Promise.reject({
+          code: 400,
+          reason: 'validationError',
+          message: 'email already associated with another account!',
+          location: ['email']
+        })
+      }
+      return User.find({username}).count()
+    })
     .then(count => {
       if (count > 0) {
         return Promise.reject({
           code: 400,
           reason: 'validationError',
           message: 'username already exists!',
-          location: 'username'
+          location: ['username']
         });
       };
       return User.hashPassword(password);
@@ -41,6 +53,7 @@ router.post('/', validateUser, validateProfile, (req, res) => {
     })
     .then(profile => {
       console.log('===profile ===\n', profile)
+      // create JWT
       return res.status(201).json(profile.serialize());
     })
     .catch(err => {

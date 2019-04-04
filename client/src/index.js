@@ -29,8 +29,8 @@ ReactDOM.render(
         <Route exact path='/' component={Landing} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
-        <Route exact path='/user' component={UserPage} />
-        <Route exact path='/user/:workoutId' component={ExerciseList} />
+        <Route exact path='/user/:username' component={UserPage} />
+        <Route exact path='/user/:username/:workoutId' component={ExerciseList} />
       </div>
     </Router>  
   </Provider>, document.getElementById('root'));

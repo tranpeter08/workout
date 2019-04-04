@@ -18,9 +18,11 @@ export const length = (min, max) => value => {
   }
 };
 
-export const matching = inputName => (value, allValues) =>
-  inputName in allValues && value !== allValues[inputName]?
-    '*Passwords do not match' : null;
+export const matching = (value, allValues) => {
+  if ('password' in allValues && value !== allValues['password']) {
+    return '*Passwords do not match' 
+  }
+}
 
 export const selected = inputName => (value, allValues) => {
   return inputName in allValues && !value? '* Choose an option'  : null; 

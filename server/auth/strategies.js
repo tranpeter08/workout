@@ -14,7 +14,8 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       if(!user) {
         return Promise.reject({
           reason: 'LoginError',
-          message: `username doesn't exist`
+          message: `no account associated with that username`,
+          location: 'username'
         });
       }
       return user.validatePassword(password);
@@ -23,7 +24,8 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
       if(!isValid) {
         return Promise.reject({
           reason: 'LoginError',
-          message: 'incorrect username or password'
+          message: 'incorrect password or username',
+          location: 'password'
         })
       }
       return callback(null, user);
@@ -31,6 +33,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
     })
     .catch(err => {
       if(err.reason === 'LoginError') {
+        console.error('ERROR ===>\n', err)
         return callback(null, false, err);
       }
       return callback(err, false);

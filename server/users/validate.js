@@ -1,16 +1,14 @@
 'use strict';
 
-
 function validateUser(req, res, next) {
   console.log('req body ===\n', req.body)
   function sendErrorMessage(code, reason, message, location) {
-    const locationString = location.join(', ');
-    if (locationString) {
+    if (location[0]) {
       return res.status(code).json({
         code,
         reason,
         message,
-        location: locationString
+        location
       });
     };
   };
@@ -70,7 +68,7 @@ function validateUser(req, res, next) {
     } else if(req.body[field].trim().length > lengthFields[field].max) {
       return `${field} must be no more than ${lengthFields[field].max} characters long`
     }
-  }).join('; ');
+  });
 
   sendErrorMessage(
     400,
@@ -84,13 +82,12 @@ function validateUser(req, res, next) {
 
 function validateProfile(req, res, next) {
   function sendErrorMessage(code, reason, message, location) {
-    const locationString = location.join(', ');
-    if (locationString) {
+    if (location[0]) {
       return res.status(code).json({
         code,
         reason,
         message,
-        location: locationString
+        location
       });
     };
   };

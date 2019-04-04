@@ -3,7 +3,7 @@ import {SubmissionError} from 'redux-form';
 import jwtDecode from 'jwt-decode';
 
 import {API_BASE_URL} from '../config';
-import {fetchOptions} from '../utils';
+import {fetchOptions, normalizeRes} from '../utils';
 import {saveToken, loadToken, deleteToken} from '../local-storage';
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
@@ -43,18 +43,25 @@ export const logIn = (username, password) => dispatch => {
     `${API_BASE_URL}/auth/login`,
     fetchOptions('POST', {username, password})
   )
+  .then(res => normalizeRes(res))
   .then(res => res.json())
   .then(({authToken}) => {
     console.log('auth token ===>', authToken);
     storeToken(authToken, dispatch)
   })
   .catch(err => {
-    console.error(err);
-    return Promise.reject(new SubmissionError({err}))
+    console.error('ERROR==>',err);
+    if (err.reason === 'LoginError') {
+      dispatch(authError(err));
+      return new SubmissionError({
+          _error: 'Login failure'
+        }) 
+    }
+    return err;
   });
 
   
-  }
+}
 
 export const refreshToken = () => dispatch => {
   dispatch(authRequest);

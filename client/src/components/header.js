@@ -6,7 +6,7 @@ const Header = (props) => {
     <nav>
       <Link to="/">Home</Link>
       <Link to="/login">Login</Link>
-      <Link to="/user">Workouts</Link>
+      <Link to="/user/:username">Workouts</Link>
     </nav>
   )
 }

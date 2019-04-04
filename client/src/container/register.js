@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { 
+  Field, 
+  reduxForm, 
+  SubmissionError, 
+  formValueSelector 
+} from 'redux-form';
+import {Redirect} from 'react-router-dom'
 
 import UserInput from '../components/user-input';
 import Select from  '../components/select';
@@ -11,15 +17,36 @@ import {
   length,
   matching, 
   isTrimmed,
-  selected
 } from '../validators';
+import {parseInput} from '../utils';
 
 import {createUser} from '../actions/user'
 import {logIn} from '../actions/auth'
 
 export class Register extends Component {
+  componentDidMount() {
+    const inputs = document.getElementsByName('email');
+    if(inputs.length > 0){
+      inputs[0].focus();
+    };
+  };
+
+  componentDidUpdate() {
+    const {error} = this.props.userState;
+    // console.log('component update error ==>', error);
+    if (error) {
+      const element = document.getElementsByName(error.location[0])[0]
+      if (element) {
+        element.focus();
+      }
+    }
+  }
+
   onSubmit(data) {
     console.log('register data:', data);
+    if(data.heightUnit === 'cm' && data.inches) {
+      delete data.inches;
+    }
     const {username, password, email, ...profile} = data;
     return this.props.dispatch(createUser({
         username,
@@ -27,30 +54,42 @@ export class Register extends Component {
         email,
         profile
       }))
-      .then(() => this.props.dispatch(logIn(username, password)))
+      .then(res => {
+        if (!res.error) {
+          return this.props.dispatch(logIn(data.username, data.password))
+        }
+      })
   };
 
   render() {
-    // console.log('register props:',this.props)
+    console.log('register props:', this.props)
     const { 
       heightUnitValue, 
       handleSubmit,
       pristine,
-      submitting 
+      submitting,
+      userState: {error, loading},
+      auth: {user}
     } = this.props; 
 
-    const inches = <Field 
-      name='inches'
-      type='text'
-      component={UserInput}
-    />
+    if(user) {
+      return <Redirect to={`/user/${user.username}`} />
+    }
 
     return (
-      <form 
-        action="" 
-        onSubmit={handleSubmit((data) => this.onSubmit(data))}
-      >
-        <Field 
+      <div>
+        <form 
+          action="" 
+          onSubmit={handleSubmit((data) => this.onSubmit(data))}
+        >
+          <Field
+            name='email'
+            label='Email'
+            type='email'
+            component={UserInput}
+            validate={required}
+            />
+          <Field 
             name='username'
             label='Username'
             type='text'
@@ -81,14 +120,7 @@ export class Register extends Component {
             label='Confirm Password'
             type='password'
             component={UserInput}
-            validate={[required, matching('password')]}
-          />
-          <Field
-          name='email'
-          label='Email'
-          type='email'
-          component={UserInput}
-          validate={required}
+            validate={[required, matching]}
           />
           <Field 
             name='firstName'
@@ -106,53 +138,58 @@ export class Register extends Component {
             name='height'
             label='Height'
             type='number'
+            parse={parseInput}
             component={UserInput}
           />
           <Field
             name='heightUnit'
             options={['ft', 'cm']}
             component={Select}
-            validate={selected('height')}
           />
-          { heightUnitValue === 'ft'? inches : null }
+          { heightUnitValue === 'cm'? null :
+            <Field 
+              name='inches'
+              type='number'
+              parse={parseInput}
+              component={UserInput}
+            /> 
+          }
           <Field 
             name='weight'
             label='Weight'
             type='number'
+            parse={parseInput}
             component={UserInput}
           />
           <Field
             name='weightUnit'
             options={['lb', 'kg']}
             component={Select}
-            validate={selected('weight')}
           />
           <Field 
             name='bodyFat'
             label='Body Fat'
             type='number'
+            parse={parseInput}
             component={UserInput}
           />
           <button disabled={pristine || submitting}>Submit</button>
-      </form>
+        </form>
+        {error && <span>{error.message}</span>}
+        {loading && <span>Loading...</span>}
+      </div>
     );
   };
 };
-
+// need to get height unit value to set inches if in SI units
 const selector = formValueSelector('register');
 
 const mapStateToProps = (state, props) => {
   const heightUnitValue = selector(state, 'heightUnit');
-  return {heightUnitValue};
+  return {heightUnitValue, auth: state.auth, userState: state.user};
 }
 
-const initialValues = {
-  weightUnit: 'lb',
-  heightUnit: 'ft'
-}
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'register',
-  // initialValues
-  // validate
+  form: 'register'
 })(Register));

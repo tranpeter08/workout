@@ -8,6 +8,7 @@ import requiresLogin from '../container/requires-login';
 export class UserPage extends React.Component {
 
   render() {
+    console.log('user-page props', this.props)
     return (
       <div>
         <UserInfo />

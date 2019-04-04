@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 export default class UserInput extends Component {
 
   render() {
-    // console.log('input props:',this.props)
     // props --> type, label
+    // console.log('input props', this.props)
     const {input, label, type, meta: {touched, error}} = this.props
 
     return (
       <div>
-        <label htmlFor="">{label}</label>
-        <input 
+        <label htmlFor={input.name}>{label}</label>
+        <input
           type={type}
           placeholder='something'
           {...input}
