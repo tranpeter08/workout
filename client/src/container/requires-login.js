@@ -8,7 +8,7 @@ const requiresLogin = Component => {
 
     render() {
       console.log('requires login props', this.props);
-      const {hasToken, loading, error} = this.props.auth;
+      const {hasToken, loading, error, ...otherProps} = this.props.auth;
 
       if (!hasToken) {
         return <Redirect to='/' />;
@@ -25,7 +25,7 @@ const requiresLogin = Component => {
       };
 
       if (hasToken) {
-        return <Component  />;
+        return <Component {...otherProps} />;
       }
 
       return <Redirect to='/' />
