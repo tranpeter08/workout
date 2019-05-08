@@ -19,7 +19,7 @@ const validateSubmission = (req, res, next) => {
 
 const createAuthToken = function(user) {
   console.log('token user ===\n', user)
-  return jwt.sign(user, config.JWT_SECRET, {
+  return jwt.sign({payload: user}, config.JWT_SECRET, {
     algorithm: 'HS256',
     expiresIn: config.JWT_EXPIRY,
     subject: user.username
@@ -39,7 +39,7 @@ router.use(express.json());
 //   res.json({authToken})
 // });
 
-router.post('/login', (req, res, next)=> {
+router.post('/login',(req, res, next)=> {
   passport.authenticate('local', {session: false}, (err, user, info) => {
     console.log('USER:\n', err)
     if (err) {

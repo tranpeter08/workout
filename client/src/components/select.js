@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 export default class Select extends Component {
   render() {
-    // console.log('select props:', this.props);
-    //props --> options:[]; 
     const {meta: {touched, error}, options} = this.props;
     
     const optionList = options.map( 

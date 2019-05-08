@@ -48,7 +48,7 @@ const jwtStrategy = new JwtStrategy(
   },
   (payload, callback) => {
     console.log('payload ====\n', payload);
-    callback(null, payload.user);
+    callback(null, {payload});
   }
 );
 

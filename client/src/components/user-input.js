@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 export default class UserInput extends Component {
+  constructor() {
+    super();
+  }
 
   render() {
-    // props --> type, label
-    // console.log('input props', this.props)
     const {input, label, type, meta: {touched, error}} = this.props
 
     return (

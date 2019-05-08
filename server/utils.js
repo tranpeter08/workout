@@ -4,15 +4,21 @@ function createError(reason, message, code) {
 }
 
 function handleError(err, res) {
-  console.error('=== ERROR ===\n',err);
-  if(err.reason === 'validationError'){
+  console.error('=== ERROR ===\n', err);
+
+  if (err.reason === 'validationError'){
     return sendRes(res, err.code, err.message);
   };
+
   return sendRes(res, 500, 'Something went wrong :(');
 };
 
 function sendRes(res, code, message) {
-  return res.status(code).json({message});
+  const resMessage = {
+    code,
+    message
+  }
+  return res.status(code).json(resMessage);
 }
 
 module.exports = {createError, handleError, sendRes};

@@ -36,7 +36,6 @@ app.use(cors(corsOptions));
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-// to do: simplify routes
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/users/:userId/workouts', workoutsRouter);

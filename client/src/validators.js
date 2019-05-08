@@ -1,10 +1,10 @@
-export const required = value => value ? null : '*Required';
+export const required = value => value ? null : '* Required';
 
-export const notEmpty = value => value.trim() === '' ?
-  'Cannot be empty' : null;
+export const notEmpty = value => !value ? null : value.trim() === '' ?
+  '* Cannot be empty' : null;
 
 export const isTrimmed = value => value.trim() !== value? 
-  '*Cannot start or end with whitespace':null;
+  '* Cannot start or end with whitespace':null;
 
 export const noSpaceInside = value => 
   value.split(' ').length > 1 ? 'Cannot have spaces between characters' : null;

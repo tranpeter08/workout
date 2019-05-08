@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import ExerciseForm from '../container/exercise-form';
 
-export default class AddItem extends Component {
+export default class ExerciseAdd extends Component {
   //props: type
   constructor(props){
     super(props);
@@ -24,6 +24,7 @@ export default class AddItem extends Component {
     return <ExerciseForm
         action='Adding'
         setEdit={(bool) => this.setAdd(bool)}
+        workoutId={this.props.workoutId}
      />
   };
 };

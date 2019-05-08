@@ -1,21 +1,34 @@
 'use strict';
+import {loadToken} from './local-storage';
 
-export const fetchOptions = (method, data, token) => ({
-  method: method,
-  headers: {
-    'content-type': 'application/json',
-    'Authorization' : `Bearer ${token}`
-  },
-  body: JSON.stringify(data)
-});
+export const fetchOptions = (method, data, notProtected) => {
+  const options = {
+    method: method,
+    headers: {
+      'content-type': 'application/json'
+    }
+  }
+
+  if (!notProtected) {
+    options.headers['Authorization'] = `Bearer ${loadToken()}`;
+  }
+
+  if (data) {
+    options.body = JSON.stringify(data);
+  }
+  
+  return options;
+}
 
 export const normalizeRes = (res) => {
-  console.log('res', res)
   if (!res.ok) {
     return res.json()
-      .then((error) => Promise.reject(error))
+      .then((error) => {
+        console.error('res error', error);
+        return Promise.reject(error)
+      })
   }
-  return res
+  return res.json();
 }
 
 export const parseInput = (input) => {

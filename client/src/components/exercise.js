@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ExerciseForm from '../container/exercise-form';
-import Delete from '../components/delete';
+import Delete from '../container/delete';
 
 export default class Exercise extends Component {
   constructor(props) {
@@ -20,33 +20,43 @@ export default class Exercise extends Component {
   }
 
   render() {
-    console.log('exercise props', this.props);
     const {editing, deleting} = this.state;
     const initialValues = {...this.props};
-    const {id, exercise, resistance, reps, sets, notes, resistUnit } = this.props;
+    const {
+      _id, 
+      exerciseName, 
+      resistance, 
+      reps, 
+      sets, 
+      notes, 
+      resistUnit, 
+      workoutId } = this.props;
 
     if(editing) {
       return <ExerciseForm
         action='Editing'
-        form={id.toString()}
+        form={_id}
         initialValues={initialValues}
         setEdit={(bool) => this.setEdit(bool)}
-        exercise={exercise}
+        exerciseName={exerciseName}
+        workoutId={workoutId}
+        exerciseId={_id}
       />
     }
 
     if(deleting) {
       return <Delete 
         type='exercise'
-        title={exercise}
+        title={exerciseName}
+        itemId={_id}
+        workoutId={workoutId}
         setDelete={(bool) => this.setDelete(bool)}
       />
     }
-
     
     return(
       <div>
-        <h3>{exercise}</h3>
+        <h3>{exerciseName}</h3>
         <p>Resistance: {resistance} {resistUnit === 'other'? null : resistUnit}</p>
         <p>Reps: {reps}</p>
         <p>Sets: {sets}</p>

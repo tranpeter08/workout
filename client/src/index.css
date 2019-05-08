@@ -16,3 +16,16 @@ code {
 .hidden {
   display: none;
 }
+
+.modal-backdrop{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.349);
+  position: absolute;
+}
+
+.modal-body{
+  background-color: white;
+  max-width: 300px;
+  margin: auto;
+}

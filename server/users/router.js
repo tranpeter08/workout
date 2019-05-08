@@ -83,14 +83,18 @@ router.put('/:userId', jwtAuth,(req, res) => {
 });
 
 // get profile
-router.get('/profile/:userId/', jwtAuth,(req, res) => {
+router.get('/profile/:userId/', jwtAuth, (req, res) => {
   return Profile
     .findOne({userId: req.params.userId})
-    .populate('workouts')
+    .populate({
+      path: 'workouts',
+      populate: {path: 'exercises'}
+    })
     .then(profile => {
       if (!profile) {
         createError('validationError', 'profile not found', 404);
       }
+      console.log('get profile\n', profile);
       return res.status(200).json(profile.serialize());
     })
     .catch(err => {

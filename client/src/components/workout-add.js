@@ -5,26 +5,25 @@ export default class WorkoutAdd extends Component {
   constructor(props){
     super(props);
     this.state = {
-      adding: false
+      editing: false
     }
   }
 
-  setAdd(bool) {
-    this.setState({adding: bool});
+  setEditing(bool) {
+    this.setState({editing: bool});
   }
 
   render() {
-    if(!this.state.adding){
+    if(!this.state.editing){
       return <div 
-        onClick={() => this.setAdd(true)}
+        onClick={() => this.setEditing(true)}
       >Add a Workout</div>
     }
 
     return <WorkoutForm
       form='NewWorkout'  
-      setEdit={(bool) => this.setAdd(bool)}
+      setEditing={(bool) => this.setEditing(bool)}
       action='Adding'
-      
     />
   };
 };

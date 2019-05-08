@@ -1,50 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm} from 'redux-form';
 import { Link, Redirect } from 'react-router-dom';
-
 import UserInput from '../components/user-input';
 import {required, notEmpty, isTrimmed} from '../validators';
-
 import {logIn} from '../actions/auth';
 
 export class Login extends Component {
   componentDidMount() {
-    const inputs = document.getElementsByName('username');
-    if(inputs.length > 0){
-      inputs[0].focus();
+    const input = document.getElementsByName('username')[0];
+    if(input){
+      input.focus();
     }
   }
 
   componentDidUpdate(prevProps) {
     const {error} = this.props.auth;
-    // console.log('component update error ==>', error);
     if (error) {
       document.getElementsByName(error.location)[0].focus();
     }
   }
 
-  onSubmit(data) {
-    //submit user data to DB, update state with user logged in
-    // action?
+  constructor(props){
+    super(props);
+    this.node = React.createRef();
+  }
 
-    // console.log('sign-in data:', data);
-    
-    return this.props.dispatch(logIn(data.username, data.password))
+  onSubmit({username, password}) { 
+    return this.props.dispatch(logIn(username, password))
   };
 
   render() {
-    // console.log('LOG IN props', this.props)
-    const {error, user} = this.props.auth;
-    if(user) { 
-      return <Redirect to={`/user/${user.username}`} />
+    const {error, username} = this.props.auth;
+
+    if (username) { 
+      return <Redirect to={`/user/${username}`} />
     }
+
     return (
-      <div>
+      <div className={this.props.form} ref={this.node} >
         <form 
           onSubmit={
             this.props.handleSubmit((values) => this.onSubmit(values))
-        }>
+          }>
           <Field 
             name='username'
             label='Username'
@@ -60,7 +58,7 @@ export class Login extends Component {
             validate={[required, isTrimmed]}
           />
           <button
-            disabled={this.props.pristine || this.props.submitting}
+            // disabled={this.props.pristine || this.props.submitting}
             type='submit'
           >Submit</button>
           <span>Not registered yet? Sign up <Link to="/register">here</Link></span>
@@ -71,8 +69,18 @@ export class Login extends Component {
   };
 };
 
-const mapStateToProps = ( {auth}, props) => ({auth});
+const mapStateToProps = ( {auth}, props) => ({
+  auth: {
+    error: auth.error,
+    username : auth.username
+  }
+});
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'logIn'
+  form: 'logIn',
+  initialValues: {
+    'username': 'petertran',
+    'password': '1234567890'
+  }
+  // onSubmitFail: () => {}
 })(Login));

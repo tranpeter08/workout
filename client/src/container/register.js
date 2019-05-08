@@ -20,8 +20,7 @@ import {
 } from '../validators';
 import {parseInput} from '../utils';
 
-import {createUser} from '../actions/user'
-import {logIn} from '../actions/auth'
+import {createUser} from '../actions/user';
 
 export class Register extends Component {
   componentDidMount() {
@@ -32,8 +31,7 @@ export class Register extends Component {
   };
 
   componentDidUpdate() {
-    const {error} = this.props.userState;
-    // console.log('component update error ==>', error);
+    const {error} = this.props.user;
     if (error) {
       const element = document.getElementsByName(error.location[0])[0]
       if (element) {
@@ -43,7 +41,6 @@ export class Register extends Component {
   }
 
   onSubmit(data) {
-    console.log('register data:', data);
     if(data.heightUnit === 'cm' && data.inches) {
       delete data.inches;
     }
@@ -54,26 +51,19 @@ export class Register extends Component {
         email,
         profile
       }))
-      .then(res => {
-        if (!res.error) {
-          return this.props.dispatch(logIn(data.username, data.password))
-        }
-      })
   };
 
   render() {
-    console.log('register props:', this.props)
     const { 
       heightUnitValue, 
       handleSubmit,
       pristine,
       submitting,
-      userState: {error, loading},
-      auth: {user}
-    } = this.props; 
+      user: {username ,error, loading}
+    } = this.props;
 
-    if(user) {
-      return <Redirect to={`/user/${user.username}`} />
+    if(username) {
+      return <Redirect to={`/user/${username}`} />
     }
 
     return (
@@ -181,14 +171,21 @@ export class Register extends Component {
     );
   };
 };
-// need to get height unit value to set inches if in SI units
+
 const selector = formValueSelector('register');
 
 const mapStateToProps = (state, props) => {
+  const {auth, user} = state;
   const heightUnitValue = selector(state, 'heightUnit');
-  return {heightUnitValue, auth: state.auth, userState: state.user};
+  return {
+    heightUnitValue, 
+    user: { 
+      username: auth.usernanme,
+      loading: user.loading,
+      error: user.error
+    }
+  };
 }
-
 
 export default connect(mapStateToProps)(reduxForm({
   form: 'register'

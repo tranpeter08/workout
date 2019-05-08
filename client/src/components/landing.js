@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Landing = (props) => {
+  
   return (
     <div>
-      <h1>Workout</h1>
-      <p>An app for keeping track of workouts</p>
+      <h1>GET SWOLE</h1>
+      <p>Hello! Welcome to GET SWOLE. GET SWOLE is an app use to keep track of workouts, set goals and most importantly, GET SWOLE!</p>
     </div>
   )
 }
