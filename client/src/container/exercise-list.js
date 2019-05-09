@@ -4,6 +4,7 @@ import Exercise from '../components/exercise';
 import ExerciseAdd from '../components/exercise-add';
 
 export class ExerciseList extends Component {
+
   render() {
     
     const {workoutName} = this.props.match.params;

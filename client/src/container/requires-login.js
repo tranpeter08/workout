@@ -1,22 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
-import {getProfile} from '../actions/user';
 
 const requiresLogin = Component => {
   class RequiresLogin extends React.Component {
 
     render() {
-      console.log('requires login props', this.props);
-      const {hasToken, loading, error} = this.props.auth;
+      const {hasToken, loading, error, ...otherProps} = this.props.auth;
 
       if (!hasToken) {
         return <Redirect to='/' />;
       };
 
-      if(error) {
+      if (error) {
         return <div>
-          <p>An error has occured, try logging back <Link to='/login'>in</Link></p>
+          <p>An error has occured, try logging back <button>in</button></p>
         </div>
       }
 
@@ -25,17 +23,17 @@ const requiresLogin = Component => {
       };
 
       if (hasToken) {
-        return <Component  />;
+        return <Component {...otherProps} />;
       }
 
-      return <Redirect to='/' />
+      return <Redirect to='/' />;
     };
   };
 
   const displayName = Component.displayName || Component.name || 'Component';
   RequiresLogin.displayName = `RequiresLogin(${displayName})`;
 
-  const mapStateToProps = ({auth, user}, ownProps) => ({
+  const mapStateToProps = ({auth}, ownProps) => ({
     auth: {
       hasToken: auth.token !== null,
       loading: auth.loading,

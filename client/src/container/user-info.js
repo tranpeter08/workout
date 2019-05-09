@@ -24,6 +24,9 @@ class UserInfo extends React.Component {
   }
 }
 
-const mapStateToProps = ({user: {profile}}, props) => ({profile});
+const mapStateToProps = ({user: {profile}}, props) => { 
+  const {workouts, ..._profile} = profile;
+  return {profile : _profile}
+};
 
 export default connect(mapStateToProps)(UserInfo);

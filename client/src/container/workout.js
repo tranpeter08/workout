@@ -47,7 +47,7 @@ export class Workout extends Component {
       />
     };
 
-    const exercisesLink = `/user/${username}/${workoutName}/exercises`
+    const exercisesLink = `/user/${username}/${workoutName}/exercises`;
     return (
       <div >
         <h4><Link to={exercisesLink}>{workoutName}</Link></h4>
@@ -66,5 +66,5 @@ export class Workout extends Component {
   };
 }
 
-const mapStateToProps = ({auth:{username}}) => ({username});
+const mapStateToProps = ({auth: {username}}) => ({username});
 export default connect(mapStateToProps)(Workout);

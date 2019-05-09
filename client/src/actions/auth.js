@@ -76,16 +76,16 @@ export const logOut = () => dispatch => {
 
 export const refreshToken = () => dispatch => {
   dispatch(authRequest);
-  const token = localStorage.getItem('authToken');
   return fetch(
     `${API_BASE_URL}/auth/refresh`,
-    fetchOptions('POST', null, token )
+    fetchOptions('POST')
   )
-  .then(({token}) => storeToken(token, dispatch))
+  .then(res => normalizeRes(res))
+  .then(({authToken}) => storeToken(authToken, dispatch))
   .catch(err => {
     console.error(err);
     dispatch(authError(err));
-    dispatch(logOut());
+    dispatch(logOut())
     return err;
   })
 };

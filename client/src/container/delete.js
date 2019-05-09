@@ -29,15 +29,12 @@ export class Delete extends Component {
 
     if (type === 'workout') {
       return dispatch(deleteWorkout(itemId))
-        .then(error => !error ? setDelete(false) : null);
     }
 
     if (type === 'exercise') {
       return dispatch(deleteExercise(workoutId, itemId))
-        .then(error => !error ? setDelete(false) : null);
     }
   };
-
 
   render() {
     return(

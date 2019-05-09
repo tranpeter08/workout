@@ -16,10 +16,12 @@ export class Login extends Component {
 
   componentDidUpdate(prevProps) {
     const {error} = this.props.auth;
-    if (error) {
-      document.getElementsByName(error.location)[0].focus();
+    if (!prevProps.auth.error && error) {
+      if (error.location) {
+        document.getElementsByName(error.location)[0].focus();
+      }
     }
-  }
+  };
 
   constructor(props){
     super(props);
@@ -31,7 +33,7 @@ export class Login extends Component {
   };
 
   render() {
-    const {error, username} = this.props.auth;
+    const {error, username, loading} = this.props.auth;
 
     if (username) { 
       return <Redirect to={`/user/${username}`} />
@@ -69,12 +71,7 @@ export class Login extends Component {
   };
 };
 
-const mapStateToProps = ( {auth}, props) => ({
-  auth: {
-    error: auth.error,
-    username : auth.username
-  }
-});
+const mapStateToProps = ( {auth: {token, ..._auth}}, props) => ({auth: _auth});
 
 export default connect(mapStateToProps)(reduxForm({
   form: 'logIn',
