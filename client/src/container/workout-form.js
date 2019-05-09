@@ -31,21 +31,20 @@ class WorkoutForm extends Component {
 
   onSubmit = data => {
     if(data.workoutName) {
-      const {action, form} = this.props;
-
+      const {action, form, dispatch} = this.props;
       if(action === 'Adding') {
-        return this.props.dispatch(createWorkout(data))
+        return dispatch(createWorkout(data))
         .then(this.handleResErr);
       };
 
       if(action === 'Editing') {
-        return this.props.dispatch(editWorkout(data, form))
+        return dispatch(editWorkout(data, form))
           .then(this.handleResErr);
       };
     }
   };
 
-  handleResErr = resErr => {return resErr ? null : this.props.setEditing(false)};
+  handleResErr = resErr => resErr ? null : null //this.props.setEditing(false)};
 
   onCancel() {
     this.props.setEditing(false);

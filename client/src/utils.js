@@ -22,11 +22,16 @@ export const fetchOptions = (method, data, notProtected) => {
 
 export const normalizeRes = (res) => {
   if (!res.ok) {
-    return res.json()
-      .then((error) => {
-        console.error('res error', error);
-        return Promise.reject(error)
-      })
+    if (
+        res.headers.has('content-type') &&
+        res.headers.get('content-type').startsWith('application/json')
+    ) {
+        return res.json().then(err => Promise.reject(err));
+    }
+    return Promise.reject({
+      code: res.status,
+      message: res.statusText
+    });
   }
   return res.json();
 }

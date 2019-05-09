@@ -6,8 +6,7 @@ import WorkoutAdd from '../components/workout-add';
 export class WorkoutList extends Component {
 
   render() {
-    console.log('Workout list pROPS:', this.props);
-    const {workouts} = this.props.user.profile;
+    const {workouts} = this.props;
     let workoutList;
     if (workouts) {
       workoutList = workouts.map(workout => {
@@ -28,6 +27,6 @@ export class WorkoutList extends Component {
   }
 }; 
 
-const mapStateToProps = ({user}, props) => ({user});
+const mapStateToProps = ({user: {profile: {workouts}}}, props) => ({workouts});
 
 export default connect(mapStateToProps)(WorkoutList);

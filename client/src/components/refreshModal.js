@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class RefreshModal extends React.Component{
   state = {
-    count: 10
+    count: 60
   }
 
   componentDidMount() {
@@ -18,7 +18,6 @@ export default class RefreshModal extends React.Component{
   }
 
   render(){
-  console.log(this.state.count);
     return <div className='modal-backdrop'>
       <div className='modal-body'>
       <h3>Session is about to expire!</h3>

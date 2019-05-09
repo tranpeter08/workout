@@ -47,8 +47,8 @@ const jwtStrategy = new JwtStrategy(
     algorithms: ['HS256']
   },
   (payload, callback) => {
-    console.log('payload ====\n', payload);
-    callback(null, {payload});
+    console.log('jwt strategy payload:\n', payload);
+    callback(null, payload);
   }
 );
 
