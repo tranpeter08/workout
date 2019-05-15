@@ -10,12 +10,9 @@ class Header extends React.Component {
   }
 
   render(){  
-    // console.log(this.props)
-  
     const {username} = this.props;
     
     return (  
-      
       <nav>
         <NavLink to="/">Home</NavLink>
         {
@@ -27,6 +24,8 @@ class Header extends React.Component {
             : 
             <NavLink to="/login">Login</NavLink>
         }
+        <NavLink to='/nutrition'>Nutrition</NavLink>
+        <NavLink to='/recipes'>Recipes</NavLink>
       </nav>
     )
   }

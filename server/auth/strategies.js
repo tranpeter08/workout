@@ -6,7 +6,7 @@ const {User} = require('../users/model')
 
 const {JWT_SECRET, JWT_EXPIRY} = require('../config')
 
-const localStrategy = new LocalStrategy((username, password, callback) => {
+const localStrategy = new LocalStrategy((username, password, done) => {
   let user;
   User.findOne({username})
     .then(_user => {
@@ -28,15 +28,15 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
           location: 'password'
         })
       }
-      return callback(null, user);
+      return done(null, user);
       // passport returns a user object
     })
     .catch(err => {
       if(err.reason === 'LoginError') {
         console.error('ERROR ===>\n', err)
-        return callback(null, false, err);
+        return done(null, false, err);
       }
-      return callback(err, false);
+      return done(err, false);
     });
 });
 
@@ -46,9 +46,9 @@ const jwtStrategy = new JwtStrategy(
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     algorithms: ['HS256']
   },
-  (payload, callback) => {
+  (payload, done) => {
     console.log('jwt strategy payload:\n', payload);
-    callback(null, payload);
+    done(null, payload);
   }
 );
 

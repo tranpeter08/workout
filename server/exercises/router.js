@@ -95,7 +95,7 @@ router.put('/:exerciseId', (req, res) => {
     })
     .then(result => {
       console.log('=== UPDATE EXERCISE RESULT ===\n', result)
-      if(!result){
+      if (!result) {
         return createError('validationError', 'exercise not found', 404);
       }
       return sendRes(res, 200, 'exercise updated successfully');
@@ -111,7 +111,7 @@ router.delete('/:exerciseId', (req, res) => {
     return Workout
       .findById(workoutId)
       .then(workout => {
-        if(!workout) {
+        if (!workout) {
           return createError('validationError', 'workout not found', 404);
         }
         console.log('=== WORKOUT EXERCISES ===\n', workout);

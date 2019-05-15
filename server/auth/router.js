@@ -29,7 +29,6 @@ const createAuthToken = function(user) {
 // 'local' from strategies, see docs
 const localAuth = passport.authenticate('local', {session: false});
 
-router.use(express.json());
 // sign in, trade for auth token
 
 // router.post('/login', localAuth, (req, res) => {
@@ -66,7 +65,7 @@ router.post('/refresh', jwtAuth,(req, res) => {
 });
 
 router.post('/test', jwtAuth, (req, res) => {
-  
   res.json({message: 'success'})
 })
+
 module.exports = {router, jwtAuth};

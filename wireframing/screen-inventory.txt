@@ -1,0 +1,8 @@
+1) landing page
+2) login page
+3) registration page
+4) user page or dashboard, list of workouts
+5) edit workouts
+6) delete a workout 
+7) then list of exercises for that workouts
+8) 

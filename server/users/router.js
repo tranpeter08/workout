@@ -22,7 +22,7 @@ router.post('/', validateUser, validateProfile, (req, res) => {
           code: 400,
           reason: 'validationError',
           message: 'email already associated with another account!',
-          location: ['email']
+          location: 'email'
         })
       }
       return User.find({username}).count()
@@ -33,7 +33,7 @@ router.post('/', validateUser, validateProfile, (req, res) => {
           code: 400,
           reason: 'validationError',
           message: 'username already exists!',
-          location: ['username']
+          location: 'username'
         });
       };
       return User.hashPassword(password);
@@ -61,7 +61,7 @@ router.post('/', validateUser, validateProfile, (req, res) => {
         return res.status(err.code).json(err);
       }
       console.error('=== ERROR ===\n', err);
-      return res.status(500).json({message:'internal server error'})
+      return res.status(500).json({message: 'Internal server error'})
     });
 });
 
@@ -76,8 +76,8 @@ router.put('/:userId', jwtAuth,(req, res) => {
       return res.status(204);
     })
     .catch(err => {
-      console.error('=== Error === \n');
-      return res.status(500).json({message: 'Something went wrong'})
+      console.error('=== Error === \n', err);
+      return res.status(500).json({message: 'Internal server error'})
     });
 
 });

@@ -9,6 +9,8 @@ import UserPage from './components/user-page';
 import RefreshModal from './components/refreshModal';
 import {logOut, refreshToken} from './actions/auth';
 import {Footer} from './components/footer';
+import Nutrition from './container/Nutrition';
+import Recipes from './container/Recipes';
 
 class App extends React.Component{
   state = {
@@ -111,6 +113,8 @@ class App extends React.Component{
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/user/:username' component={UserPage} />
+          <Route exact path='/nutrition' component={Nutrition} />
+          <Route exact path='/recipes' component={Recipes} />
           <Footer />
         </React.Fragment>
     );

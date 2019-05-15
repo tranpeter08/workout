@@ -12,6 +12,8 @@ const { router: authRouter, jwtAuth } = require('./auth');
 const { localStrategy, jwtStrategy } = require('./auth/strategies');
 const { router: workoutsRouter } = require('./workouts');
 const { router: exercisesRouter } = require('./exercises');
+const {router: nutritionRouter} = require('./nutrition/nutritionRouter');
+const {router: recipesRouter} = require('./recipes/recipesRouter');
 
 const app = express();
 
@@ -40,6 +42,8 @@ app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/users/:userId/workouts', workoutsRouter);
 app.use('/users/:userId/workouts/:workoutId/exercises', exercisesRouter);
+app.use('/nutrition', nutritionRouter);
+app.use('/recipes', recipesRouter);
 // app.use('/api/:userId', [workoutsRouter, exercisesRouter]);
 
 app.get('/', (req, res) => {
@@ -59,7 +63,6 @@ const runServer = (databaseUrl, port = PORT) => {
 app.listen(PORT, () => {
   console.log(`App is listening on port: ${PORT}`);
   mongoose.connect(DATABASE_URL);
-  
 });
 
 module.exports = { app };

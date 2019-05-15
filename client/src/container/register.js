@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { 
   Field, 
-  reduxForm, 
-  SubmissionError, 
-  formValueSelector 
+  reduxForm,
+  formValueSelector
 } from 'redux-form';
 import {Redirect} from 'react-router-dom'
 
@@ -30,15 +29,18 @@ export class Register extends Component {
     };
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {error} = this.props.user;
-    if (error) {
-      const element = document.getElementsByName(error.location[0])[0]
-      if (element) {
-        element.focus();
+    if (prevProps.user.error !== error) {
+      if (error !==null && error.location) {
+        const element = document.getElementsByName(error.location)[0]
+        if (element) {
+          element.focus();
+        }
       }
     }
   }
+
 
   onSubmit(data) {
     if(data.heightUnit === 'cm' && data.inches) {
@@ -53,18 +55,23 @@ export class Register extends Component {
       }))
   };
 
+  handleFocusErr = () => {
+
+  }
+
   render() {
+    console.log(this.props)
     const { 
       heightUnitValue, 
       handleSubmit,
       pristine,
       submitting,
-      user: {username ,error, loading}
+      user: {error, loading}
     } = this.props;
 
-    if(username) {
-      return <Redirect to={`/user/${username}`} />
-    }
+    // if (username) {
+    //   return <Redirect to={`/user/${username}`} />
+    // }
 
     return (
       <div>
@@ -180,13 +187,21 @@ const mapStateToProps = (state, props) => {
   return {
     heightUnitValue, 
     user: { 
-      username: auth.usernanme,
+      username: auth.username,
       loading: user.loading,
       error: user.error
     }
   };
 }
 
+const ph = '1234567890';
+
 export default connect(mapStateToProps)(reduxForm({
-  form: 'register'
+  form: 'register',
+  initialValues: {
+    username: '1234567890_', 
+    email: 'peter@domain.com',
+    password: ph,
+    confirmPassword: ph
+  }
 })(Register));

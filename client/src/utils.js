@@ -26,7 +26,8 @@ export const normalizeRes = (res) => {
         res.headers.has('content-type') &&
         res.headers.get('content-type').startsWith('application/json')
     ) {
-        return res.json().then(err => Promise.reject(err));
+        return res.json()
+          .then(err => Promise.reject(err));
     }
     return Promise.reject({
       code: res.status,
@@ -42,4 +43,12 @@ export const parseInput = (input) => {
   } else {
     return Number(input);
   }
+}
+
+export const queryStr = queryObj => {
+  let queryArr = [];
+    for (let key in queryObj) {
+      queryArr.push(`${key}=${queryObj[key]}`)
+    };
+  return queryArr.join('&');
 }

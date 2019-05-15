@@ -22,12 +22,19 @@ code {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.349);
   position: fixed;
+  top: 0;
 }
 
 .modal-body{
   background-color: white;
   max-width: 300px;
   margin: auto;
+  top: 20%;
+}
+
+.nutrition-section{
+  overflow: scroll;
+  max-height: 360px;
 }
 
 .footer-app{

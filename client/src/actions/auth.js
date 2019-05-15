@@ -55,12 +55,16 @@ export const logIn = (username, password) => dispatch => {
     console.error('LOG IN ERROR==>',err);
     dispatch(authError(err));
     if (err.reason === 'LoginError') {
-      
-      return new SubmissionError({
+      return Promise.reject( 
+        new SubmissionError({
+          [err.location] : err.message,
           _error: 'Login failure'
-        }) 
+        })
+      )
     }
-    return err;
+    return Promise.reject( new SubmissionError({
+      _error: 'Server Error...'
+    }))
   });
 }
 

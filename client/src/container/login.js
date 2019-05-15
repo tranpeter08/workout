@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm} from 'redux-form';
+import { Field, reduxForm, focus} from 'redux-form';
 import { Link, Redirect } from 'react-router-dom';
 import UserInput from '../components/user-input';
 import {required, notEmpty, isTrimmed} from '../validators';
@@ -16,7 +16,7 @@ export class Login extends Component {
 
   componentDidUpdate(prevProps) {
     const {error} = this.props.auth;
-    if (!prevProps.auth.error && error) {
+    if (prevProps.auth.error !== error) {
       if (error.location) {
         document.getElementsByName(error.location)[0].focus();
       }
@@ -31,6 +31,10 @@ export class Login extends Component {
   onSubmit({username, password}) { 
     return this.props.dispatch(logIn(username, password))
   };
+
+  handleFocusError = error => {
+    document.getElementsByName(error.location)[0].focus();
+  }
 
   render() {
     const {error, username, loading} = this.props.auth;
@@ -71,7 +75,11 @@ export class Login extends Component {
   };
 };
 
-const mapStateToProps = ( {auth: {token, ..._auth}}, props) => ({auth: _auth});
+const mapStateToProps = ( state, props) => {
+  const {auth: {token, ..._auth}} = state;
+  return ({auth: _auth})
+};
+
 
 export default connect(mapStateToProps)(reduxForm({
   form: 'logIn',
@@ -79,5 +87,4 @@ export default connect(mapStateToProps)(reduxForm({
     'username': 'petertran',
     'password': '1234567890'
   }
-  // onSubmitFail: () => {}
 })(Login));
