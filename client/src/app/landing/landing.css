@@ -1,0 +1,148 @@
+
+.landing h2, .landing-intro {
+  text-align: center;
+}
+
+.landing p{
+  font-size: 2rem;
+  letter-spacing: .15rem;
+}
+
+.intro-wrapper{
+  max-width: 70rem;
+  display: inline-block;
+}
+
+.landing-intro{
+  min-height: 70rem;
+}
+
+.landing-intro h2{
+  font-size: 3.8rem;
+  margin-top: 0;
+  padding-top: 5rem;
+  color: rgb(230, 230, 230);
+  text-shadow: 3px 3px 2px rgba(0,0,0,0.8);
+  letter-spacing: .2rem;
+}
+
+.landing-intro p {
+  color: rgb(230, 230, 230);
+  text-shadow: 2px 2px 1px black;
+  padding: 5rem 2rem;
+  font-weight: 900;
+}
+
+.landing-intro a {
+  text-decoration: none;
+}
+
+.landing-intro a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.intro-register {
+  color: rgb(0, 175, 255);
+}
+
+.intro-login {
+  color: rgb(0, 175, 75)
+}
+
+.landing-features{
+  background: rgb(238, 238, 238);
+}
+
+.landing-features h2{
+  color: rgb(0, 0, 0);
+  font-size: 3.2rem;
+  text-decoration-line: underline;
+  padding: 3rem 0;
+  letter-spacing: .14rem;
+  margin: 0;
+}
+
+.features-wrapper{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.landing-features section{
+  padding: 2rem 2rem;
+  margin: 0 1.5rem 3rem 1.5rem;
+}
+
+.landing-workouts, .landing-nutrition, .landing-recipes{
+  flex: 1 1 auto;
+}
+
+.landing-features p{
+  margin-bottom: 0;
+}
+
+.landing-features h3 {
+  font-size: 2.4rem;
+  letter-spacing: .14rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.landing-features h3, .landing-features p{
+  color: rgb(224, 224, 224);
+  text-shadow: 2px 2px 2px black;
+}
+
+.landing-workouts{
+  background: 
+    linear-gradient(rgba(25, 75, 110, 0.7), rgba(0, 125, 95, 0.7)),
+    url('./images/dumbells-mobile.jpg')
+    center/cover
+    no-repeat;
+}
+
+.landing-nutrition{
+  background: 
+    linear-gradient(rgba(0, 125, 95, 0.7), rgba(170, 0, 0, 0.7)),
+    url('./images/landing-nutrition.jpg')
+    center/cover;
+}
+
+.landing-recipes{
+  background: 
+  linear-gradient( rgba(170, 0, 0, 0.7), rgba(25, 75, 110, 0.7)),
+  url('./images/landing-recipes.jpg')
+  center/cover;
+}
+
+.landing-footnote{
+  color: rgb(100, 100, 100);
+  font-size: 1.8rem;
+  display: inline-block;
+  margin: 0 2rem 3rem;
+}
+
+@media only screen and (min-width: 630px) {
+  .landing-intro p {
+    padding: 5rem 5rem;
+    min-width: 4rem;
+  }
+  .landing-intro{
+    min-height: 90rem;
+  }
+}
+
+@media only screen and (min-width: 760px) {
+  .landing-nutrition{
+    flex: 2 1 0;
+  }
+  .landing-recipes{
+    flex: 3 1 0;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .landing-features section{
+    flex: 1 1 0;
+  }
+}

@@ -21,4 +21,20 @@ function sendRes(res, code, message) {
   return res.status(code).json(resMessage);
 }
 
-module.exports = {createError, handleError, sendRes};
+const queryStr = queryObj => {
+  let queryArr = [];
+
+  for (const key in queryObj) {
+    if (Array.isArray(queryObj[key])) {
+      queryObj[key].forEach(item => {
+        queryArr.push(`${key}=${item}`)
+      })
+    } else {
+      queryArr.push(`${key}=${queryObj[key]}`)
+    }
+  };
+
+  return queryArr.join('&');
+}
+
+module.exports = {createError, handleError, sendRes, queryStr};

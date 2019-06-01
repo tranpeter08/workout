@@ -57,6 +57,7 @@ function validateUser(req, res, next) {
   };
 
   const lengthFieldKeys = Object.keys(lengthFields);
+  
   const badLengthFields = lengthFieldKeys.filter( field => 
     field in req.body && req.body[field].length < lengthFields[field].min ||
     req.body[field].length > lengthFields[field].max

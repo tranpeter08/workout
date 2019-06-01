@@ -1,5 +1,4 @@
 'use strict';
-
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
@@ -28,15 +27,6 @@ const createAuthToken = function(user) {
 
 // 'local' from strategies, see docs
 const localAuth = passport.authenticate('local', {session: false});
-
-// sign in, trade for auth token
-
-// router.post('/login', localAuth, (req, res) => {
-//   console.log('req user ===\n', req.user.serialize());
-//   const authToken = createAuthToken(req.user.serialize());
-      
-//   res.json({authToken})
-// });
 
 router.post('/login',(req, res, next)=> {
   passport.authenticate('local', {session: false}, (err, user, info) => {

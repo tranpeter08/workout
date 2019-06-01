@@ -14,7 +14,7 @@ const localStrategy = new LocalStrategy((username, password, done) => {
       if(!user) {
         return Promise.reject({
           reason: 'LoginError',
-          message: `no account associated with that username`,
+          message: `* No account associated with that username`,
           location: 'username'
         });
       }
@@ -24,7 +24,7 @@ const localStrategy = new LocalStrategy((username, password, done) => {
       if(!isValid) {
         return Promise.reject({
           reason: 'LoginError',
-          message: 'incorrect password or username',
+          message: '* Incorrect password or username',
           location: 'password'
         })
       }

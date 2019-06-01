@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
-
+const request = require('request');
+const multer = require('multer');
 const { User, Profile } = require('./model');
 const { jwtAuth } = require('../auth')
 const { validateUser, validateProfile } = require('./validate');
@@ -8,8 +9,32 @@ const { createError, handleError, sendRes } = require('../utils');
 
 const router = express.Router();
 
-// create user and profile
-// jwt
+router.post('/upload', (req, res) => {
+  const {image} = req.body;
+
+  const options = {
+    form: {image},
+    headers: {Authorization: 'Client-ID 99bccd5e07906f'},
+    json: true
+  };
+
+  request.post(
+    'https://api.imgur.com/3/upload',
+    options,
+    (err, resp, body) => {
+      if (err) {
+        return res.status(resp.statusCode).json({message: 'Internal Server Error'});
+      }
+
+      if (resp.statusCode !== 200) {
+        return res.status(resp.statusCode).json(body);
+      }
+      const {link} = body.data;
+      return res.json({link});
+    }
+  );
+});
+
 router.post('/', validateUser, validateProfile, (req, res) => {
   const {username, password, email, profile} = req.body;
 
@@ -21,8 +46,8 @@ router.post('/', validateUser, validateProfile, (req, res) => {
         return Promise.reject({
           code: 400,
           reason: 'validationError',
-          message: 'email already associated with another account!',
-          location: 'email'
+          message: '* Email already being used!',
+          location: ['email']
         })
       }
       return User.find({username}).count()
@@ -32,8 +57,8 @@ router.post('/', validateUser, validateProfile, (req, res) => {
         return Promise.reject({
           code: 400,
           reason: 'validationError',
-          message: 'username already exists!',
-          location: 'username'
+          message: '* Username already being used!',
+          location: ['username']
         });
       };
       return User.hashPassword(password);
@@ -150,15 +175,5 @@ router.post('/lost-credentials', (req, res) => {
 
   return username? newPasswordWith('username') : newPasswordWith('email');
 });
-
-// show all users for debugging only
-// router.get('/', (req, res) => {
-//   return User.find()
-//     .then(users => res.json(users))
-//     .catch(err => {
-//       console.error(err);
-//       res.json({message: 'An error has occured'});
-//     })
-// });
 
 module.exports = { router };

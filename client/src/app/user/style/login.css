@@ -1,0 +1,86 @@
+.login-main{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+#login-form {
+  color: rgb(240, 240, 240);
+  flex: 0 0 30rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: .5rem;
+}
+
+#login-form h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+#login-form label{
+  font-size: 2.2rem;
+  margin-bottom: .8rem;
+}
+
+#login-form input{
+  font-size: 2.2rem;
+  background-color: rgb(230, 230, 230);
+  border: none;
+  margin-bottom: .2rem;
+}
+
+#login-form .validation-err{
+  min-height: 1rem;
+  color: red;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+#login-form label, #login-form .validation-err{
+  padding: 0 1.8rem;
+}
+
+#login-form input, #login-form label {
+  display: block; 
+  width: 100%;
+}
+
+#login-form button {
+  color:  rgb(0, 0, 0);
+  font-size: 2.2rem;
+  background-color:rgb(0, 175, 75);
+  border: none;
+  display: block;
+  margin: 2.4rem auto;
+}
+
+#login-form button, #login-form input{
+  border-radius: 1.8rem;
+  padding: .4rem 1.8rem;
+}
+
+#login-form button:hover{
+  background-color: rgb(0, 120, 40);
+  transition: .3s;
+}
+
+#login-form button:active{
+  background-color: rgb(90, 90, 90);
+}
+
+#login-form .message{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.message a{
+  text-decoration: none;
+  color: rgb(0, 175, 255);
+}
+
+.message a:hover{
+  text-decoration: underline;
+}

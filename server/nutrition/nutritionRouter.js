@@ -9,7 +9,7 @@ const NUTRIENT_ROOT_URL = 'https://api.edamam.com/api/food-database/'
 
 router.get('/', (req, res, next) => {
   const {ingr} = req.query;
-
+  
   const searchQuery = {
     app_id: config.EDAMAM_NUTRITION_ID,
     app_key: config.EDAMAM_NUTRITION_KEY,

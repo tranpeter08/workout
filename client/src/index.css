@@ -1,23 +1,69 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Pontano Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  letter-spacing: .13rem;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+#root{
+  display: flex;
+  flex-direction: column;
 }
 
-.hidden {
-  display: none;
+main {
+  padding-top: 7rem;
+  flex: 1 0 auto;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.4)),
+    url('./images/gym-mobile.jpg')
+    center / cover
+    no-repeat
+    fixed;
 }
 
-.modal-backdrop{
+a{
+  text-decoration: none;
+}
+
+
+/* 
+font-family: 'Bevan', cursive;
+font-family: 'Pontano Sans', sans-serif;
+*/
+
+h1, h2, h3, h4 {
+  font-family: 'Bevan', cursive;
+}
+
+p {
+  font-family: 'Pontano Sans', sans-serif;
+}
+
+button{
+  cursor: pointer;
+}
+
+button:disabled, button[disabled]{
+  background-color: rgb(90, 90, 90) !important;
+  color:black !important;
+  cursor: not-allowed;
+}
+
+.modal-backdrop {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.349);
@@ -25,19 +71,32 @@ code {
   top: 0;
 }
 
-.modal-body{
+.session {
+  z-index: +1;
+}
+
+.modal-body {
   background-color: white;
   max-width: 300px;
   margin: auto;
-  top: 20%;
+  position: relative;
+  top: 10px;
 }
 
 .nutrition-section{
-  overflow: scroll;
+  overflow: auto;
   max-height: 360px;
 }
 
-.footer-app{
-  position: relative;
-  bottom: 10%;
+.hidden {
+  display: none;
+}
+
+.inline{
+  display: inline !important;
+}
+
+.error{
+  color: red;
+  font-size: 1.6rem;
 }

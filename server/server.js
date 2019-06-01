@@ -17,7 +17,7 @@ const {router: recipesRouter} = require('./recipes/recipesRouter');
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({limit: '3mb'}));
 app.use(morgan('common'));
 
 // CORS
@@ -25,6 +25,7 @@ const corsOptions = {
   methods: 'GET,PUT,POST,PATCH,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
 }
+
 app.use(cors(corsOptions));
 // app.use(function (req, res, next) {
 //   res.header('Access-Control-Allow-Origin', '*');
@@ -46,14 +47,6 @@ app.use('/nutrition', nutritionRouter);
 app.use('/recipes', recipesRouter);
 // app.use('/api/:userId', [workoutsRouter, exercisesRouter]);
 
-app.get('/', (req, res) => {
-  const fakeData = {
-    foo: 'bar',
-    buzz: 'bang'
-  };
-  res.json(fakeData);
-});
-
 let server;
 
 const runServer = (databaseUrl, port = PORT) => {
@@ -62,7 +55,10 @@ const runServer = (databaseUrl, port = PORT) => {
 
 app.listen(PORT, () => {
   console.log(`App is listening on port: ${PORT}`);
-  mongoose.connect(DATABASE_URL);
+  mongoose.connect(
+    DATABASE_URL, 
+    {useNewUrlParser: true, useCreateIndex: true}
+  );
 });
 
 module.exports = { app };
