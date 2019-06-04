@@ -21,7 +21,7 @@ export class Navigation extends React.Component {
 
   handleWindowResize(e) {
     return this.state.collapse ? null :
-      e.target.innerWidth >= 600 ? this.setState({collapse: true}) : null;
+      e.target.innerWidth >= 760 ? this.setState({collapse: true}) : null;
   };
 
   handleLogout = ()=>{

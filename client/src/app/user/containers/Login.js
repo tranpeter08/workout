@@ -10,7 +10,6 @@ import '../style/login.css';
 export class Login extends Component {
   constructor(props){
     super(props);
-    this.node = React.createRef();
   };
 
   componentDidMount() {
@@ -54,7 +53,7 @@ export class Login extends Component {
     }
 
     return (
-      <main className='login-main' ref={this.node} >
+      <main className='login-main'>
         <form 
           id='login-form'
           onSubmit={
@@ -69,7 +68,7 @@ export class Login extends Component {
               component={UserInput}
               validate={[required, isTrimmed]}
             />
-            <Field 
+            <Field
               name='password'
               label='Password'
               type='password'

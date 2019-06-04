@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function UserInput({
   input,
-  label, 
+  label,
   type,
   meta: {
     touched, 

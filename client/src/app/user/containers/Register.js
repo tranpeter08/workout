@@ -22,6 +22,8 @@ import {parseInput} from '../../misc/utils';
 import {createUser} from '../user-actions';
 import '../style/register.css';
 
+import UserInputs from '../components/UserInputs';
+
 export class Register extends Component {
   componentDidMount() {
     const inputs = document.getElementsByName('email');
@@ -76,7 +78,7 @@ export class Register extends Component {
         >
           <fieldset>
             <legend>Registration</legend>
-            <div className='user-inputs-wrapper'>
+            {/* <div className='user-inputs-wrapper'>
               <Field
                 name='email'
                 label='Email'
@@ -138,7 +140,8 @@ export class Register extends Component {
                 parse={parseInput}
                 component={UserInput}
               />
-            </div>
+            </div> */}
+            <UserInputs heightUnitValue={heightUnitValue} />
             <button disabled={pristine || submitting}>Register</button>
           </fieldset>
           {
@@ -162,6 +165,7 @@ const selector = formValueSelector('register');
 const mapStateToProps = (state, props) => {
   const {auth, user} = state;
   const heightUnitValue = selector(state, 'heightUnit');
+
   return {
     heightUnitValue, 
     user: { 

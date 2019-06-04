@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-class UserInfo extends React.Component {
+export class UserInfo extends React.Component {
 
   renderUserInfo() {
     const {profile} = this.props;
