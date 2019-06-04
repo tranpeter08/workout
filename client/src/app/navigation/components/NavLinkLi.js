@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {NavContext} from '../containers/Navigation';
 
-const NavLinkA = ({className, to, icon, label}) => {
+const NavLinkLi = ({className, to, icon, label}) => {
   const style = {
     color: 'rgb(0, 175, 255)'
   }
@@ -10,6 +10,7 @@ const NavLinkA = ({className, to, icon, label}) => {
   return (
     <NavContext.Consumer>
       { value => (
+        <li>
           <NavLink
             className={className}
             activeStyle={style} 
@@ -19,9 +20,10 @@ const NavLinkA = ({className, to, icon, label}) => {
           >
             {icon} {label}
           </NavLink>
+        </li>
       )}
     </NavContext.Consumer>
   )
 };
 
-export default NavLinkA;
+export default NavLinkLi;

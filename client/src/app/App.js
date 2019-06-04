@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 import Navigation from './navigation/containers/Navigation';
-import Landing from './landing/Landing';
+import Landing from './landing/components/Landing';
 import Login from './user/containers/Login';
 import Register from './user/containers/Register';
 import UserPage from './user/containers/UserPage';

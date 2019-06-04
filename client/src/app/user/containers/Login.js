@@ -11,22 +11,22 @@ export class Login extends Component {
   constructor(props){
     super(props);
     this.node = React.createRef();
-  }
+  };
 
   componentDidMount() {
     const input = document.getElementsByName('username')[0];
     if (input) {
       input.focus();
     }
-  }
+  };
 
   componentDidUpdate(prevProps) {
     const {error} = this.props.auth;
     if (prevProps.auth.error !== error) {
       if (error.location) {
         document.getElementsByName(error.location)[0].focus();
-      }
-    }
+      };
+    };
   };
 
   onSubmit({username, password}) { 
@@ -35,10 +35,19 @@ export class Login extends Component {
 
   handleFocusError = error => {
     document.getElementsByName(error.location)[0].focus();
-  }
+  };
 
   render() {
-    const {auth: {error, username, loading}, invalid} = this.props;
+    const {
+      auth: {
+        error, 
+        username, 
+        loading
+      }, 
+      invalid,
+      handleSubmit,
+      submitting
+    } = this.props;
 
     if (username) { 
       return <Redirect to={`/user/${username}/workouts`} />
@@ -46,11 +55,10 @@ export class Login extends Component {
 
     return (
       <main className='login-main' ref={this.node} >
-        
         <form 
           id='login-form'
           onSubmit={
-            this.props.handleSubmit((values) => this.onSubmit(values))
+            handleSubmit((values) => this.onSubmit(values))
           }
         >
           <h2>Login</h2>
@@ -68,14 +76,16 @@ export class Login extends Component {
               component={UserInput}
               validate={[required, isTrimmed]}
               />
-            
+
             <button
-              disabled={this.props.submitting}
+              disabled={submitting}
               type='submit'
             >
               Login
             </button>   
-            <p className='message'>Not registered yet?<br/><Link to="/register">Sign up!</Link></p> 
+            <p className='message'>
+              Not registered yet?<br/><Link to="/register">Sign up!</Link>
+            </p> 
             {
               invalid && 
               error && 
@@ -90,7 +100,7 @@ export class Login extends Component {
   };
 };
 
-const mapStateToProps = ( state, props) => {
+export const mapStateToProps = ( state, props) => {
   const {auth: {token, ..._auth}} = state;
   return ({auth: _auth})
 };

@@ -16,15 +16,15 @@ export class Navigation extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('resize', this.handleWindowResize.bind(this));
   }
 
-  handleWindowResize = e => {
+  handleWindowResize(e) {
     return this.state.collapse ? null :
       e.target.innerWidth >= 600 ? this.setState({collapse: true}) : null;
   };
 
-  handleLogout = () => {
+  handleLogout = ()=>{
     this.closeNav();
     this.props.dispatch(logOut());
   };
