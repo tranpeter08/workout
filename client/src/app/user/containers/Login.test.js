@@ -26,14 +26,18 @@ describe('<Login />', () => {
     );
   });
 
-  // it('calls onSubmit method when form is submitted', () => {
-  //   let instance = wrapper.instance();
-  //   let username = 'hello123',
-  //     password = 'person123';
-  //   instance.onSubmit(username, password);
-// 
-    // wrapper.simulate('submit');
+  it('calls onSubmit method when form is submitted', () => {
+    // let instance = wrapper.instance();
+    // let username = 'hello123',
+    //   password = 'person123';
+    // instance.onSubmit(username, password);
+
+    
     // expect(props.handleSubmit).toHaveBeenCalledWith(spy);
     // expect(props.dispatch).toHaveBeenCalledWith(logIn(username, password));
-  // })
+    
+    wrapper.simulate('submit');
+    expect(props.handleSubmit).toHaveBeenCalled();
+
+  })
 });
