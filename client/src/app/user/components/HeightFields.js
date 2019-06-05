@@ -25,7 +25,7 @@ export default function HeightFields(props) {
       />
       {
         props.heightUnitValue === 'cm' ? null :
-          <span>
+          <span className='inches-span'>
             <Field
               component='input'
               name='inches' 

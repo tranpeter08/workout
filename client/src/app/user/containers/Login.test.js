@@ -28,4 +28,25 @@ describe('<Login />', () => {
     instance.onSubmit(username, password);
     expect(props.dispatch).toHaveBeenCalled();
   })
+
+  it('displays the error if there is an error', () => {
+    const wrapper = shallow(<Login {...props} />);
+    expect(wrapper.exists('.error')).toBe(false);
+    
+    const authErr = {
+      auth: {
+        error: {
+          message: 'test error message'
+        }
+      },
+      invalid: true
+    };
+
+    wrapper.setProps(authErr);
+    expect(wrapper.exists('.error')).toBe(true);
+
+    let errorMessage = wrapper.find('.error');
+    expect(errorMessage.text().includes(authErr.auth.error.message)).toBe(true);
+
+  })
 });

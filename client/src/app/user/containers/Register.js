@@ -145,9 +145,9 @@ export class Register extends Component {
             <button disabled={pristine || submitting}>Register</button>
           </fieldset>
           {
-            error && 
-            error.reason === 'ValidationError' && 
-            <small 
+            error &&
+            error.reason !== 'validationError' &&
+            <small
               className='error'
             >
               * {error.message} at {error.location[0]}
@@ -162,16 +162,16 @@ export class Register extends Component {
 
 const selector = formValueSelector('register');
 
-const mapStateToProps = (state, props) => {
-  const {auth, user} = state;
+export const mapStateToProps = (state, props) => {
+  const {auth: {username}, user: {loading, error}} = state;
   const heightUnitValue = selector(state, 'heightUnit');
 
   return {
     heightUnitValue, 
     user: { 
-      username: auth.username,
-      loading: user.loading,
-      error: user.error
+      username,
+      loading,
+      error
     }
   };
 }
