@@ -13,14 +13,12 @@ export default function WeightFields(props) {
         type='number'
         component='input'
         min={0}
-        parse={parseInput}
-      />
+        parse={parseInput} />
       <Field
         name='weightUnit'
         options={['lb', 'kg']}
         component={Select}
-        label='Weight Unit'
-      />
+        label='Weight Unit' />
     </div>
   )
 }

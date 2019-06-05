@@ -104,10 +104,12 @@ export const mapStateToProps = ( state, props) => {
   return ({auth: _auth})
 };
 
-export default connect(mapStateToProps)(reduxForm({
+export const FormLogin = reduxForm({
   form: 'logIn',
   initialValues: {
     'username': 'petertran',
     'password': '1234567890'
   }
-})(Login));
+})(Login);
+
+export default connect(mapStateToProps)(FormLogin);
