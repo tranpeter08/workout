@@ -19,7 +19,7 @@ export default function Landing(props) {
         </div>
         <p><Link className='intro-login' to='/login'>Login</Link> to begin.<br/>
           Don't have an account?<br/>
-        <Link className='intro-register' to='/register'>Login</Link></p>
+        <Link className='intro-register' to='/register'>Register</Link></p>
       </section>
 
       <section className='landing-features'>

@@ -27,6 +27,8 @@ describe('<Landing />', () => {
     );
 
     expect(wrapper.exists('a[href="/login"]')).toBe(true);
+    expect(wrapper.find('a.intro-login').text()).toBe('Login');
     expect(wrapper.exists('a[href="/register"]')).toBe(true);
+    expect(wrapper.find('a.intro-register').text()).toBe('Register');
   });
 });

@@ -96,8 +96,8 @@ describe('<Register />', () => {
         error
       }
     }
-    
+
     const mappedProps = mapStateToProps(mockState);
     expect(mappedProps).toEqual(_mappedProps);
-  })
+  });
 });
