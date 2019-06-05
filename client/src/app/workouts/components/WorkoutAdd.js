@@ -14,16 +14,20 @@ export default class WorkoutAdd extends Component {
   }
 
   render() {
-    if(!this.state.editing){
-      return <div 
-        onClick={() => this.setEditing(true)}
-      >Add a Workout</div>
-    }
+    if (!this.state.editing) {
+      return (
+        <li >
+          <button onClick={() => this.setEditing(true)}>Add a workout</button>
+        </li>
+      )
+    };
 
-    return <WorkoutForm
-      form='NewWorkout'  
-      setEditing={(bool) => this.setEditing(bool)}
-      action='Adding'
-    />
+    return (
+      <WorkoutForm
+        form='NewWorkout'
+        setEditing={(bool) => this.setEditing(bool)}
+        action='Adding'
+      />
+    )
   };
 };

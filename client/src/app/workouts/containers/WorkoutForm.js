@@ -66,14 +66,17 @@ class WorkoutForm extends Component {
       workout: {error, loading},
       anyTouched
       } = this.props;
+
     const statusMessage = () => {
       if (loading) {
         return 'Submitting...'
       }
+
       if (anyTouched && error) {
         return `${error.message}`
-      }  
+      }
     };
+    
     return (
       <form 
         action="" 

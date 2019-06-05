@@ -1,15 +1,55 @@
 .workouts-section{
   margin: 2rem;
+  background-color: white;
 }
 
 .workouts-section h2{
   font-size: 2.4rem;
   text-align: center;
+  padding: 2rem;
 }
 
 .workouts-section ul{
   list-style-type: none;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  padding: 1rem 1rem 2rem;
+}
+
+.workouts-section li {
+  background-color: rgb(158, 245, 197);
+  padding: 1rem;
+  flex: 1 0 260px;
+  margin: 2rem 1rem 0 ;
+}
+
+@media screen and (min-width: 480px) {
+  .workouts-section li {
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .workouts-section li {
+    max-width: calc(33% - 20px);
+  }
+  
+}
+
+@media screen and (min-width: 880px) {
+  .workouts-section li {
+    max-width: calc(25% - 20px);
+  }
+}
+
+@media (min-width: 1080px) {
+  .workouts-section li {
+    max-width: calc(20% - 20px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .workouts-section li {
+    max-width: calc(16.67% - 20px);
+  }
 }

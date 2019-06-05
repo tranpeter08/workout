@@ -27,7 +27,9 @@ export class Workout extends Component {
 
   render() {
     const {workoutName, _id, username} = this.props;
-    if(this.state.editing){
+    const {editing, deleting} = this.state;
+
+    if (editing) {
       return <WorkoutForm 
         form={_id}
         initialValues={{workoutName, _id}}
@@ -37,7 +39,7 @@ export class Workout extends Component {
       />
     };
     
-    if (this.state.deleting) {
+    if (deleting) {
       return <Delete
         itemId = {_id}
         type='workout'
@@ -48,7 +50,7 @@ export class Workout extends Component {
 
     const exercisesLink = `/user/${username}/workouts/${workoutName}/exercises`;
     return (
-      <div >
+      <li >
         <h4><Link to={exercisesLink}>{workoutName}</Link></h4>
         <button 
           type='button' 
@@ -60,7 +62,7 @@ export class Workout extends Component {
           onClick={() => this.setDelete(true)}>
           Delete
         </button>
-      </div>
+      </li>
     )
   };
 }

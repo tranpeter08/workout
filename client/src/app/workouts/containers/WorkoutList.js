@@ -10,9 +10,7 @@ export class WorkoutList extends Component {
     let workoutList;
     if (workouts) {
       workoutList = workouts.map(workout => 
-        <li key={workout._id}>
-          <Workout {...workout} />
-        </li>
+        <Workout key={workout._id} {...workout} />
       );
     }
 
@@ -25,9 +23,9 @@ export class WorkoutList extends Component {
       <section className='workouts-section'>
         <h2>Workouts</h2>
         <ul>
-          <li><WorkoutAdd /></li>
+          <WorkoutAdd />
           {this.renderWorkouts()}
-        </ul>  
+        </ul>
       </section>
     )
   }

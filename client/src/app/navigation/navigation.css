@@ -128,7 +128,7 @@
   cursor: pointer;
 }
 
-@media screen and (min-width: 760px){
+@media screen and (min-width: 770px){
   .nav-button{
     display: none;
   }
@@ -162,7 +162,7 @@
   .top-nav .icon{display: none;}
 }
 
-@media screen and (min-width: 860px) {
+@media screen and (min-width: 876px) {
   .top-nav .icon{display: inline}
 }
 
