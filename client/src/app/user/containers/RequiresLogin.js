@@ -13,8 +13,8 @@ const requiresLogin = Component => {
       };
 
       if (error) {
-        return <div>
-          <p>An error has occured, try logging back <button>in</button></p>
+        return <div className='reqLogin-error'>
+          <p>An error has occured, try logging back <Link to='/login'>in</Link></p>
         </div>
       }
 

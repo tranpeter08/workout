@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import '../style/userInfo.css';
 
 export class UserInfo extends React.Component {
 
@@ -8,13 +9,15 @@ export class UserInfo extends React.Component {
     if (profile) {
       const {bodyFat, height, name, weight} = profile;
       return (
-        <div>
-          <img width='200px' src='https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg' alt='User' />
-          <h3>{name}</h3>
-          <span>Height: {height}</span>
-          <span>Weight: {weight}</span>
-          <span>Body Fat: {bodyFat}%</span>
-        </div>
+        <section className='userInfo-section'>
+          <img className='userInfo-img' src='https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg' alt='User' />
+          <div className='userInfo-detail-container'>
+            <h2>{name}</h2>
+            <p>Height: {height}</p>
+            <p>Weight: {weight}</p>
+            <p>Body Fat: {bodyFat}%</p>
+          </div>
+        </section>
       )
     }
   }

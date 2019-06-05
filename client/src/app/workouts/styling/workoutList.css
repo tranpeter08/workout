@@ -1,0 +1,15 @@
+.workouts-section{
+  margin: 2rem;
+}
+
+.workouts-section h2{
+  font-size: 2.4rem;
+  text-align: center;
+}
+
+.workouts-section ul{
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

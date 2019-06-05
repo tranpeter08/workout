@@ -13,7 +13,7 @@ import {Footer} from './footer/Footer';
 class App extends React.Component{
   state = {
     modal: false,
-    interval: 1,
+    interval: 60,
     timeout: 1
   };
 

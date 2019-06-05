@@ -1,0 +1,32 @@
+.userInfo-section{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 2rem;
+  background-color: white;
+}
+
+.userInfo-img{
+  width: 150px;
+  height:150px;
+  border-radius: 50%;
+  
+  /* flex: 0 0 150px; */
+}
+
+.userInfo-detail-container{
+  /* flex:0 0 150px; */
+  align-self: center;
+}
+
+.userInfo-detail-container, .userInfo-img{
+  margin: 2rem;
+}
+
+.userInfo-section h2{
+  font-size: 2rem;
+}
+
+.userInfo-detail-container p {
+  font-size: 1.6rem;
+}
