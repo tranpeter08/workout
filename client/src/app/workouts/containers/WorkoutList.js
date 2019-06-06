@@ -9,7 +9,7 @@ export class WorkoutList extends Component {
     const {workouts} = this.props;
     let workoutList;
     if (workouts) {
-      workoutList = workouts.map(workout => 
+      workoutList = workouts.map(workout =>
         <Workout key={workout._id} {...workout} />
       );
     }

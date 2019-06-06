@@ -38,11 +38,11 @@ export class Delete extends Component {
 
   render() {
     return(
-      <div ref={this.node}>
+      <li ref={this.node}>
         <p>Do you want to delete {this.props.type} "{this.props.title}"?</p>
         <button type='button' onClick={() => this.onYesDelete()}>Yes</button>
         <button type='button' onClick={() => this.props.setDelete(false)}>No</button>
-      </div>
+      </li>
     )
   }
 }

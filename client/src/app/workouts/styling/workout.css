@@ -1,0 +1,22 @@
+.workout-li h3 {
+  text-align: center;
+}
+
+.workout-li h3 a{
+  font-size: 1.8rem;
+  font-family: 'Bevan', cursive;
+  color: black;
+}
+
+.workout-li h3 a:hover{
+  color: rgb(110, 110, 110);
+  text-decoration: underline;
+}
+
+.workout-button-container button:nth-child(2){  
+  float: right;
+}
+
+.workout-button-container{
+  margin: 1rem 20% 0;
+}

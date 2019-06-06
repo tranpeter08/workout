@@ -1,3 +1,4 @@
+
 .workouts-section{
   margin: 2rem;
   background-color: white;
@@ -29,27 +30,26 @@
   }
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 780px) {
   .workouts-section li {
-    max-width: calc(33% - 20px);
+    max-width: calc(33.333% - 20px);
   }
-  
 }
 
-@media screen and (min-width: 880px) {
+@media screen and (min-width: 1080px) {
   .workouts-section li {
     max-width: calc(25% - 20px);
   }
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1380px) {
   .workouts-section li {
     max-width: calc(20% - 20px);
   }
 }
 
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .workouts-section li {
     max-width: calc(16.67% - 20px);
-  }
-}
+  } */
+/* } */

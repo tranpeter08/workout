@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import WorkoutForm from './WorkoutForm';
 import Delete from './Delete';
+import '../styling/workout.css';
 
 export class Workout extends Component {
   constructor(props){
@@ -50,18 +51,20 @@ export class Workout extends Component {
 
     const exercisesLink = `/user/${username}/workouts/${workoutName}/exercises`;
     return (
-      <li >
-        <h4><Link to={exercisesLink}>{workoutName}</Link></h4>
-        <button 
-          type='button' 
-          onClick={() => this.setEditing(true)}>
-          Edit
-        </button>
-        <button 
-          type='button' 
-          onClick={() => this.setDelete(true)}>
-          Delete
-        </button>
+      <li className='workout-li'>
+        <h3><Link to={exercisesLink}>{workoutName}</Link></h3>
+        <div className='workout-button-container'>
+          <button 
+            type='button' 
+            onClick={() => this.setEditing(true)}>
+            Edit
+          </button>
+          <button 
+            type='button' 
+            onClick={() => this.setDelete(true)}>
+            Delete
+          </button>
+        </div>
       </li>
     )
   };

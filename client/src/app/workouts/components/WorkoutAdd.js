@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import WorkoutForm from '../containers/WorkoutForm';
+import '../styling/workoutAdd.css';
 
 export default class WorkoutAdd extends Component {
   constructor(props){
@@ -16,18 +17,22 @@ export default class WorkoutAdd extends Component {
   render() {
     if (!this.state.editing) {
       return (
-        <li >
-          <button onClick={() => this.setEditing(true)}>Add a workout</button>
+        <li className='workoutAdd-li' >
+          <button onClick={() => this.setEditing(true)}>
+            Add a workout
+          </button>
         </li>
       )
     };
 
     return (
-      <WorkoutForm
-        form='NewWorkout'
-        setEditing={(bool) => this.setEditing(bool)}
-        action='Adding'
-      />
+      <li>
+        <WorkoutForm
+          form='NewWorkout'
+          setEditing={(bool) => this.setEditing(bool)}
+          action='Adding'
+        />
+      </li>
     )
   };
 };
