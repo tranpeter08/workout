@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Workout from './Workout';
 import WorkoutAdd from '../components/WorkoutAdd';
+import {getWorkouts} from '../workout-actions';
 import '../styling/workoutList.css';
 
 export class WorkoutList extends Component {
+  componentDidMount() {
+    console.log('mount')
+    this.props.dispatch(getWorkouts());
+  }
+
   renderWorkouts() {
     const {workouts} = this.props;
     let workoutList;
@@ -12,9 +18,10 @@ export class WorkoutList extends Component {
       workoutList = workouts.map(workout =>
         <Workout key={workout._id} {...workout} />
       );
+      return workoutList.reverse();
     }
 
-    return workoutList.reverse();
+    
   }
 
   render() {
@@ -31,6 +38,7 @@ export class WorkoutList extends Component {
   }
 }; 
 
-const mapStateToProps = ({user: {profile: {workouts}}}) => ({workouts});
+// const mapStateToProps = ({user: {profile: {workouts}}}) => ({workouts});
+const mapStateToProps = ({workout: {workouts}}) => ({workouts});
 
 export default connect(mapStateToProps)(WorkoutList);

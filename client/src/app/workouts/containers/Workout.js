@@ -31,22 +31,30 @@ export class Workout extends Component {
     const {editing, deleting} = this.state;
 
     if (editing) {
-      return <WorkoutForm 
-        form={_id}
-        initialValues={{workoutName, _id}}
-        setEditing={(bool) => this.setEditing(bool)}
-        action='Editing'
-        workoutName={workoutName}
-      />
+
+      return (
+        <li className='workout-li'>
+          <WorkoutForm
+            form={_id}
+            initialValues={{workoutName, _id}}
+            setEditing={(bool) => this.setEditing(bool)}
+            action='Editing'
+            workoutName={workoutName}
+          />
+        </li>
+      )
     };
     
     if (deleting) {
-      return <Delete
-        itemId = {_id}
-        type='workout'
-        title={workoutName}
-        setDelete={(bool) => this.setDelete(bool)}
-      />
+
+      return (
+        <Delete
+          itemId = {_id}
+          type='workout'
+          title={workoutName}
+          setDelete={(bool) => this.setDelete(bool)}
+        />
+      )
     };
 
     const exercisesLink = `/user/${username}/workouts/${workoutName}/exercises`;
@@ -68,7 +76,7 @@ export class Workout extends Component {
       </li>
     )
   };
-}
+};
 
 const mapStateToProps = ({auth: {username}}) => ({username});
 export default connect(mapStateToProps)(Workout);

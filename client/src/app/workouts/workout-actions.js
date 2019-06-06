@@ -7,6 +7,12 @@ export const workoutRequest = () => ({
   type: WORKOUT_REQUEST
 });
 
+export const WORKOUT_GET_SUCCESS = 'WORKOUT_GET_SUCCESS';
+export const workoutGetSuccess = workouts => ({
+  type: WORKOUT_GET_SUCCESS,
+  workouts
+});
+
 export const WORKOUT_SUCCESS = 'WORKOUT_SUCCESS';
 export const workoutSuccess = () => ({type: WORKOUT_SUCCESS});
 
@@ -19,6 +25,22 @@ export const workoutError = error => ({
 export const WORKOUT_CLEAR_ERRORS = 'WORKOUT_CLEAR_ERRORS';
 export const clearErrors = () => ({type: WORKOUT_CLEAR_ERRORS});
 
+export const getWorkouts = () => (dispatch, getState) => {
+  dispatch(workoutRequest());
+  const userId = getState().auth.userId;
+
+  return fetch(
+    `${API_BASE_URL}/users/${userId}/workouts`,
+    fetchOptions('GET')
+  )
+  .then(normalizeRes)
+  .then(res => dispatch(workoutGetSuccess(res)))
+  .catch(err => {
+    console.error(err);
+    dispatch(workoutError(err));
+  });
+}
+
 export const createWorkout = data => (dispatch, getState) => {
   dispatch(workoutRequest());
   const userId = getState().auth.userId;
@@ -29,8 +51,8 @@ export const createWorkout = data => (dispatch, getState) => {
     )
     .then(res => normalizeRes(res))
     .then(() => {
-      dispatch(getProfile(userId))
-      dispatch(workoutSuccess())
+      // dispatch(getProfile(userId));
+      dispatch(getWorkouts());
     })
     .catch(err => {
       console.error('create workout error ==>', err);
@@ -50,8 +72,7 @@ export const editWorkout = (data, workoutId) => (dispatch, getState )=> {
     )
     .then(res => normalizeRes(res))
     .then(() => {
-      dispatch(getProfile(userId));
-      dispatch(workoutSuccess());
+      dispatch(getWorkouts());
     })
     .catch(err => {
       console.error('WORKOUT EDIT ERROR ==>', err);
@@ -70,8 +91,7 @@ export const deleteWorkout = workoutId => (dispatch, getState ) => {
     )
     .then(res => normalizeRes(res))
     .then(() => {
-      dispatch(getProfile(userId));
-      dispatch(workoutSuccess());
+      dispatch(getWorkouts());
     })
     .catch(err => {
       console.error('WORKOUT Delete ERROR ==>', err);

@@ -72,15 +72,15 @@ class UserPage extends React.Component {
             <Route path={`${path}`} component={UserInfo} />
           </Switch>
           <Switch>
-              <Route 
-                path={`${path}/workouts/:workoutName/exercises`}
-                component={ExerciseList} />
-              <Route path={`${path}/workouts`} component={WorkoutList} />
-            </Switch>
+            <Route 
+              path={`${path}/workouts/:workoutName/exercises`}
+              component={ExerciseList} />
+            <Route path={`${path}/workouts`} component={WorkoutList} />
+          </Switch>
         </main>
       )
     }
-    return <div></div>
+    return <div></div>;
   }
 };
 

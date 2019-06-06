@@ -77,7 +77,7 @@ export class Login extends Component {
               />
 
             <button
-              disabled={submitting}
+              disabled={submitting || loading}
               type='submit'
             >
               Login

@@ -1,22 +1,47 @@
-.workout-li h3 {
+.workout-li h3, .workout-form h3 {
   text-align: center;
+  height: 2.2rem;
+  margin-bottom: 2rem;
 }
 
-.workout-li h3 a{
+.workout-li h3 a, .workout-form h3 {
   font-size: 1.8rem;
   font-family: 'Bevan', cursive;
   color: black;
 }
 
+
+
 .workout-li h3 a:hover{
-  color: rgb(110, 110, 110);
   text-decoration: underline;
+  font-size: 1.9rem;
+}
+
+.workout-button-container button:first-child:hover{
+  background-color: rgb(201, 201, 201);
 }
 
 .workout-button-container button:nth-child(2){  
   float: right;
 }
 
+.workout-button-container button:nth-child(2):hover{  
+  background-color: rgb(210, 0, 0);
+  color: white;
+}
+
 .workout-button-container{
-  margin: 1rem 20% 0;
+  margin: 1rem 10% 0;
+}
+
+.workout-button-container button{
+  font-size: 1.6rem;
+  padding: .4rem 1rem;
+  border: none;
+  border-radius: 1.6rem;
+  transition: .3s;
+}
+
+.workoutForm-button-submit{
+  background-color:rgba(70, 230, 140, 1);
 }

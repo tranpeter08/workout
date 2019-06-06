@@ -4,16 +4,17 @@
 }
 
 .workoutAdd-li button {
-  flex: 0 0 140px;
+  flex: 1 0 140px;
   height: auto;
   align-self: center;
   border: none;
   background: none;
   color: black;
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 .workoutAdd-li button:hover{
   color: rgb(0, 0, 0);
+  font-size: 2.1rem;
   text-decoration: underline;
 }

@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
 //get all workouts
 router.get('/', (req, res) => {
   return Profile
-    .findOne({userId:req.params.userId})
+    .findOne({userId: req.params.userId})
     .populate('workouts')
     .then(user => {
       console.log('=== USER WORKOUTS ===', user);

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styling/workoutInput.css'
 
 class WorkoutInput extends React.Component{
   componentDidMount(){
@@ -11,9 +12,10 @@ class WorkoutInput extends React.Component{
   }
 
   render() {
-    const {input, meta: {touched, error}} = this.props;
+    const {input, label, meta: {touched, error}} = this.props;
     return (
-      <div>
+      <div className='workout-formGroup'>
+        <label htmlFor={input.name}>{label}</label><br/>
         <input 
           type='text'
           {...input}
@@ -22,7 +24,7 @@ class WorkoutInput extends React.Component{
         {
           touched && 
           error && 
-          <span>{error || 'Something went wrong'}</span>
+          <span>{error || error.message}</span>
         }
       </div>
     )

@@ -5,6 +5,7 @@ import { reduxForm, Field} from 'redux-form';
 import WorkoutInput from '../components/WorkoutInput';
 import {required, notEmpty} from '../../user/validators';
 import {createWorkout, editWorkout, clearErrors} from '../workout-actions';
+import '../styling/workoutForm.css'
 
 class WorkoutForm extends Component {
   constructor(props) {
@@ -30,21 +31,21 @@ class WorkoutForm extends Component {
   };
 
   onSubmit = data => {
-    if(data.workoutName) {
+    if (data.workoutName) {
       const {action, form, dispatch} = this.props;
-      if(action === 'Adding') {
+      if (action === 'Adding') {
         return dispatch(createWorkout(data))
         .then(this.handleResErr);
       };
 
-      if(action === 'Editing') {
+      if (action === 'Editing') {
         return dispatch(editWorkout(data, form))
           .then(this.handleResErr);
       };
     }
   };
 
-  handleResErr = resErr => resErr ? null : null //this.props.setEditing(false)};
+  handleResErr = resErr => resErr ? null : this.props.setEditing(false);
 
   onCancel() {
     this.props.setEditing(false);
@@ -76,21 +77,22 @@ class WorkoutForm extends Component {
         return `${error.message}`
       }
     };
-    
+
     return (
       <form 
-        action="" 
+        className='workout-form'
         onSubmit={handleSubmit(values => this.onSubmit(values))}
-        ref={this.node}>
-          <h2>{action} {workoutName? workoutName : 'workout'}</h2>
-          <Field
-            name='workoutName'
-            label='Workout:'
-            component={WorkoutInput}
-            validate={[notEmpty]}
-            onChange={() => this.onChange()}
-          />
-          <button 
+        ref={this.node}
+      >
+        {/* <h3 >{action} {workoutName? workoutName : 'a workout'}</h3> */}
+        <Field
+          name='workoutName'
+          label='Workout Name'
+          component={WorkoutInput}
+          validate={[notEmpty]}
+          onChange={() => this.onChange()}/>
+        <div className='workout-button-container'>
+          <button className='workoutForm-button-submit'
             type='submit' 
             disabled={this.props.submitting}
             >Submit
@@ -98,9 +100,16 @@ class WorkoutForm extends Component {
           <button 
             type='button' 
             onClick={() => this.onCancel()}
-          >Cancel
+          >
+            Cancel
           </button>
-        <span>{statusMessage()}</span>
+        </div>
+        <div className='workout-form-status'>
+          { 
+            loading ? <span>Submitting</span> : 
+            anyTouched && error ? <span className='error'>{error.message}</span> : null
+          }
+        </div>
       </form>
     );
   };
