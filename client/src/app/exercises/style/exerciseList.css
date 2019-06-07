@@ -1,2 +1,16 @@
 /* exerciseList.css */
 
+.exercises-back-button {
+  margin-left:2rem;
+  font-size: 1.6rem;
+  border-radius: 1.6rem;
+  padding: .4rem 1rem;
+  color: white;
+  background-color: black;
+  border: none;
+  transition: .3s;
+}
+
+.exercises-back-button:hover{
+  background-color: rgb(80, 80, 80)
+}

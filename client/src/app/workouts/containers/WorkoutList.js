@@ -7,21 +7,17 @@ import '../styling/workoutList.css';
 
 export class WorkoutList extends Component {
   componentDidMount() {
-    console.log('mount')
     this.props.dispatch(getWorkouts());
   }
 
   renderWorkouts() {
     const {workouts} = this.props;
-    let workoutList;
     if (workouts) {
-      workoutList = workouts.map(workout =>
+      return workouts.map(workout =>
         <Workout key={workout._id} {...workout} />
-      );
-      return workoutList.reverse();
+      )
+      .reverse();
     }
-
-    
   }
 
   render() {
@@ -38,7 +34,6 @@ export class WorkoutList extends Component {
   }
 }; 
 
-// const mapStateToProps = ({user: {profile: {workouts}}}) => ({workouts});
 const mapStateToProps = ({workout: {workouts}}) => ({workouts});
 
 export default connect(mapStateToProps)(WorkoutList);

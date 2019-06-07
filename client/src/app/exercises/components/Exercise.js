@@ -55,15 +55,17 @@ export default class Exercise extends Component {
     }
     
     return(
-      <div>
+      <React.Fragment>
         <h3>{exerciseName}</h3>
         <p>Resistance: {resistance} {resistUnit === 'other'? null : resistUnit}</p>
         <p>Reps: {reps}</p>
         <p>Sets: {sets}</p>
         <p>Notes: {notes}</p>
-        <button onClick={() => this.setEdit(true)}>Edit</button>
-        <button onClick={() => this.setDelete(true)}>Delete</button>
-      </div>
+        <div className='exercise-button-container'>
+          <button onClick={() => this.setEdit(true)}>Edit</button>
+          <button onClick={() => this.setDelete(true)}>Delete</button>
+        </div>
+      </React.Fragment>
     )
   }
 };

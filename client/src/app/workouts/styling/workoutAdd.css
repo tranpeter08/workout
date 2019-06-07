@@ -3,7 +3,7 @@
   justify-content: center;
 }
 
-.workoutAdd-li button {
+.workoutAdd-li button{
   flex: 1 0 140px;
   height: auto;
   align-self: center;
