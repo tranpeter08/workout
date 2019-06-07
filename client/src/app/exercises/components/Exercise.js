@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import ExerciseForm from '../container/ExerciseForm';
 import Delete from '../../workouts/containers/Delete';
+import '../style/exercise.css';
 
 export default class Exercise extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: false,
-      deleting: false
-    }
+  state = {
+    editing: false,
+    deleting: false
   }
 
   setEdit(bool) {
@@ -33,6 +31,7 @@ export default class Exercise extends Component {
       workoutId } = this.props;
 
     if (editing) {
+      // create separate function
       return <ExerciseForm
         action='Editing'
         form={_id}
@@ -45,6 +44,7 @@ export default class Exercise extends Component {
     }
 
     if (deleting) {
+      // create separate function
       return <Delete 
         type='exercise'
         title={exerciseName}
@@ -54,15 +54,20 @@ export default class Exercise extends Component {
       />
     }
     
-    return(
+    return (
       <React.Fragment>
         <h3>{exerciseName}</h3>
-        <p>Resistance: {resistance} {resistUnit === 'other'? null : resistUnit}</p>
-        <p>Reps: {reps}</p>
-        <p>Sets: {sets}</p>
-        <p>Notes: {notes}</p>
+        <hr/>
+        <div className='exercise-detail-container'>
+          <p>
+            <span>Resistance:</span> {resistance} {resistUnit === 'other'? null : resistUnit}
+          </p>
+          <p><span>Reps:</span> {reps}</p>
+          <p><span>Sets:</span> {sets}</p>
+          <p><span>Notes:</span> {notes}</p>
+        </div>
         <div className='exercise-button-container'>
-          <button onClick={() => this.setEdit(true)}>Edit</button>
+          <button onClick={()=> this.setEdit(true)}>Edit</button>
           <button onClick={() => this.setDelete(true)}>Delete</button>
         </div>
       </React.Fragment>

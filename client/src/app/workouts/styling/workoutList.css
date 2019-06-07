@@ -22,12 +22,18 @@
 
 .workouts-section li,
 .exercises-section li {
-  background-color: rgb(100, 185, 225);
   padding: 1rem;
-  flex: 1 0 240px;
+  
   margin: 2rem 1rem 0 ;
   box-shadow: .1rem .1rem .7rem .1rem  rgb(145, 145, 145);
 }
+
+.workouts-section li{
+  background-color: rgb(100, 185, 225);
+  flex: 1 0 240px;
+}
+
+
 
 @media screen and (min-width: 480px) {
   .workouts-section li {

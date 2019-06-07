@@ -19,7 +19,7 @@ export default class WorkoutAdd extends Component {
       return (
         <li className='workoutAdd-li' >
           <button onClick={() => this.setEditing(true)}>
-            Add a workout
+          <i className="add-icon fas fa-plus-circle"></i>
           </button>
         </li>
       )

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
 import Exercise from '../components/Exercise';
 import ExerciseAdd from '../components/ExerciseAdd';
 import {getExercises} from '../exercise-actions';
@@ -8,20 +7,21 @@ import '../style/exerciseList.css';
 
 class ExerciseList extends Component {
   componentDidMount() {
-    const {dispatch, location: {state: {workoutId}}} = this.props;
-    dispatch(getExercises(workoutId));
+    this.props.dispatch(getExercises(this.selectWorkoutId));
+  }
+
+  get selectWorkoutId() {
+    const {location: {state: {workoutId}}} = this.props;
+    return workoutId;
   }
 
   renderExercises() {
-    const {
-      location: {state : {workoutId}}, 
-      exercise: {exercises}
-    } = this.props;
+    const {exercise: {exercises}} = this.props;
     
     if (exercises) {
       return exercises.map(exercise => 
         <li key={exercise._id}>
-          <Exercise {...exercise} workoutId={workoutId} />
+          <Exercise {...exercise} workoutId={this.selectWorkoutId} />
         </li>
       )
       .reverse();
@@ -31,7 +31,6 @@ class ExerciseList extends Component {
   render() {
     const {
       match: {params: {workoutName}},
-      location: {state: {workoutId}},
       history: {goBack}
     } = this.props;
 
@@ -45,8 +44,8 @@ class ExerciseList extends Component {
           <i className="fas fa-arrow-left"></i> To Workouts
         </button>
         <ul>
-          <li>
-            <ExerciseAdd type='exercise' workoutId={workoutId} />
+          <li className='exerciseAdd-li'>
+            <ExerciseAdd type='exercise' workoutId={this.selectWorkoutId} />
           </li>
           {this.renderExercises()}
         </ul>

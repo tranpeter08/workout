@@ -63,10 +63,10 @@ export class ExerciseForm extends Component {
       setEdit,
       anyTouched,
       exercise: {error}
-    } = this.props
+    } = this.props;
+
     return (
       <form 
-        action="" 
         onSubmit={handleSubmit((values) => this.onSubmit(values))}
         ref={this.node}
       >

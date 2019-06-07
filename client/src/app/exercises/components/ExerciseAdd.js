@@ -19,9 +19,10 @@ export default class ExerciseAdd extends Component {
       return (
       <button 
         className='exerciseAdd-button'
+        aria-label='Add an exercise'
         onClick={() => this.setAdd(true)}
       >
-        Add an exercise
+        <i className="add-icon fas fa-plus-circle"></i>
       </button>
     )}
 
