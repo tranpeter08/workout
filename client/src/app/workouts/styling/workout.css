@@ -1,3 +1,5 @@
+/* workout.css */
+
 .workout-li h3, .workout-form h3 {
   text-align: center;
   height: 2.2rem;
@@ -10,31 +12,34 @@
   color: black;
 }
 
-
-
 .workout-li h3 a:hover{
   text-decoration: underline;
   font-size: 1.9rem;
 }
 
-.workout-button-container button:first-child:hover{
+.workout-button-container button:first-child:hover,
+.delete-button-container button:last-child:hover{
   background-color: rgb(201, 201, 201);
 }
 
-.workout-button-container button:nth-child(2){  
+.workout-button-container button:last-child,
+.delete-button-container button:last-child{  
   float: right;
 }
 
-.workout-button-container button:nth-child(2):hover{  
+.workout-button-container button:last-child:hover,
+.delete-button-container button:first-child:hover{  
   background-color: rgb(210, 0, 0);
   color: white;
 }
 
-.workout-button-container{
+.workout-button-container,
+.delete-button-container{
   margin: 1rem 10% 0;
 }
 
-.workout-button-container button{
+.workout-button-container button,
+.delete-button-container button{
   font-size: 1.6rem;
   padding: .4rem 1rem;
   border: none;

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {deleteWorkout} from '../../workouts/workout-actions';
 import {deleteExercise} from '../../exercises/exercise-actions';
+import '../styling/delete.css';
 
 export class Delete extends Component {
   componentDidMount() {
@@ -25,7 +26,12 @@ export class Delete extends Component {
   }
 
   onYesDelete() {
-    const {type, dispatch, workoutId, itemId, setDelete} = this.props;
+    const {
+      type, 
+      dispatch, 
+      workoutId, 
+      itemId
+    } = this.props;
 
     if (type === 'workout') {
       return dispatch(deleteWorkout(itemId))
@@ -37,16 +43,31 @@ export class Delete extends Component {
   };
 
   render() {
+    const {
+      type, 
+      title, 
+      setDelete, 
+      workout: {loading, error}
+    } = this.props;
+    
     return(
-      <li ref={this.node}>
-        <p>Do you want to delete {this.props.type} "{this.props.title}"?</p>
-        <button type='button' onClick={() => this.onYesDelete()}>Yes</button>
-        <button type='button' onClick={() => this.props.setDelete(false)}>No</button>
+      <li className='delete-li' ref={this.node}>
+        <h3 className='delete-header'>Delete {type} "{title}"?</h3>
+        <div className='delete-button-container'>
+          <button type='button' onClick={() => this.onYesDelete()}>Yes</button>
+          <button type='button' onClick={() => setDelete(false)}>No</button>
+        </div>
+        <div className='delete-status'>
+          {
+            loading ? <span>Deleting...</span> :
+            error ? <span className='error'>{error.message}</span> : null
+          }
+        </div>
       </li>
     )
   }
 }
 
-const mapStateToProps = ({workout}, ownProps) => ({workout});
+const mapStateToProps = ({workout}) => ({workout});
 
 export default connect(mapStateToProps)(Delete);

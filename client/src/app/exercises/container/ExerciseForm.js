@@ -52,7 +52,7 @@ export class ExerciseForm extends Component {
   }
 
   handleResErr = resErr => {
-    return resErr ? null : null //this.props.setEdit(false);
+    return resErr ? null : this.props.setEdit(false);
   }
 
   render() {

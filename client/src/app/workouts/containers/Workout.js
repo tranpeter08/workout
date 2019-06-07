@@ -29,6 +29,11 @@ export class Workout extends Component {
   render() {
     const {workoutName, _id, username} = this.props;
     const {editing, deleting} = this.state;
+    const exercisesPath = `/user/${username}/workouts/${workoutName}/exercises`;
+    const location = {
+      pathname: exercisesPath,
+      state: {workoutId: _id}
+    };
 
     if (editing) {
 
@@ -57,10 +62,9 @@ export class Workout extends Component {
       )
     };
 
-    const exercisesLink = `/user/${username}/workouts/${workoutName}/exercises`;
     return (
       <li className='workout-li'>
-        <h3><Link to={exercisesLink}>{workoutName}</Link></h3>
+        <h3><Link to={location}>{workoutName}</Link></h3>
         <div className='workout-button-container'>
           <button 
             type='button' 
@@ -69,7 +73,8 @@ export class Workout extends Component {
           </button>
           <button 
             type='button' 
-            onClick={() => this.setDelete(true)}>
+            onClick={() => this.setDelete(true)}
+          >
             Delete
           </button>
         </div>

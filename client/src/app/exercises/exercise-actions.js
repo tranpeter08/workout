@@ -8,8 +8,9 @@ export const exerciseRequest = () => ({
 });
 
 export const EXERCISE_SUCCESS = 'EXERCISE_SUCCESS';
-export const exerciseSuccess = () => ({
-  type: EXERCISE_SUCCESS
+export const exerciseSuccess = exercises => ({
+  type: EXERCISE_SUCCESS,
+  exercises
 });
 
 export const EXERCISE_ERROR = 'EXERCISE_ERROR';
@@ -21,17 +22,35 @@ export const exerciseError = (error) => ({
 export const EXERCISE_CLEAR_ERROR = 'EXERCISE_CLEAR_ERROR';
 export const exerciseClearError = () => ({type: EXERCISE_CLEAR_ERROR});
 
+export const getExercises = workoutId => (dispatch, getState) => {
+  dispatch(exerciseRequest());
+  const {userId} = getState().auth;
+
+  return fetch(
+    `${API_BASE_URL}/users/${userId}/workouts/${workoutId}`,
+    fetchOptions('GET')
+  )
+  .then(normalizeRes)
+  .then(({exercises}) => {
+    dispatch(exerciseSuccess(exercises));
+  })
+  .catch(err => {
+    console.error('GET EXERCISE ERROR:', err);
+    dispatch(exerciseError(err));
+    return err;
+  });
+}
+
 export const createExercise = (workoutId, data) => (dispatch, getState) => {
   dispatch(exerciseRequest());
-  const {userId} = getState().auth.userId;
+  const {userId} = getState().auth;
   return fetch(
     `${API_BASE_URL}/users/${userId}/workouts/${workoutId}/exercises`,
     fetchOptions('POST', data)
   )
   .then(res => normalizeRes(res))
   .then(() => {
-    dispatch(getProfile(userId));
-    dispatch(exerciseSuccess());
+    dispatch(getExercises(workoutId));
   })
   .catch(error => {
     console.log('create exercise error', error);
@@ -42,15 +61,14 @@ export const createExercise = (workoutId, data) => (dispatch, getState) => {
 
 export const editExercise = (workoutId, exrcseId, data) => (dispatch, getState) => {
   dispatch(exerciseRequest());
-  const {userId} = getState().auth.userId;
+  const {userId} = getState().auth;
   return fetch(
     `${API_BASE_URL}/users/${userId}/workouts/${workoutId}/exercises/${exrcseId}`,
     fetchOptions('PUT', data)
   )
   .then(res => normalizeRes(res))
   .then(() => {
-    dispatch(getProfile(userId));
-    dispatch(exerciseSuccess());
+    dispatch(getExercises(workoutId));
   })
   .catch(err => {
     console.error('EXERCISE EDIT ERROR', err);
@@ -61,14 +79,13 @@ export const editExercise = (workoutId, exrcseId, data) => (dispatch, getState) 
 
 export const deleteExercise = (workoutId, exerciseId) => (dispatch, getState) => {
   dispatch(exerciseRequest);
-  const {userId} = getState().auth.userId;
+  const {userId} = getState().auth;
   return fetch(
     `${API_BASE_URL}/users/${userId}/workouts/${workoutId}/exercises/${exerciseId}`,
     fetchOptions('DELETE', null))
     .then(res => normalizeRes(res))
     .then(() => {
-      dispatch(getProfile(userId));
-      dispatch(exerciseSuccess());
+      dispatch(getExercises(workoutId));
     })
     .catch( err => {
       console.error('EXERCISE DELETE ERROR', err);

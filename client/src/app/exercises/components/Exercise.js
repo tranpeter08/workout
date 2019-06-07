@@ -32,7 +32,7 @@ export default class Exercise extends Component {
       resistUnit, 
       workoutId } = this.props;
 
-    if(editing) {
+    if (editing) {
       return <ExerciseForm
         action='Editing'
         form={_id}
@@ -44,7 +44,7 @@ export default class Exercise extends Component {
       />
     }
 
-    if(deleting) {
+    if (deleting) {
       return <Delete 
         type='exercise'
         title={exerciseName}

@@ -1,16 +1,19 @@
+/* workoutList.css */
 
-.workouts-section{
+.workouts-section, .exercises-section{
   margin: 2rem;
   background-color: white;
 }
 
-.workouts-section h2{
+.workouts-section h2, 
+.exercises-section h2{
   font-size: 2.4rem;
   text-align: center;
   padding: 2rem;
 }
 
-.workouts-section ul{
+.workouts-section ul,
+.exercises-section ul{
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
@@ -18,8 +21,7 @@
 }
 
 .workouts-section li {
-  /* background-color: rgb(158, 245, 197); */
-  background-color: rgb(98, 184, 224);
+  background-color: rgb(100, 185, 225);
   padding: 1rem;
   flex: 1 0 240px;
   margin: 2rem 1rem 0 ;

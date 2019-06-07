@@ -6,6 +6,7 @@ import {
 } from './exercise-actions';
 
 const initialState = {
+  exercises: '',
   error: '',
   loading: false
 };
@@ -15,7 +16,12 @@ const exerciseReducer = (state = initialState, action) => {
   case EXERCISE_REQUEST:
     return {...state, loading: true};
   case EXERCISE_SUCCESS:
-    return {...state, loading: false, error: null};
+    return {
+      ...state, 
+      exercises: action.exercises,
+      loading: false, 
+      error: null
+    };
   case EXERCISE_ERROR:
     return {...state, loading: false, error: action.error};
   case EXERCISE_CLEAR_ERROR:

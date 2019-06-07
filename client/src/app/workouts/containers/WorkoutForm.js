@@ -59,7 +59,6 @@ class WorkoutForm extends Component {
   }
 
   render() {
-    // console.log('workoutform props', this.props)
     const {
       action, 
       workoutName, 

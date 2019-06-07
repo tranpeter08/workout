@@ -1,5 +1,4 @@
-.workout-form-status{
+.workout-form-status, .delete-status{
   min-height: 1rem;
   margin: .4rem;
 }
-

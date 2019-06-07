@@ -1,6 +1,5 @@
 import {API_BASE_URL} from '../misc/config';
 import {fetchOptions, normalizeRes} from '../misc/utils';
-import {getProfile} from '../user/user-actions';
 
 export const WORKOUT_REQUEST = 'WORKOUT_REQUEST';
 export const workoutRequest = () => ({
@@ -36,7 +35,7 @@ export const getWorkouts = () => (dispatch, getState) => {
   .then(normalizeRes)
   .then(res => dispatch(workoutGetSuccess(res)))
   .catch(err => {
-    console.error(err);
+    console.error('GET WORKOUT ERROR: ',err);
     dispatch(workoutError(err));
   });
 }
@@ -51,11 +50,10 @@ export const createWorkout = data => (dispatch, getState) => {
     )
     .then(res => normalizeRes(res))
     .then(() => {
-      // dispatch(getProfile(userId));
       dispatch(getWorkouts());
     })
     .catch(err => {
-      console.error('create workout error ==>', err);
+      console.error('CREATE WORKOUT ERROR:', err);
       dispatch(workoutError(err))
       return err
     });
@@ -63,7 +61,6 @@ export const createWorkout = data => (dispatch, getState) => {
 
 export const editWorkout = (data, workoutId) => (dispatch, getState )=> {
   dispatch(workoutRequest());
-  console.log('test');
   const userId = getState().auth.userId;
   
   return fetch(
@@ -75,7 +72,7 @@ export const editWorkout = (data, workoutId) => (dispatch, getState )=> {
       dispatch(getWorkouts());
     })
     .catch(err => {
-      console.error('WORKOUT EDIT ERROR ==>', err);
+      console.error('WORKOUT EDIT ERROR:', err);
       dispatch(workoutError(err));
       return err;
     })
@@ -94,7 +91,7 @@ export const deleteWorkout = workoutId => (dispatch, getState ) => {
       dispatch(getWorkouts());
     })
     .catch(err => {
-      console.error('WORKOUT Delete ERROR ==>', err);
+      console.error('WORKOUT Delete ERROR:', err);
       dispatch(workoutError(err));
       return err;
     })
