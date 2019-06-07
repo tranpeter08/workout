@@ -57,7 +57,7 @@ export default class Exercise extends Component {
     return (
       <React.Fragment>
         <h3>{exerciseName}</h3>
-        <hr/>
+        <hr className='exercise-hr'/>
         <div className='exercise-detail-container'>
           <p>
             <span>Resistance:</span> {resistance} {resistUnit === 'other'? null : resistUnit}
