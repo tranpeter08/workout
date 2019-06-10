@@ -25,7 +25,7 @@ const exerciseReducer = (state = initialState, action) => {
   case EXERCISE_ERROR:
     return {...state, loading: false, error: action.error};
   case EXERCISE_CLEAR_ERROR:
-    return {...state, error: null};
+    return {...state, error: ''};
   default:
     return state;
   }

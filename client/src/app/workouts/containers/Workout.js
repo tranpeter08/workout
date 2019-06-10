@@ -38,15 +38,13 @@ export class Workout extends Component {
     if (editing) {
 
       return (
-        <li className='workout-li'>
-          <WorkoutForm
-            form={_id}
-            initialValues={{workoutName, _id}}
-            setEditing={(bool) => this.setEditing(bool)}
-            action='Editing'
-            workoutName={workoutName}
-          />
-        </li>
+        <WorkoutForm
+          form={_id}
+          initialValues={{workoutName, _id}}
+          setEditing={(bool) => this.setEditing(bool)}
+          action='Editing'
+          workoutName={workoutName}
+        />
       )
     };
     
@@ -63,7 +61,7 @@ export class Workout extends Component {
     };
 
     return (
-      <li className='workout-li'>
+      <React.Fragment>
         <h3><Link to={location}>{workoutName}</Link></h3>
         <div className='workout-button-container'>
           <button 
@@ -78,7 +76,7 @@ export class Workout extends Component {
             Delete
           </button>
         </div>
-      </li>
+        </React.Fragment>
     )
   };
 };

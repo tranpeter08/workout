@@ -51,7 +51,7 @@ export class Delete extends Component {
     } = this.props;
     
     return(
-      <li className='delete-li' ref={this.node}>
+      <div className='' ref={this.node}>
         <h3 className='delete-header'>Delete {type} "{title}"?</h3>
         <div className='delete-button-container'>
           <button type='button' onClick={() => this.onYesDelete()}>Yes</button>
@@ -63,7 +63,7 @@ export class Delete extends Component {
             error ? <span className='error'>{error.message}</span> : null
           }
         </div>
-      </li>
+      </div>
     )
   }
 }

@@ -14,7 +14,9 @@ export class WorkoutList extends Component {
     const {workouts} = this.props;
     if (workouts) {
       return workouts.map(workout =>
-        <Workout key={workout._id} {...workout} />
+        <li className='workout-li' key={workout._id} >
+          <Workout {...workout} />
+        </li>
       )
       .reverse();
     }

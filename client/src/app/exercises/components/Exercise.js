@@ -17,22 +17,10 @@ export default class Exercise extends Component {
     this.setState({deleting: bool})
   }
 
-  render() {
-    const {editing, deleting} = this.state;
+  renderForm() {
     const initialValues = {...this.props};
-    const {
-      _id, 
-      exerciseName, 
-      resistance, 
-      reps, 
-      sets, 
-      notes, 
-      resistUnit, 
-      workoutId } = this.props;
-
-    if (editing) {
-      // create separate function
-      return <ExerciseForm
+    const {exerciseName, _id, workoutId, } = this.props;
+    return <ExerciseForm
         action='Editing'
         form={_id}
         initialValues={initialValues}
@@ -41,21 +29,38 @@ export default class Exercise extends Component {
         workoutId={workoutId}
         exerciseId={_id}
       />
-    }
 
-    if (deleting) {
-      // create separate function
-      return <Delete 
+  }
+
+  renderDelete() {
+    const {exerciseName, _id, workoutId} = this.props
+    return <Delete 
         type='exercise'
         title={exerciseName}
         itemId={_id}
         workoutId={workoutId}
         setDelete={(bool) => this.setDelete(bool)}
       />
-    }
+  }
+
+  render() {
+    const {editing, deleting} = this.state;
+  
+    const {
+      exerciseName, 
+      resistance, 
+      reps, 
+      sets, 
+      notes, 
+      resistUnit} = this.props;
+
+    if (deleting) {
+      return this.renderDelete()
+    };
     
     return (
       <React.Fragment>
+        { editing ? this.renderForm() : null}
         <h3>{exerciseName}</h3>
         <hr className='exercise-hr'/>
         <div className='exercise-detail-container'>
@@ -71,6 +76,6 @@ export default class Exercise extends Component {
           <button onClick={() => this.setDelete(true)}>Delete</button>
         </div>
       </React.Fragment>
-    )
-  }
+    );
+  };
 };

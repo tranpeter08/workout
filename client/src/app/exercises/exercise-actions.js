@@ -1,6 +1,5 @@
 import {API_BASE_URL} from '../misc/config';
 import {fetchOptions, normalizeRes} from '../misc/utils';
-import {getProfile} from '../user/user-actions';
  
 export const EXERCISE_REQUEST = 'EXERCISE_REQUEST';
 export const exerciseRequest = () => ({
@@ -20,7 +19,9 @@ export const exerciseError = (error) => ({
 });
 
 export const EXERCISE_CLEAR_ERROR = 'EXERCISE_CLEAR_ERROR';
-export const exerciseClearError = () => ({type: EXERCISE_CLEAR_ERROR});
+export const exerciseClearError = () => {
+  return ({type: EXERCISE_CLEAR_ERROR})
+};
 
 export const getExercises = workoutId => (dispatch, getState) => {
   dispatch(exerciseRequest());
@@ -31,13 +32,10 @@ export const getExercises = workoutId => (dispatch, getState) => {
     fetchOptions('GET')
   )
   .then(normalizeRes)
-  .then(({exercises}) => {
-    dispatch(exerciseSuccess(exercises));
-  })
+  .then(({exercises}) => dispatch(exerciseSuccess(exercises)))
   .catch(err => {
     console.error('GET EXERCISE ERROR:', err);
     dispatch(exerciseError(err));
-    return err;
   });
 }
 
@@ -48,14 +46,11 @@ export const createExercise = (workoutId, data) => (dispatch, getState) => {
     `${API_BASE_URL}/users/${userId}/workouts/${workoutId}/exercises`,
     fetchOptions('POST', data)
   )
-  .then(res => normalizeRes(res))
-  .then(() => {
-    dispatch(getExercises(workoutId));
-  })
+  .then(normalizeRes)
+  .then(() => dispatch(getExercises(workoutId)))
   .catch(error => {
     console.log('create exercise error', error);
     dispatch(exerciseError(error));
-    return error;
   });
 };
 
@@ -66,14 +61,11 @@ export const editExercise = (workoutId, exrcseId, data) => (dispatch, getState) 
     `${API_BASE_URL}/users/${userId}/workouts/${workoutId}/exercises/${exrcseId}`,
     fetchOptions('PUT', data)
   )
-  .then(res => normalizeRes(res))
-  .then(() => {
-    dispatch(getExercises(workoutId));
-  })
+  .then(normalizeRes)
+  .then(() => dispatch(getExercises(workoutId)))
   .catch(err => {
     console.error('EXERCISE EDIT ERROR', err);
     dispatch(exerciseError(err));
-    return err;
   })
 }
 
@@ -83,14 +75,11 @@ export const deleteExercise = (workoutId, exerciseId) => (dispatch, getState) =>
   return fetch(
     `${API_BASE_URL}/users/${userId}/workouts/${workoutId}/exercises/${exerciseId}`,
     fetchOptions('DELETE', null))
-    .then(res => normalizeRes(res))
-    .then(() => {
-      dispatch(getExercises(workoutId));
-    })
+    .then(normalizeRes)
+    .then(() => dispatch(getExercises(workoutId)))
     .catch( err => {
       console.error('EXERCISE DELETE ERROR', err);
       dispatch(exerciseError(err));
-      return err;
     })
 }
 

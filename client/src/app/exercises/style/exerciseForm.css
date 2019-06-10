@@ -1,0 +1,90 @@
+/* exerciseForm.css */
+
+.exerciseForm {
+  background-color: rgb(240, 240, 240);
+  margin: 0 2rem;
+  padding: 1rem;
+  box-shadow: 0 0 3px 1.5px rgb(121, 121, 121);
+}
+
+.exercise-fields-container {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1rem;
+}
+
+.resistance{
+  width: 6rem;
+}
+
+.exerciseForm-group.sets,
+.exerciseForm-group.reps{
+  flex: 1 0 50%;
+}
+
+.exerciseForm-group.sets input,
+.exerciseForm-group.reps input{
+  width: 4rem;
+}
+
+.exerciseForm textarea,
+.exerciseForm label, 
+.exerciseForm input, 
+.exerciseForm select{
+  font-size: 1.6rem;
+}
+
+.resistUnit,
+.exerciseForm textarea,
+.exerciseForm input{
+  padding: .4rem .8rem;
+  margin-left: .4rem;
+}
+
+.exerciseForm textarea,
+.exerciseForm input{
+  border: none;
+}
+
+.exerciseForm textarea{
+  font-family: 'Pontano Sans', sans-serif;
+}
+
+.exerciseForm-group{
+  margin-top: 1rem;
+  display: flex;
+  align-items: baseline;
+  flex: 1 0 100%;
+}
+
+.exerciseForm-group textarea,
+.exerciseForm-group input{
+  flex: 1 1 3rem;
+}
+
+.exerciseForm-group textarea{
+  border: none;
+}
+
+.resistUnit{
+  border: 1px solid rgb(200, 200, 200);
+}
+
+.success-icon{
+  color: green;
+  font-size: 8rem;
+}
+
+.success-container{
+  text-align: center;
+  padding: 2rem;
+  visibility: visible;
+  opacity: 1;
+  transition: .25s;
+}
+
+@media screen and (min-width: 400px) {
+  .exerciseForm {
+    max-width: 36rem;
+  }
+}

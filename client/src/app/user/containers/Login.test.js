@@ -20,8 +20,8 @@ describe('<Login />', () => {
   });
 
   it('onSubmit dispatches', () => {
-    const wrapper = shallow(<Login {...props} />);
-    let username = 'hello123',
+    let wrapper = shallow(<Login {...props} />),
+    username = 'hello123',
     password = 'person123',
     instance = wrapper.instance();
     

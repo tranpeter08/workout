@@ -66,9 +66,13 @@ button:disabled, button[disabled]{
 .modal-backdrop {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.349);
+  background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .session {

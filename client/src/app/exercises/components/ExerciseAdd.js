@@ -14,22 +14,28 @@ export default class ExerciseAdd extends Component {
     this.setState({adding: bool});
   }
 
-  render() {
-    if (!this.state.adding) {
+  renderForm() {
+    if (this.state.adding) {
       return (
-      <button 
-        className='exerciseAdd-button'
-        aria-label='Add an exercise'
-        onClick={() => this.setAdd(true)}
-      >
-        <i className="add-icon fas fa-plus-circle"></i>
-      </button>
+        <ExerciseForm
+        action='Adding'
+        setEdit={(bool) => this.setAdd(bool)}
+        workoutId={this.props.workoutId} />
     )}
+  }
 
-    return <ExerciseForm
-      action='Adding'
-      setEdit={(bool) => this.setAdd(bool)}
-      workoutId={this.props.workoutId}
-     />
+  render() {
+    return (
+      <React.Fragment>
+        {this.renderForm()}
+        <button 
+          className='exerciseAdd-button'
+          aria-label='Add an exercise'
+          onClick={() => this.setAdd(true)}
+        >
+          <i className="add-icon fas fa-plus-circle"></i>
+        </button>
+    </React.Fragment>
+    )
   };
 };
