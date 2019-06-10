@@ -41,7 +41,7 @@ class ExerciseList extends Component {
           className='exercises-back-button' 
           onClick={() => goBack()}
         >
-          <i className="fas fa-arrow-left"></i> To Workouts
+          <i className="fas fa-arrow-left"></i> Workouts
         </button>
         <ul>
           <li className='exerciseAdd-li'>

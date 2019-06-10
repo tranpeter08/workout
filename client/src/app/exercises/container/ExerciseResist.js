@@ -10,10 +10,12 @@ export default function ExerciseResist(props) {
       <Field
         name='resistance'
         type='text'
+        id='resistance'
         className='resistance'
         component='input'
       />
       <Field 
+        aria-label='Resistance Unit'
         name='resistUnit' 
         className='resistUnit' 
         component='select'

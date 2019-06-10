@@ -12,7 +12,7 @@ export default class ExcerciseInput extends Component {
         </label>
         {
           label === 'Notes' ? 
-            <textarea  {...input} /> 
+            <textarea id={input.name}  {...input} /> 
             :
             <input type={type} id={input.name}{...input}/>
         }
