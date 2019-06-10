@@ -18,7 +18,7 @@ export default class WorkoutAdd extends Component {
     if (!this.state.editing) {
       return (
         <li className='workoutAdd-li' >
-          <button onClick={() => this.setEditing(true)}>
+          <button aria-label='Add a workout' onClick={() => this.setEditing(true)}>
           <i className="add-icon fas fa-plus-circle"></i>
           </button>
         </li>

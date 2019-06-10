@@ -17,6 +17,7 @@ class WorkoutInput extends React.Component{
       <div className='workout-formGroup'>
         <label htmlFor={input.name}>{label}</label><br/>
         <input 
+          aria-label='Workout Name'
           type='text'
           {...input}
           ref={this.inputField}
