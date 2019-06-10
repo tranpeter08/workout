@@ -27,7 +27,7 @@ export class WorkoutList extends Component {
     return (
       <section className='workouts-section'>
         <h2>Workouts</h2>
-        <ul>
+        <ul aria-live='polite'>
           <WorkoutAdd />
           {this.renderWorkouts()}
         </ul>

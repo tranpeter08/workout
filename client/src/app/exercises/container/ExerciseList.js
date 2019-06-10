@@ -43,7 +43,7 @@ class ExerciseList extends Component {
         >
           <i className="fas fa-arrow-left"></i> Workouts
         </button>
-        <ul>
+        <ul aria-live='polite'>
           <li className='exerciseAdd-li'>
             <ExerciseAdd type='exercise' workoutId={this.selectWorkoutId} />
           </li>
