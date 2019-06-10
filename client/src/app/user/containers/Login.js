@@ -8,9 +8,6 @@ import {logIn} from '../../auth/auth-actions';
 import '../style/login.css';
 
 export class Login extends Component {
-  constructor(props){
-    super(props);
-  };
 
   componentDidMount() {
     const input = document.getElementsByName('username')[0];

@@ -22,6 +22,10 @@
   flex: 1 0 50%;
 }
 
+.exerciseForm-group.sets{
+  padding-left: .8rem;
+}
+
 .exerciseForm-group.sets input,
 .exerciseForm-group.reps input{
   width: 4rem;
