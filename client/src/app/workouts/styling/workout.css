@@ -22,6 +22,7 @@
   font-size: 1.9rem;
 }
 
+.modal-button-container,
 .exerciseForm-button-container,
 .workout-button-container,
 .delete-button-container,
@@ -29,6 +30,7 @@
   margin: 1rem 10% 0;
 }
 
+.modal-body button,
 .exerciseForm-button-container button,
 .workout-button-container button,
 .delete-button-container button,
@@ -40,6 +42,7 @@
   transition: .3s;
 }
 
+.modal-body button:hover,
 .exerciseForm-button-container button:first-child:hover,
 .workout-button-container button:first-child:hover,
 .delete-button-container button:last-child:hover,
@@ -47,6 +50,7 @@
   background-color: rgb(201, 201, 201);
 }
 
+.modal-body button:last-child,
 .exerciseForm-button-container button:last-child,
 .workout-button-container button:last-child,
 .delete-button-container button:last-child,
@@ -54,6 +58,7 @@
   float: right;
 }
 
+.modal-body button:last-child:hover,
 .exerciseForm-button-container button:last-child:hover,
 .workout-button-container button:last-child:hover,
 .delete-button-container button:first-child:hover,
@@ -62,11 +67,13 @@
   color: white;
 }
 
+.modal-body button:first-of-type:hover,
 .exerciseForm-button-container button:first-child,
 .workoutForm-button-submit{
-  background-color:rgba(70, 230, 140, 1);
+  background-color:rgb(70, 230, 140);
 }
 
+.modal-body,
 .resistUnit,
 .exerciseForm,
 .exerciseForm textarea,

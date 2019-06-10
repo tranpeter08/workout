@@ -80,11 +80,33 @@ button:disabled, button[disabled]{
 }
 
 .modal-body {
-  background-color: white;
+  background-color: rgb(230, 230, 230);
   max-width: 300px;
   margin: auto;
   position: relative;
-  top: 10px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.session-icon,
+.modal-body p,
+.modal-body h3{
+  font-size: 2.2rem;
+  padding: 0 2rem;
+}
+
+.modal-body p {
+  margin: 2rem 0;
+}
+
+.modal-body button:first-of-type{
+  float: left;
+}
+
+.session-icon{
+  color: rgb(100, 185, 225);
+  font-size: 3rem;
+  margin-top: 2rem;
 }
 
 .nutrition-section{
