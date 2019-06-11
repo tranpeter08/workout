@@ -109,11 +109,6 @@ button:disabled, button[disabled]{
   margin-top: 2rem;
 }
 
-.nutrition-section{
-  overflow: auto;
-  max-height: 360px;
-}
-
 .hidden {
   display: none;
 }

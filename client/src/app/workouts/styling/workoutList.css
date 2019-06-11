@@ -1,5 +1,12 @@
 /* workoutList.css */
 
+/* .workouts-section h2{
+  background: 
+    url(../workouts.jpg)
+    center / cover
+    no-repeat;
+} */
+
 .workouts-section, .exercises-section{
   margin: 2rem;
   background-color: white;

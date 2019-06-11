@@ -11,11 +11,11 @@ const {
   showModal} = props;
 
   return (
-    <div onClick={() => showModal(props)}>
-      <h3>{label}</h3>
-      {brand ? <h4>{brand}</h4> : null}
+    <li onClick={() => showModal(props)}>
       <img src={image || food} width='200px' alt='Food Item' />
-    </div>
+      <h4>{label}</h4>
+      {brand ? <h5>({brand})</h5> : null}
+    </li>
   )
 }
 

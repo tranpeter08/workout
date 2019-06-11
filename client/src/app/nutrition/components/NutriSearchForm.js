@@ -24,7 +24,7 @@ export default class NutriSearchForm extends React.Component{
           onChange={this.handleChange} 
           value={this.state.term}
           placeholder={this.props.placeholder}/>
-        <button>Search</button>
+        <button aria-label='Search'><i className="fas fa-search"></i></button>
       </form>
     )
   }

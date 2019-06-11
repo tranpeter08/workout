@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {NavContext} from '../containers/Navigation';
 
-const NavLinkLi = ({className, to, icon, label}) => {
+const NavLinkLi = ({className, to, icon, label, exact}) => {
   const style = {
     color: 'rgb(0, 175, 255)'
   }
@@ -14,7 +14,7 @@ const NavLinkLi = ({className, to, icon, label}) => {
           <NavLink
             className={className}
             activeStyle={style} 
-            exact={true} 
+            exact={exact} 
             to={to}
             onClick={value.closeNav}
           >

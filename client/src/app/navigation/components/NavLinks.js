@@ -12,11 +12,11 @@ export default function NavLinks({collapse, username, handleLogout}) {
             <NavLinkLi
               to={`${path}/workouts`}
               label='Workouts'
-              icon= {<i className="fas fa-dumbbell icon"></i>}/>
+              icon={<i className="fas fa-dumbbell icon"></i>}/>
             <NavLinkLi
               to={`${path}/nutrition`}
               label='Nutrition' 
-              icon= {<i className="fas fa-apple-alt icon"></i>}/>
+              icon={<i className="fas fa-apple-alt icon"></i>}/>
             <NavLinkLi 
               to={`${path}/recipes/search`}
               label='Recipes' 
@@ -24,7 +24,7 @@ export default function NavLinks({collapse, username, handleLogout}) {
             <NavLinkLi 
               to={`${path}/recipes/myRecipes`}
               label='My Recipes'
-              icon= {<i className="fas fa-utensils icon"></i>}/>
+              icon={<i className="fas fa-utensils icon"></i>}/>
             <li>
               <button
                 className='logout-button' 

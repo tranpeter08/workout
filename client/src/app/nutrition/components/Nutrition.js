@@ -3,6 +3,8 @@ import NutriSearchForm from './NutriSearchForm';
 import {normalizeRes} from '../../misc/utils';
 import NutriResult from './NutriResult';
 import NutriModal from './NutriModal';
+import {API_BASE_URL} from '../../misc/config';
+import '../styling/nutrition.css';
 
 export default class Nutrition extends React.Component{
   state = {
@@ -24,7 +26,7 @@ export default class Nutrition extends React.Component{
 
   getResults = term => {
     fetch(
-      `http://localhost:8080/nutrition?ingr=${term}`,
+      `${API_BASE_URL}/nutrition?ingr=${term}`,
       {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
@@ -54,11 +56,12 @@ export default class Nutrition extends React.Component{
   }
 
   renderResults = () => {
-    return this.state.results.map((item, index) => 
-      <NutriResult 
-        key={index}  
-        showModal={this.showModal} 
-        {...item} />);
+    return this.state.results.map((item, index) =>
+        <NutriResult
+          key={index}
+          showModal={this.showModal} 
+          {...item} />
+    )
   }
 
   handleGetMore = () => {
@@ -104,8 +107,7 @@ export default class Nutrition extends React.Component{
       modal, 
       modalData} = this.state;
 
-    return <React.Fragment>
-
+    return <section className='nutrition-section'>
       {
         modal ? 
           <NutriModal {...modalData} closeModal={this.closeModal}/>
@@ -113,34 +115,36 @@ export default class Nutrition extends React.Component{
           null
       }
 
+      <h2 className='nutri-h2' >Nutrition</h2>
+
       <NutriSearchForm 
         handleSearch={this.handleSearch} 
         placeholder={'Search for a food'}/>
-
-      {results ? <h2>Search Results for "{text}"</h2> : null}
-
-      {
-        error ? <p>{error.message}</p> :
-        !results ? null : 
-        results.length > 0 ?  
-          this.renderResults()
-          : 
-          <div>No search results found</div>
-      }
-
-      {loading ? <div>Loading...</div> : null}
-
-      {
-        !results ? null :
-        hasNext ? 
-          <div>
-            <button onClick={this.handleGetMore}>More Results</button>
-            <a href='#search'>Back to top</a>
-          </div>
-          :
-          null
-      }
-
-    </React.Fragment>
+      
+      <section className='nutri-search-results'>
+        {results ? <h3>Search Results for "{text}"</h3> : null}
+        <ul>
+          {
+            error ? <p>{error.message}</p> :
+            !results ? null : 
+            results.length > 0 ?  
+              this.renderResults()
+              : 
+              <p>No search results found</p>
+          }
+        </ul>
+        {loading ? <p>Searching...</p> : null}
+        {
+          !results ? null :
+          hasNext ? 
+            <div>
+              <button onClick={this.handleGetMore}>More Results</button>
+              <a href='#search'>Back to top</a>
+            </div>
+            :
+            null
+        }
+      </section>
+    </section>
   }
 }

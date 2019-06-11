@@ -1,0 +1,58 @@
+/* nutrition.css */
+
+.nutrition-section{
+  display: flex;
+  flex-flow: column;
+}
+
+.nutri-h2{
+  font-size: 3.2rem;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+#search{
+  margin: 2rem auto 0;
+}
+
+#search button,
+#search input{
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(190, 190, 190);
+  font-size: 2.2rem;
+  padding: .4rem 1.3rem;
+}
+
+#search input{
+  border-top-left-radius: 1.9rem;
+  border-bottom-left-radius: 1.9rem;
+  border-right: none;
+}
+
+#search button{
+  border-top-right-radius: 1.9rem;
+  border-bottom-right-radius: 1.9rem;
+  border-left: none;
+}
+
+.nutri-search-results ul,
+.nutri-search-results{
+  margin-top: 2rem;
+}
+
+
+.nutri-search-results{
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+}
+
+.nutri-search-results h3{
+  font-size: 2.4rem;
+}
+
+
+/* .nutri-search-results li{
+  flex: 1 0 100%;
+} */
