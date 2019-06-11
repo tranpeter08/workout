@@ -41,7 +41,6 @@ router.post('/', validateUser, validateProfile, (req, res) => {
   return User
     .findOne({email})
     .then(user => {
-      console.log('user\n:', user)
       if (user) {
         return Promise.reject({
           code: 400,
@@ -72,14 +71,11 @@ router.post('/', validateUser, validateProfile, (req, res) => {
         });
     })
     .then(user => {
-      console.log('=== user ===\n', user)
       return Profile
         .create({userId: user._id, ...profile});
     })
     .then(profile => {
-      console.log('===profile ===\n', profile)
-      // create JWT
-      return res.status(201).json(profile.serialize());
+      return res.status(201).json(profile);
     })
     .catch(err => {
       if(err.reason === 'validationError') {
@@ -120,7 +116,7 @@ router.get('/profile/:userId/', jwtAuth, (req, res) => {
         createError('validationError', 'profile not found', 404);
       }
       console.log('get profile\n', profile);
-      return res.status(200).json(profile.serialize());
+      return res.status(200).json(profile);
     })
     .catch(err => {
       return handleError(err, res)

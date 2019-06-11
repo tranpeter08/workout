@@ -7,8 +7,6 @@ import {
 } from 'redux-form';
 import {Redirect} from 'react-router-dom'
 import UserInput from '../components/UserInput';
-import HeightFields from '../components/HeightFields';
-import WeightFields from '../components/WeightFields';
 import { 
   required, 
   notEmpty,
@@ -18,7 +16,6 @@ import {
   matching, 
   isTrimmed,
 } from '../validators';
-import {parseInput} from '../../misc/utils';
 import {createUser} from '../user-actions';
 import '../style/register.css';
 
@@ -49,6 +46,7 @@ export class Register extends Component {
       delete data.inches;
     }
     const {username, password, email, ...profile} = data;
+
     return this.props.dispatch(createUser({
         username,
         password,
@@ -78,14 +76,13 @@ export class Register extends Component {
         >
           <fieldset>
             <legend>Registration</legend>
-            {/* <div className='user-inputs-wrapper'>
+            <div className='user-inputs-wrapper'>
               <Field
                 name='email'
                 label='Email'
                 type='email'
                 component={UserInput}
-                validate={required}
-                />
+                validate={required}/>
               <Field
                 name='username'
                 label='Username'
@@ -97,8 +94,7 @@ export class Register extends Component {
                   isTrimmed,
                   noSpaceInside,
                   usernameLength
-                ]}
-              />
+                ]}/>
               <Field 
                 name='password'
                 label='Password'
@@ -110,39 +106,20 @@ export class Register extends Component {
                   isTrimmed,
                   noSpaceInside,
                   passwordLength
-                ]}
-              />
+                ]}/>
               <Field 
                 name='confirmPassword'
                 label='Confirm Password'
                 type='password'
                 component={UserInput}
-                validate={[required, matching]}
-              />
-              <Field 
-                name='firstName'
-                label='First Name'
-                type='text'
-                component={UserInput}
-              />
-              <Field 
-                name='lastName'
-                label='Last Name'
-                type='text'
-                component={UserInput}
-              />
-              <HeightFields heightUnitValue={heightUnitValue} />
-              <WeightFields />
-              <Field 
-                name='bodyFat'
-                label='Body Fat'
-                type='number'
-                parse={parseInput}
-                component={UserInput}
-              />
-            </div> */}
-            <UserInputs heightUnitValue={heightUnitValue} />
-            <button disabled={pristine || submitting}>Register</button>
+                validate={[required, matching]}/>
+              <UserInputs heightUnitValue={heightUnitValue} />
+            </div>
+            <button 
+              disabled={pristine || submitting || error}
+            >
+              Register
+            </button>
           </fieldset>
           {
             error &&

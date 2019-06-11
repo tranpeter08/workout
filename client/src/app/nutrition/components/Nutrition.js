@@ -122,7 +122,7 @@ export default class Nutrition extends React.Component{
         placeholder={'Search for a food'}/>
       
       <section className='nutri-search-results'>
-        {results ? <h3>Search Results for "{text}"</h3> : null}
+        {results ? <h3>Search Results For "{text}"</h3> : null}
         <ul>
           {
             error ? <p>{error.message}</p> :

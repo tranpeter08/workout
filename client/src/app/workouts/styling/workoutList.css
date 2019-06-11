@@ -40,8 +40,6 @@
   flex: 1 0 240px;
 }
 
-
-
 @media screen and (min-width: 480px) {
   .workouts-section li {
     max-width: calc(50% - 20px);
