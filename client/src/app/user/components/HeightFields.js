@@ -2,10 +2,11 @@ import React from 'react';
 import {Field} from 'redux-form';
 import Select from './Select';
 import {parseInput} from '../../misc/utils'
+import '../style/heightFields.css';
 
-export default function HeightFields(props) {
+export default function HeightFields({heightUnitValue}) {
   return (
-    <div className='form-group'>
+    <div className='form-group' id='heightFields'>
       <label htmlFor='height'>Height</label>
       <Field 
         component='input'
@@ -14,7 +15,7 @@ export default function HeightFields(props) {
         name='height' 
         type='number'
         min={0}
-        max={10}
+        max={ heightUnitValue === 'ft' ? 10 : 300}
         parse={parseInput}
       />
       <Field 
@@ -24,7 +25,7 @@ export default function HeightFields(props) {
         label='Height Unit'
       />
       {
-        props.heightUnitValue === 'cm' ? null :
+        heightUnitValue === 'cm' ? null :
           <span className='inches-span'>
             <Field
               component='input'

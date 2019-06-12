@@ -8,7 +8,7 @@ export class UserInfo extends React.Component {
     edit: false
   }
 
-  toggleForm() {
+  toggleForm = () => {
     this.setState((state) => ({edit: !state.edit}));
   }
 
@@ -16,7 +16,7 @@ export class UserInfo extends React.Component {
     return this.state.edit ? 
       <UserForm 
         initialValues={profile} 
-        toggleForm={() => this.toggleForm()} /> 
+        toggleForm={this.toggleForm} /> 
       : 
       null
   }

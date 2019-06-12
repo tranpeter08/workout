@@ -19,6 +19,7 @@ export default function UserInput({
         type={type}
         {...input}
         min={0}
+        max={input.name === 'bodyFat' ? 99 : 999}
       />
       {
         label === 'Body Fat' ? '%' :

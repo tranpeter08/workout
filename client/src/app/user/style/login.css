@@ -5,7 +5,7 @@
 }
 
 #login-form {
-  color: rgb(240, 240, 240);
+  color: white;
   flex: 0 0 30rem;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 2rem;
@@ -26,7 +26,7 @@
 
 #login-form input{
   font-size: 2.2rem;
-  background-color: rgb(230, 230, 230);
+  background-color: white;
   border: none;
   margin-bottom: .2rem;
 }

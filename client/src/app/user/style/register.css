@@ -4,13 +4,18 @@
   align-items: center;
 }
 
+#profile-form,
 #register-form{
   flex: 0 1 60rem;
-  background-color: rgba(0, 0, 0, 0.6);
   margin: 2rem;
-  color: rgb(240, 240, 240);
 }
 
+#register-form{
+  color: rgb(240, 240, 240);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#profile-form legend,
 #register-form legend{
   font-family: 'Bevan', cursive;
   font-size: 3rem;
@@ -19,29 +24,36 @@
   padding: 2rem 0 0;
 }
 
-#register-form fieldset{
+#profile-form fieldset,
+#profile-form input,
+#register-form fieldset,
+#register-form input{
   border: none;
 }
 
-.user-inputs-wrapper {
+.user-inputs-wrapper{
   display: flex;
   flex-flow: row wrap;
 }
 
+#profile-form .form-group,
 #register-form .form-group{
   flex: 1 1 auto;
   padding: 0 2rem 2rem;
 }
 
+#profile-form label,
 #register-form label{
   display: block;
   margin-bottom: .8rem;
 }
 
+#profile-form .user-input-text,
 #register-form .user-input-text{
   width: 100%;
 }
 
+#profile-form input,
 .user-inputs-wrapper,
 #register-form input,
 .user-inputs-wrapper select{
@@ -55,6 +67,7 @@
   height: 1.8rem;
 }
 
+#profile-form #bodyFat,
 .height-input, 
 #weight, 
 #register-form #bodyFat{
@@ -62,18 +75,16 @@
   margin-right: .5rem;
 }
 
-#register-form #bodyFat{
-  display: inline-block;
-}
-
+#profile-form input,
 #register-form input{
   padding: .4rem .6rem;
-  border: none;
 }
 
+#profile-form select,
 #register-form select{
   margin-right: .5rem;
 }
+
 
 #register-form input, 
 #register-form select{
@@ -81,6 +92,13 @@
   color: black;
 }
 
+#profile-form input,
+#profile-form select{
+  background: white;
+  color: black;
+}
+
+#profile-form button,
 #register-form button{
   color: black;
   background-color:rgb(0, 175, 75); 
@@ -91,17 +109,28 @@
   padding: 1rem;
 }
 
+#profile-form button:first-of-type:hover,
 #register-form button:hover{
   background-color: rgb(0, 120, 40);
   transition: .3s;
 }
 
+#profile-form button:active,
 #register-form button:active{
   background-color: rgb(90, 90, 90);
 }
 
+#profile-form,
+#profile-form button,
+#profile-form input,
 #register-form input, 
 #register-form button,
 #register-form{
   border-radius: .5rem;
+}
+
+@media screen and (max-width: 525px) {
+  #register-form .form-group:nth-child(6){
+    flex: 1 0 100%;
+  }
 }
