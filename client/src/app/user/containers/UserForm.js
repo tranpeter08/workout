@@ -21,6 +21,7 @@ export class UserForm extends React.Component{
 
   render() {
     const {heightUnitValue, toggleForm, handleSubmit} = this.props;
+    console.log(this.props)
 
     return (
       <div className='modal-backdrop'>
@@ -35,13 +36,12 @@ export class UserForm extends React.Component{
                 </div>
               </fieldset>
               <div className='userForm-button-container'>
-                <button>Submit</button>
+                <button type='submit'>Submit</button>
                 <button type='button' onClick={toggleForm}>Close</button>
               </div>
             </React.Fragment>
           }
         </form>
-        
       </div>
     )
   }

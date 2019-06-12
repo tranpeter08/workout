@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import UserForm from './UserForm';
 import {getProfile} from '../user-actions';
 import '../style/userInfo.css';
@@ -14,12 +15,10 @@ export class UserInfo extends React.Component {
   }
 
   toggleForm = () => {
-    console.log('toggle')
     this.setState((state) => ({edit: !state.edit}));
   }
 
-  renderForm(profile) {
-    const {workouts, ...data} = profile
+  renderForm(data) {
     return this.state.edit ? 
       <UserForm 
         initialValues={data} 
@@ -41,17 +40,16 @@ export class UserInfo extends React.Component {
     return `${height} ${heightUnit}`
   }
 
-  renderUserInfo() {
-    if (this.props.user.profile) {
+  renderUserInfo(data) {
+    if (data) {
       const {
-        profile: {
-          bodyFat, 
-          firstName, 
-          lastName, 
-          weight, 
-          weightUnit
-        }
-      } = this.props.user;
+        bodyFat, 
+        firstName, 
+        lastName, 
+        weight, 
+        weightUnit
+      } = data;
+
       const name = `${firstName} ${lastName}`;
     
       return (
@@ -77,13 +75,19 @@ export class UserInfo extends React.Component {
       profile,
       loading,
       error
-   } = this.props.user;
+    } = this.props.user;
+
+    const {workouts, ...data} = profile;
+
+    if (error && error.code === 401) {
+      return <Redirect to='/unauthorized' />
+    }
 
     return (
       <section className='userInfo-section'>
-        {this.renderForm(profile)}
+        {this.renderForm(data)}
         <img className='userInfo-img' src='https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg' alt='User' />
-        {this.renderUserInfo()}
+        {this.renderUserInfo(data)}
       </section>
     )
   }
