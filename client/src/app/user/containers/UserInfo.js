@@ -79,7 +79,7 @@ export class UserInfo extends React.Component {
 
     const {workouts, ...data} = profile;
 
-    if (error && error.code === 401) {
+    if (!error) {
       return <Redirect to='/unauthorized' />
     }
 

@@ -20,27 +20,36 @@ export class UserForm extends React.Component{
   }
 
   render() {
-    const {heightUnitValue, toggleForm, handleSubmit} = this.props;
+    const {
+      heightUnitValue, 
+      toggleForm, 
+      handleSubmit,
+      submitting,
+      user: {error}
+    } = this.props;
     console.log(this.props)
 
     return (
       <div className='modal-backdrop'>
         <form onSubmit={handleSubmit(this.onSubmit)} id='profile-form'>
           {
-            this.state.success ? <SuccessStatus toggleForm={toggleForm} /> :
-            <React.Fragment>
-              <fieldset>
-                <legend>Editing Profile</legend>
-                <div className='user-inputs-wrapper'>
-                    <UserInputs heightUnitValue={heightUnitValue} />
+            this.state.success ? 
+              <SuccessStatus toggleForm={toggleForm} /> 
+              :
+              <React.Fragment>
+                <fieldset>
+                  <legend>Editing Profile</legend>
+                  <div className='user-inputs-wrapper'>
+                      <UserInputs heightUnitValue={heightUnitValue} />
+                  </div>
+                </fieldset>
+                <div className='userForm-button-container'>
+                  <button disabled={submitting} type='submit'>Submit</button>
+                  <button disabled={submitting} type='button' onClick={toggleForm}>Close</button>
                 </div>
-              </fieldset>
-              <div className='userForm-button-container'>
-                <button type='submit'>Submit</button>
-                <button type='button' onClick={toggleForm}>Close</button>
-              </div>
-            </React.Fragment>
+              </React.Fragment>
           }
+          {error && <span className='error'>* {error.message}</span>}
         </form>
       </div>
     )
@@ -50,7 +59,11 @@ export class UserForm extends React.Component{
 const selector = formValueSelector('UserForm');
 
 const mapStateToProps = (state) => {
-  return {heightUnitValue: selector(state, 'heightUnit')}
+
+  return {
+    heightUnitValue: selector(state, 'heightUnit'),
+    user: state.user
+  }
 }
 
 const DecoratedUserForm = reduxForm({

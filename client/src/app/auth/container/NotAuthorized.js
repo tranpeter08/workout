@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {logOut} from '../auth-actions';
 import ErrorMessage from './ErrorMessage';
 import {Redirect} from 'react-router-dom';
@@ -9,19 +10,19 @@ export class NotAuthorized extends React.Component{
     redirect: false
   }
 
-  // componentDidMount() {
-  //   this.logoutTimer = setTimeout(
-  //     this.handleLogout,
-  //     3 * 1000
-  //   );
-  // }
+  componentDidMount() {
+    this.logoutTimer = setTimeout(
+      this.handleLogout,
+      3 * 1000
+    );
+  }
 
-  // handleLogout =()=> {
-  //   this.setState(
-  //     {redirect: true},
-  //     () => this.props.dispatch(logOut())
-  //   )
-  // }
+  handleLogout =()=> {
+    this.setState(
+      {redirect: true},
+      () => this.props.dispatch(logOut())
+    )
+  }
 
   render() {
     console.log(this.props);
@@ -31,10 +32,15 @@ export class NotAuthorized extends React.Component{
 
     return (
         <main>
-          <ErrorMessage />
+          {/* <ErrorMessage /> */}
+          Error Message Place Holder
         </main>
     )
   }
 }
 
-export default connect()(NotAuthorized);
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ logOut }, dispatch);
+// }
+
+export default connect(null, {logOut})(NotAuthorized);
