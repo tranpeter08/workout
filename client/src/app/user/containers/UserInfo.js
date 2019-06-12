@@ -54,7 +54,12 @@ export class UserInfo extends React.Component {
           <p>Height: {this.normalizeHeight()}</p>
           <p>Weight: {weight} {weightUnit}</p>
           <p>Body Fat: {bodyFat}%</p>
-          <button onClick={()=> this.toggleForm()}>Edit</button>
+          <button 
+            onClick={this.toggleForm}
+            aria-label='Edit Profile'
+          >
+            <i className="edit-profile-icon far fa-edit"></i>
+          </button>
         </div>
       </section>
     );

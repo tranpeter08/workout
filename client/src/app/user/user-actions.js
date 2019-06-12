@@ -46,18 +46,31 @@ export const createUser = data => dispatch => {
 
 export const getProfile = () => (dispatch, getState) => {
   dispatch(userRequest());
-  const userId = getState().auth.userId;
+  const {userId} = getState().auth;
   return fetch(`${API_BASE_URL}/users/profile/${userId}`, fetchOptions('GET'))
-    .then(res => {
-      return normalizeRes(res)
-    })
+    .then(normalizeRes)
     .then(profile => {
       dispatch(userSuccess(profile))
     })
     .catch(error => {
-      dispatch(userClear());
+      // dispatch(userClear());
       dispatch(userError(error));
       console.error('GET PROFILE ERROR', error);
       return error;
     })
+}
+
+export const updateProfile = data => (dispatch, getState) => {
+  dispatch(userRequest());
+  const {userId} = getState().auth;
+  return fetch(
+    `${API_BASE_URL}/users/profile/${userId}`,
+    fetchOptions('PUT', data)
+  )
+  .then(normalizeRes)
+  .then(profile => dispatch(getProfile()))
+  .catch(err => {
+    dispatch(userError(err));
+    console.error('UPDATE PROFILE ERROR:', err);
+  })
 }

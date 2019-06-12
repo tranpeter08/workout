@@ -30,3 +30,16 @@
 .userInfo-detail-container p {
   font-size: 1.6rem;
 }
+
+.userInfo-section button{
+  background: none;
+  border: none;
+}
+
+.userInfo-section button:hover{
+  color: grey;
+}
+
+.edit-profile-icon{
+  font-size: 2rem;
+}

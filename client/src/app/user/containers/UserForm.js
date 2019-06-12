@@ -2,12 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {reduxForm, formValueSelector} from 'redux-form';
 import UserInputs from '../components/UserInputs';
-import {} from '../user-actions';
+import {updateProfile} from '../user-actions';
 import '../style/userForm.css';
 
 export class UserForm extends React.Component{
   onSubmit = data => {
-
+    console.log('submitted')
+    this.props.dispatch(updateProfile(data));
   }
 
   render() {
@@ -24,7 +25,7 @@ export class UserForm extends React.Component{
           </fieldset>
 
           <div className='userForm-button-container'>
-            <button type>Submit</button>
+            <button type='submit'>Submit</button>
             <button type='button' onClick={toggleForm}>Close</button>
           </div>
         </form>
