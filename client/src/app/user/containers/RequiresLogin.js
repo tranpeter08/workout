@@ -26,14 +26,14 @@ const requiresLogin = Component => {
         return <Component {...otherProps} />;
       }
 
-      return <Redirect to='/' />;
+      return <div></div>;
     };
   };
 
   const displayName = Component.displayName || Component.name || 'Component';
   RequiresLogin.displayName = `RequiresLogin(${displayName})`;
 
-  const mapStateToProps = ({auth}, ownProps) => ({
+  const mapStateToProps = ({auth}) => ({
     auth: {
       hasToken: auth.token !== null,
       loading: auth.loading,

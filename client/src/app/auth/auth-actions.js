@@ -87,8 +87,6 @@ export const refreshToken = () => dispatch => {
   .then(({authToken}) => storeToken(authToken, dispatch))
   .catch(err => {
     console.error(err);
-    dispatch(authError(err));
-    dispatch(logOut())
-    return err;
+    dispatch(logOut());
   })
 };

@@ -9,6 +9,7 @@ import UserPage from './user/containers/UserPage';
 import RefreshModal from './RefreshModal';
 import {logOut, refreshToken} from './auth/auth-actions';
 import {Footer} from './footer/Footer';
+import { NotAuthorized } from './auth/container/NotAuthorized';
 
 class App extends React.Component{
   state = {
@@ -112,6 +113,7 @@ class App extends React.Component{
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/user/:username' component={UserPage} />
+          <Route path='/unauthorized' component={NotAuthorized} />
           <Footer />
         </React.Fragment>
     );

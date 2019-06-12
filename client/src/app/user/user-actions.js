@@ -50,10 +50,10 @@ export const getProfile = () => (dispatch, getState) => {
   return fetch(`${API_BASE_URL}/users/profile/${userId}`, fetchOptions('GET'))
     .then(normalizeRes)
     .then(profile => {
-      dispatch(userSuccess(profile))
+      dispatch(userSuccess(profile));
+      return true;
     })
     .catch(error => {
-      // dispatch(userClear());
       dispatch(userError(error));
       console.error('GET PROFILE ERROR', error);
       return error;

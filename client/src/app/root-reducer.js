@@ -21,7 +21,6 @@ const appReducer =
     myRecipes: myRecipesReducer
   });
 
-
 const RESET_APP = 'RESET_APP';
 export const resetApp = () => ({type: RESET_APP});
 
@@ -36,7 +35,6 @@ const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
-
 
 const authToken = loadToken();
 if (authToken) {

@@ -35,6 +35,7 @@ router.post('/login',(req, res, next)=> {
       console.log('passport error: \n', err)
       return next(err)
     }
+    
     if (info) {
       console.log('passport info: \n', info)
       return res.status(401).json(info)
@@ -54,8 +55,8 @@ router.post('/refresh', jwtAuth,(req, res) => {
   res.json({authToken});
 });
 
-router.post('/test', jwtAuth, (req, res) => {
-  res.json({message: 'success'})
+router.get('/test', jwtAuth, (req, res) => {
+  res.json({isValid: true})
 })
 
 module.exports = {router, jwtAuth};

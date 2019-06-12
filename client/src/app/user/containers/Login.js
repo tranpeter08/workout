@@ -8,7 +8,6 @@ import {logIn} from '../../auth/auth-actions';
 import '../style/login.css';
 
 export class Login extends Component {
-
   componentDidMount() {
     const input = document.getElementsByName('username')[0];
     if (input) {
@@ -53,9 +52,7 @@ export class Login extends Component {
       <main className='login-main'>
         <form 
           id='login-form'
-          onSubmit={
-            handleSubmit((values) => this.onSubmit(values))
-          }
+          onSubmit={handleSubmit((values) => this.onSubmit(values))}
         >
           <h2>Login</h2>
             <Field 
@@ -72,7 +69,6 @@ export class Login extends Component {
               component={UserInput}
               validate={[required, isTrimmed]}
               />
-
             <button
               disabled={submitting || loading}
               type='submit'

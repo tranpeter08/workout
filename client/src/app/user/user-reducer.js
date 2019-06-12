@@ -7,7 +7,7 @@ import {
 const initialState = {
   loading: false,
   error: null,
-  profile: null
+  profile: ''
 }
 
 const userReducer = (state = initialState, action) => {

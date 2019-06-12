@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import ExerciseInput from '../components/ExerciseInput';
 import ExerciseResist from './ExerciseResist';
-import SuccessStatus from '../components/SuccessStatus';
+import SuccessStatus from '../../misc/components/SuccessStatus';
 import { 
   createExercise, 
   editExercise, 
@@ -29,7 +29,6 @@ export class ExerciseForm extends Component {
   componentWillUnmount() {
     document.removeEventListener('click', this.handleClickOut, false);
     this.props.dispatch(exerciseClearError());
-    this.clearTime();
   }
 
   onSubmit = data => {
@@ -49,32 +48,15 @@ export class ExerciseForm extends Component {
   }
 
   handleClickOut = event => {
-    if(this.node.current.contains(event.target)) {
+    if (this.node.current.contains(event.target)) {
       return;
     }
-
     this.props.setEdit(false);
   }
 
   handleRes = isSuccessful => {
     if (isSuccessful) {
-      this.setState(
-        {succuess: true},
-        this.setDisplayTime
-      )
-    }
-  }
-
-  setDisplayTime() {
-    this.displayTime = setTimeout(
-      () => this.props.setEdit(false),
-      1.5 * 1000
-    );
-  }
-
-  clearTime() {
-    if (this.displayTime) {
-      clearTimeout(this.displayTime);
+      this.setState({succuess: true})
     }
   }
 
@@ -96,7 +78,7 @@ export class ExerciseForm extends Component {
         ref={this.node}
       >
         {
-          this.state.succuess ? <SuccessStatus /> : 
+          this.state.succuess ? <SuccessStatus toggleForm={() => this.props.setEdit(false)} /> : 
           <React.Fragment>
             <h3>
               {action}
