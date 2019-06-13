@@ -146,7 +146,7 @@ export default class Nutrition extends React.Component{
               >
                 More Results
               </button><br/>
-              <a className='to-top' href='#nutri-h2'>Back to top</a>
+              <a className='to-top-anchor' href='#nutri-h2'>Back to top</a>
             </div>
             :
             null
