@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {reduxForm, formValueSelector} from 'redux-form';
 import UserInputs from '../components/UserInputs';
 import SuccessStatus from '../../misc/components/SuccessStatus';
+import ErrorMessage from '../../misc/components/ErrorMessage';
 import {updateProfile} from '../user-actions';
 import '../style/userForm.css';
 
@@ -45,11 +46,17 @@ export class UserForm extends React.Component{
                 </fieldset>
                 <div className='userForm-button-container'>
                   <button disabled={submitting} type='submit'>Submit</button>
-                  <button disabled={submitting} type='button' onClick={toggleForm}>Close</button>
+                  <button 
+                    disabled={submitting} 
+                    type='button' 
+                    onClick={toggleForm}
+                  >
+                    Close
+                  </button>
                 </div>
               </React.Fragment>
           }
-          {error && <span className='error'>* {error.message}</span>}
+          {error && <ErrorMessage message={error.message} />}
         </form>
       </div>
     )

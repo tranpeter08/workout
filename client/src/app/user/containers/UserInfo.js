@@ -28,6 +28,7 @@ export class UserInfo extends React.Component {
   }
 
   normalizeHeight() {
+
     const {height, heightUnit, inches} = this.props.user.profile;
     if (heightUnit === 'ft' && !inches) {
       return `${height}'`
@@ -40,15 +41,15 @@ export class UserInfo extends React.Component {
     return `${height} ${heightUnit}`
   }
 
-  renderUserInfo(data) {
-    if (data) {
+  renderUserInfo(profile) {
+    if (profile) {
       const {
         bodyFat, 
         firstName, 
         lastName, 
         weight, 
         weightUnit
-      } = data;
+      } = profile;
 
       const name = `${firstName} ${lastName}`;
     
@@ -77,17 +78,15 @@ export class UserInfo extends React.Component {
       error
     } = this.props.user;
 
-    const {workouts, ...data} = profile;
-
-    if (!error) {
+    if (error && error.code === 401) {
       return <Redirect to='/unauthorized' />
     }
 
     return (
       <section className='userInfo-section'>
-        {this.renderForm(data)}
+        {this.renderForm(profile)}
         <img className='userInfo-img' src='https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg' alt='User' />
-        {this.renderUserInfo(data)}
+        {this.renderUserInfo(profile)}
       </section>
     )
   }
