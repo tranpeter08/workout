@@ -29,14 +29,17 @@ export class UserInfo extends React.Component {
   }
 
   normalizeHeight() {
-
     const {height, heightUnit, inches} = this.props.user.profile;
     if (heightUnit === 'ft' && !inches) {
       return `${height}'`
     }
+
+    if (!height && inches) {
+      return `${inches}"`
+    }
     
     if (heightUnit === 'ft') {
-      return `${height}'  ${inches}"`
+      return `${height}' ${inches}"`
     }
 
     return `${height} ${heightUnit}`
@@ -79,7 +82,7 @@ export class UserInfo extends React.Component {
       error
     } = this.props.user;
 
-    if (!error) {
+    if (error && error.code === 401) {
       return <Redirect to='/unauthorized' />
     }
 

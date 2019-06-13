@@ -48,7 +48,7 @@ export const createWorkout = data => (dispatch, getState) => {
       `${API_BASE_URL}/users/${userId}/workouts`, 
       fetchOptions('POST', data)
     )
-    .then(res => normalizeRes(res))
+    .then(normalizeRes)
     .then(() => {
       dispatch(getWorkouts());
     })

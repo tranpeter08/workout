@@ -32,16 +32,10 @@ export class NotAuthorized extends React.Component{
 
     return (
         <main>
-          {/* <ErrorMessage />
-           */}
-           Place holder
+          <ErrorMessage />
         </main>
     )
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logOut }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(NotAuthorized);
+export default connect(null, {logOut})(NotAuthorized);
