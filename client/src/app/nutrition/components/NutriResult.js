@@ -11,7 +11,7 @@ const {
   showModal} = props;
 
   return (
-    <li onClick={() => showModal(props)}>
+    <li onClick={() => showModal(props.food)}>
       <img src={image || food} width='200px' alt='Food Item' />
       <h4>{label}</h4>
       {brand ? <h5>({brand})</h5> : null}

@@ -17,7 +17,7 @@ export default class NutriSearchForm extends React.Component{
 
   render() {
     return (
-      <form id='search' onSubmit={this.handleSearch}>
+      <form id='nutri-search-form' onSubmit={this.handleSearch}>
         <input
           name='searchInput'
           type='text'

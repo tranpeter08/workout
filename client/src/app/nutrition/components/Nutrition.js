@@ -115,7 +115,7 @@ export default class Nutrition extends React.Component{
           null
       }
 
-      <h2 className='nutri-h2' >Nutrition</h2>
+      <h2 className='nutri-h2' id='nutri-h2' >Nutrition</h2>
 
       <NutriSearchForm 
         handleSearch={this.handleSearch} 
@@ -123,23 +123,30 @@ export default class Nutrition extends React.Component{
       
       <section className='nutri-search-results'>
         {results ? <h3>Search Results For "{text}"</h3> : null}
-        <ul>
+        <ul aria-live='polite'>
           {
-            error ? <p>{error.message}</p> :
+            error ? <p className='error'>{error.message}</p> :
             !results ? null : 
-            results.length > 0 ?  
               this.renderResults()
-              : 
-              <p>No search results found</p>
           }
         </ul>
-        {loading ? <p>Searching...</p> : null}
+        {
+          loading ? <p className='nutri-search-message'>Searching...</p> :
+          !results ? null :
+          results.length === 0 ? <p className='nutri-search-message'>No results found</p> : null
+        }
         {
           !results ? null :
           hasNext ? 
             <div>
-              <button onClick={this.handleGetMore}>More Results</button>
-              <a href='#search'>Back to top</a>
+              <button 
+                id='nutri-searchMore-button' 
+                onClick={this.handleGetMore}
+                disabled={loading}
+              >
+                More Results
+              </button><br/>
+              <a className='to-top' href='#nutri-h2'>Back to top</a>
             </div>
             :
             null
