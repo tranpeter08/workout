@@ -9,6 +9,7 @@ import recipesReducer from './recipes/recipes-reducer';
 import myRecipesReducer from './myRecipes/myRecipes-reducer';
 import { loadToken } from './misc/local-storage';
 import { authPersist } from './auth/auth-actions';
+import {RESET_APP} from './root-actions';
 
 const appReducer =
   combineReducers({
@@ -20,9 +21,6 @@ const appReducer =
     recipes: recipesReducer,
     myRecipes: myRecipesReducer
   });
-
-const RESET_APP = 'RESET_APP';
-export const resetApp = () => ({type: RESET_APP});
 
 const rootReducer = (state, action) => {
   if (action.type === RESET_APP) {

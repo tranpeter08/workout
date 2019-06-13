@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 import {API_BASE_URL} from '../misc/config';
 import {fetchOptions, normalizeRes} from '../misc/utils';
 import {saveToken, deleteToken} from '../misc/local-storage';
-import {resetApp} from '../root-reducer';
+import {resetApp} from '../root-actions';
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const authRequest = () => ({
