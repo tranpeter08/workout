@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import UserForm from './UserForm';
 import {getProfile} from '../user-actions';
+import ErrorMessage from '../../misc/components/ErrorMessage';
 import '../style/userInfo.css';
 
 export class UserInfo extends React.Component {
@@ -51,7 +52,7 @@ export class UserInfo extends React.Component {
         weightUnit
       } = profile;
 
-      const name = `${firstName} ${lastName}`;
+      const name = `${firstName || ''} ${lastName || ''}`;
     
       return (
         <div className='userInfo-detail-container'>
@@ -78,7 +79,7 @@ export class UserInfo extends React.Component {
       error
     } = this.props.user;
 
-    if (error && error.code === 401) {
+    if (!error) {
       return <Redirect to='/unauthorized' />
     }
 
@@ -87,6 +88,7 @@ export class UserInfo extends React.Component {
         {this.renderForm(profile)}
         <img className='userInfo-img' src='https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg' alt='User' />
         {this.renderUserInfo(profile)}
+        {error && <ErrorMessage message={error.message} />}
       </section>
     )
   }

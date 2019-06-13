@@ -10,19 +10,19 @@ export class NotAuthorized extends React.Component{
     redirect: false
   }
 
-  componentDidMount() {
-    this.logoutTimer = setTimeout(
-      this.handleLogout,
-      3 * 1000
-    );
-  }
+  // componentDidMount() {
+  //   this.logoutTimer = setTimeout(
+  //     this.handleLogout,
+  //     3 * 1000
+  //   );
+  // }
 
-  handleLogout =()=> {
-    this.setState(
-      {redirect: true},
-      () => this.props.dispatch(logOut())
-    )
-  }
+  // handleLogout =()=> {
+  //   this.setState(
+  //     {redirect: true},
+  //     () => this.props.dispatch(logOut())
+  //   )
+  // }
 
   render() {
     console.log(this.props);
@@ -32,11 +32,16 @@ export class NotAuthorized extends React.Component{
 
     return (
         <main>
-          {/* <ErrorMessage /> */}
-          Error Message Place Holder
+          {/* <ErrorMessage />
+           */}
+           Place holder
         </main>
     )
   }
 }
 
-export default connect()(NotAuthorized);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ logOut }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(NotAuthorized);

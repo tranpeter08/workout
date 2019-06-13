@@ -2,7 +2,8 @@ import {
   USER_REQUEST, 
   USER_SUCCESS, 
   USER_CLEAR,
-  USER_ERROR} from './user-actions';
+  USER_ERROR
+} from './user-actions';
 
 const initialState = {
   loading: false,
