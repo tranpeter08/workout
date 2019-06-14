@@ -12,8 +12,7 @@ const RecipeResult = props => {
       dietLabels,
       uri
     },
-    match: {path, url},
-    Button
+    match: {url}
   } = props;
 
   const recipeId = uri.split('#')[1];

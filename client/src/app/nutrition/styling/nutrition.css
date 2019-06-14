@@ -1,17 +1,26 @@
 /* nutrition.css */
 
 .nutrition-section{
-  padding: 0 1rem;
   text-align: center;
 }
 
 .nutri-h2{
   font-size: 3.2rem;
-  padding-top: 2rem;
+  background: 
+    linear-gradient(rgba(0, 0,0 ,.8),rgba(0,0,0,.2), rgba(0, 0, 0, .8)),
+    url('./supermarket.jpg')
+    center / cover
+    no-repeat
+    ;
+  color: white;
+  display: inline-block;
+  width: 100%;
+  padding: 2rem 0;
+  text-shadow: 0 0 .4rem black;
 }
 
 #nutri-search-form{
-  margin: 2rem 1rem 0;
+  margin: 2rem 2rem 0;
   display: flex;
   justify-content: center;
 }
@@ -52,6 +61,7 @@
 
 .nutri-search-results{
   margin: 2rem 0;
+  padding: 0 1rem;
 }
 
 .nutri-search-results h3{

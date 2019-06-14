@@ -46,9 +46,10 @@
   flex: 1;
 }
 
-.nutrition-section .nutriResult-details-facts li{
+#nutrient-list li{
   display: flex;
   flex-flow: row nowrap;
+  font-size: 1.6rem;
 }
 
 .nutrient-title{

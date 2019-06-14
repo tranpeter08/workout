@@ -9,7 +9,7 @@ import UserPage from './user/containers/UserPage';
 import RefreshModal from './RefreshModal';
 import {logOut, refreshToken} from './auth/auth-actions';
 import {Footer} from './footer/Footer';
-import { NotAuthorized } from './auth/container/NotAuthorized';
+import NotAuthorized from './auth/container/NotAuthorized';
 
 class App extends React.Component{
   state = {

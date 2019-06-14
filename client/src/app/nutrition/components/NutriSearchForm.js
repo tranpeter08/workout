@@ -19,6 +19,7 @@ export default class NutriSearchForm extends React.Component{
     return (
       <form id='nutri-search-form' onSubmit={this.handleSearch}>
         <input
+          aria-label='Search For Nutrition Facts'
           name='searchInput'
           type='text'
           onChange={this.handleChange} 
