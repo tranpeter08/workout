@@ -1,5 +1,5 @@
 import {SubmissionError} from 'redux-form';
-import {logIn, logOut} from '../auth/auth-actions';
+import {logIn} from '../auth/auth-actions';
 import {API_BASE_URL} from '../misc/config';
 import {fetchOptions, normalizeRes} from '../misc/utils';
 

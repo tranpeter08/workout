@@ -1,5 +1,3 @@
-'use strict';
-
 export const saveToken = token => {
   try {
     localStorage.setItem('authToken', token);

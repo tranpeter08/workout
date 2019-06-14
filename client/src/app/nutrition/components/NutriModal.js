@@ -1,6 +1,8 @@
 import React from 'react';
 import food from '../food.jpg';
 import {normalizeRes} from '../../misc/utils';
+import NutriDetailLi from './NutriDetailLi'
+import '../styling/nutriResult-details.css';
 
 export default class NutriModal extends React.Component{
   state = {
@@ -96,10 +98,10 @@ export default class NutriModal extends React.Component{
     const {totalNutrients} = this.state.data;
 
     let nutriData = [];
-    for (let nutri in totalNutrients) {
-      const {label, quantity, unit} = totalNutrients[nutri];
-      const qty = Math.round(quantity * 100) / 100;
-      nutriData.push(<div key={nutri} >{label}: {qty} {unit}</div>)
+    for (let nutrient in totalNutrients) {
+      nutriData.push(
+        <NutriDetailLi key={nutrient} {...totalNutrients[nutrient]} />
+      )
     }
 
     return nutriData;
@@ -119,31 +121,52 @@ export default class NutriModal extends React.Component{
 
     return (
       <div className='modal-backdrop'>
-        <div className='modal-body'>
-          <h3>{label}</h3>
-          <h4>{brand}</h4>
-          <img src={image || food} width='200px' alt='Result' /><br/>
-          Nutrition Facts Per:{" "} 
-          <select value={this.state.select} onChange={this.handleChange}>
-            {this.renderOptions()}
-          </select>
-          <hr/>
-          <section className='nutrition-section'>
+
+        <div className='nutriResult-details'>
+          <img src={image || food} alt='Result' />
+          <h4>{label}</h4>
+          <h5>{brand ? `(${brand})` : null}</h5>
+
+          <section className='nutriResult-details-facts'>
+            <label>Show Nutrition Facts Per:
+              <select
+                name='measurement' 
+                value={this.state.select}
+                onChange={this.handleChange}
+              >
+                {this.renderOptions()}
+              </select>
+            </label>
+            <hr/>
             {
               error ? <div>{error.message || 'Server Error'}</div> :
-              loading ? <div>loading...</div> :
+              loading ? <div>Loading...</div> :
               data ? 
-                <div>
-                  <span>Total Calories: {data.calories}</span><br/>
-                  <span>Total Weight: {data.totalWeight} g</span><br />
+                <ul id='nutrient-list'>
+                  <li>
+                    <strong className='nutrient-title'>Total Calories:</strong>{' '}
+                    <span>{data.calories}</span>
+                  </li>
+                  <li>
+                    <strong className='nutrient-title'>Total Weight:</strong>{' '}
+                    <span>{Math.round(data.totalWeight * 100 ) / 100} g</span>
+                  </li>
                   {this.renderNutri()}
-                </div>
+                </ul>
                 : 
                 null
             }
+            <hr/>
           </section>
-          <hr/>
-          <button onClick={closeModal}>Close</button>
+
+          <button
+            className='nutriResult-details-button' 
+            type='button' 
+            onClick={closeModal}
+          >
+            Close
+          </button>
+
         </div>
       </div>
     )

@@ -21,22 +21,29 @@
 
 .exercises-section li{
   background-color: rgb(90, 205, 200);
-  flex: 1 0 260px;
+  flex: 1 0 240px;
 }
 
-@media screen and (min-width: 540px) {
+
+@media screen and (min-width: 480px) {
+  .exercises-section li {
+    flex: 1 0 260px;
+  }
+}
+
+@media screen and (min-width: 580px) {
   .exercises-section li {
     max-width: calc(50% - 20px);
   }
 }
 
-@media screen and (min-width: 840px) {
+@media screen and (min-width: 880px) {
   .exercises-section li{
     max-width: calc(33.333% - 20px);
   }
 }
 
-@media screen and (min-width: 1140px) {
+@media screen and (min-width: 1180px) {
   .exercises-section li {
     max-width: calc(25% - 20px);
   }

@@ -1,4 +1,3 @@
-'use strict';
 import {loadToken} from './local-storage';
 
 export const fetchOptions = (method, data, notProtected) => {

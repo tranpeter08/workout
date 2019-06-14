@@ -12,6 +12,7 @@
   font-weight: bold;
 }
 
+.nutriResult-details hr,
 .exercise-hr{
   border: 0;
   height: .1rem;

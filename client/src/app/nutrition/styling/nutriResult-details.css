@@ -1,0 +1,101 @@
+/* nutriResult-detail.css */
+
+.nutriResult-details{
+  background:white;
+  padding: 2rem;
+  border-radius: .8rem;
+  margin: 2rem;
+  max-height: calc(100% - 4rem);
+  overflow: auto;
+  flex: 1 0 240px;
+  box-shadow: 0 0 .8rem .4rem rgb(80, 80, 80);
+}
+
+.nutriResult-details img{
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.nutriResult-details-facts{
+  margin-top: 1rem;
+}
+
+.nutriResult-details-facts label,
+.nutriResult-details-facts select,
+.nutriResult-details-facts ul{
+  font-size: 1.6rem;
+}
+
+.nutriResult-details-facts select{
+  margin-left: .4rem;
+  border: 1px solid  rgb(182, 181, 181);
+  background: rgb(245, 245, 245);
+}
+
+.nutriResult-details hr{
+  margin: .5rem 0;
+}
+
+#nutrient-list{
+  display: flex;
+  flex-flow: column;
+}
+
+#nutrient-list span{
+  text-align: right;
+  flex: 1;
+}
+
+.nutrition-section .nutriResult-details-facts li{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.nutrient-title{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.nutriResult-details-button{
+  margin-top: 1rem;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: .8rem;
+  font-size: 1.8rem;
+  padding: .4rem .8rem;
+  transition: .3s;
+}
+
+.nutriResult-details-button:hover{
+  background-color: rgb(80, 80, 80);
+}
+
+@media screen and (min-width: 400px){
+  .nutriResult-details{
+    max-width: 35.8rem;
+  }
+}
+
+/* @media screen and (min-width: 450px){
+  .nutriResult-details{
+    max-width: 60%;
+  }
+}
+
+@media screen and (min-width: 600px){
+  .nutriResult-details{
+    max-width: 50%;
+  }
+}
+
+@media screen and (min-width: 770px){
+  .nutriResult-details{
+    max-width: 40%;
+  }
+}
+
+@media screen and (min-width: 940px){
+  .nutriResult-details{
+    max-width: 35%;
+  }
+} */

@@ -7,44 +7,51 @@
   flex: 1 0 28rem;
   display: flex;
   flex-flow: column;
+  box-shadow: 0 0 .8rem .1rem rgb(145, 145, 145);
 }
 
+.nutriResult-details img,
+.nutriResult-details,
 .nutriResult,
 .nutriResult img{
   border-radius: .8rem;
 }
+
 
 .nutriResult img{
   margin-bottom: 2rem;
   width: 100%;
 }
 
+.nutriResult-details h4,
 .nutriResult h4{
   font-size: 1.8rem;
   margin-top: auto;
 }
 
+.nutriResult-details h5,
 .nutriResult h5{
   font-size: 1.6rem;
 }
 
 .nutriResult:hover{
   cursor: pointer;
+  border: 2px solid rgb(0, 175, 255);
 }
 
-@media screen and (min-width: 520px){
+@media screen and (min-width: 540px){
   .nutriResult{
     max-width: calc(50% - 2rem);
   }
 }
 
-@media screen and (min-width: 780px){
+@media screen and (min-width: 810px){
   .nutriResult{
     max-width: calc(33.333% - 2rem);
   }
 }
 
-@media screen and (min-width: 1040px){
+@media screen and (min-width: 1080px){
   .nutriResult{
     max-width: calc(25% - 2rem);
   }

@@ -119,7 +119,8 @@ export default class Nutrition extends React.Component{
 
       <NutriSearchForm 
         handleSearch={this.handleSearch} 
-        placeholder={'Search for a food'}/>
+        placeholder={'Search for a food'}
+        loading={loading}/>
       
       <section className='nutri-search-results'>
         {results ? <h3>Search Results For "{text}"</h3> : null}
