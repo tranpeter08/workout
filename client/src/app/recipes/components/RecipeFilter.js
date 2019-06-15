@@ -6,7 +6,7 @@ export const RecipeFilters = props => {
   const renderChecks = (filters, name) => {
     let checkBxs = [];
     filters.forEach(filter => checkBxs.push(
-      <label key={filter}>
+      <label key={filter} className='filter-checkox'>
         <input 
           className='recipe-filter'
           key={filter}
@@ -22,7 +22,7 @@ export const RecipeFilters = props => {
   }
 
   return <fieldset className='filters'>
-    <legend>{legend}</legend>
-    {renderChecks(filters, grpName)}
+    <legend><h4>{legend}</h4></legend>
+      {renderChecks(filters, grpName)}
   </fieldset>
 }

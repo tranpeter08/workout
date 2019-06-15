@@ -37,33 +37,60 @@ class RecipeSrchForm extends React.Component{
     ];
 
     return (
-      <form onSubmit={handleSubmit}>
-        <input 
-          name='term'
-          type='text'
-          value={term}
-          onChange={handleChange} />
-        <button type='submit'>Search</button>
-        <button type='button'onClick={this.toggleFilters}>
-          {showFilters ? 'Hide filters' : 'Show filters'}
-        </button>
-        <fieldset className={ showFilters ? '' : 'hidden'}>
-          <RecipeFilters 
-            legend='Diet Filters'
-            filters={dietFilters}
-            grpName='diet'
-            handleChange={handleChange} />
-          <RecipeFilters
-            legend='Health Filters'
-            filters={healthFilters}
-            grpName='health'
-            handleChange={handleChange} />
+      <form aria-live='polite' id='recipe-search-form' onSubmit={handleSubmit}>
+
+        <div className='recipe-searchBar'>
+        <button
+            aria-label={showFilters ? 'Hide Filters' : 'Show Filters'}
+            id='recipe-search-filters-button'
+            className={showFilters ? 'showFilters-true' : 'showFilters-false' }
+            type='button'
+            onClick={this.toggleFilters}
+          >
+            <i className="fas fa-filter"></i>
+          </button>
+          <input 
+            name='term'
+            type='text'
+            value={term}
+            aria-label='Search for a recipe'
+            placeholder='Search for a recipe'
+            onChange={handleChange} />
+
+          <button 
+            type='submit'
+            id='recipe-search-button'
+            aria-label='Search'
+          >
+            <i className="fas fa-search"></i>
+          </button>
+
+        </div>
+
+        <fieldset className={ showFilters ? 'recipe-search-filters' : 'recipe-search-filters hidden'}>
+
+          <legend className='recipe-filters-legend'><h3>Search Filters</h3></legend> 
+
+          <div className='filters-container'>
+            <RecipeFilters 
+              legend='Diet Filters'
+              filters={dietFilters}
+              grpName='diet'
+              handleChange={handleChange} />
+            <RecipeFilters
+              legend='Health Filters'
+              filters={healthFilters}
+              grpName='health'
+              handleChange={handleChange} />
+          </div>
+
           <button 
             type='button' 
             onClick={this.clearFilters}
           >
             Clear Filters
           </button>
+
         </fieldset>
       </form>
     )

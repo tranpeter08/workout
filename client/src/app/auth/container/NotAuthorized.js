@@ -28,10 +28,10 @@ export class NotAuthorized extends React.Component{
     }
 
     return (
-        <main className='notAuthorized-main'>
-          <h2>ERROR 401</h2>
-          <p>Unauthorized access! Logging out...</p>
-        </main>
+      <main className='notAuthorized-main'>
+        <h2>ERROR 401</h2>
+        <p>Unauthorized access! Logging out...</p>
+      </main>
     )
   }
 }

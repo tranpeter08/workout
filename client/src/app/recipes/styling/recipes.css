@@ -1,0 +1,91 @@
+/*  recipes.css */
+
+.recipes-section h2{
+  font-size: 3.2rem;
+  text-align: center;
+  background: 
+    linear-gradient(
+      rgba(0, 0,0 ,.8),rgba(0,0,0,.2), 
+      rgba(0, 0, 0, .8)
+    ),
+    url('../../landing/images/landing-recipes.jpg')
+    top 10% center / cover
+    no-repeat;
+  padding: 2rem;
+  color: white;
+  text-shadow: 0 0 .4rem black;
+}
+
+#recipe-search-form{
+  flex-flow: column;
+}
+
+.recipe-searchBar{
+  display: flex;
+  justify-content: center;
+}
+
+#recipe-search-filters-button.showFilters-true{
+  color: rgb(0, 96, 141);
+  background-color: rgb(195, 195, 195);
+}
+
+#recipe-search-form input{
+  flex: 1 1 16rem;
+  max-width: 36rem;
+  border-left: none;
+  border-right: none;
+  padding: .4rem .8rem;
+}
+
+.recipe-search-filters{
+  flex: 1 0 100%;
+  background-color: white;
+  border: none;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: .8rem;
+}
+
+.recipe-search-filters hr{
+  border-style: solid;
+  border-width: .5px;
+}
+
+.recipe-search-filters legend{
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.recipe-search-filters fieldset{
+  border:  none;
+}
+
+.recipe-search-filters h3, h4{
+  font-family: 'Pontano Sans', sans-serif;
+}
+
+.recipe-search-filters h3{
+  font-size: 2rem;
+}
+
+.recipe-search-filters h4{
+  font-size: 1.6rem;
+  padding-top: .5rem;
+}
+
+.filters-container{
+  float: left;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.filters{
+  flex: 1 1 50%;
+  display: flex;
+  flex-flow: column;
+}

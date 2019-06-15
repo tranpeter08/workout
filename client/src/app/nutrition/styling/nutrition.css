@@ -7,7 +7,11 @@
 .nutri-h2{
   font-size: 3.2rem;
   background: 
-    linear-gradient(rgba(0, 0,0 ,.8),rgba(0,0,0,.2), rgba(0, 0, 0, .8)),
+    linear-gradient(
+      rgba(0, 0,0 ,.8),
+      rgba(0,0,0,.2), 
+      rgba(0, 0, 0, .8)
+    ),
     url('./supermarket.jpg')
     center / cover
     no-repeat
@@ -19,17 +23,22 @@
   text-shadow: 0 0 .4rem black;
 }
 
+#recipe-search-form,
 #nutri-search-form{
   margin: 2rem 2rem 0;
   display: flex;
   justify-content: center;
 }
 
+
 #nutri-search-form input{
   flex: 1 1 20rem;
   max-width: 40rem;
 }
 
+#recipe-search-filters-button,
+#recipe-search-button,
+#recipe-search-form input,
 #nutri-searchMore-button,
 #nutri-search-form button,
 #nutri-search-form input{
@@ -37,20 +46,35 @@
   border-width: 1px;
   border-color: rgb(182, 181, 181);
   font-size: 2.2rem;
-  padding: .4rem 1.3rem;
   background-color: white;
 }
 
+#recipe-search-filters-button,
+#recipe-search-button,
+#recipe-search-form input,
+#nutri-searchMore-button,
+#nutri-search-form button,
+#nutri-search-form input{
+  padding: .4rem 1.3rem;
+}
+
+#recipe-search-filters-button,
 #nutri-search-form input{
   border-top-left-radius: 1.9rem;
   border-bottom-left-radius: 1.9rem;
   border-right: none;
 }
 
+#recipe-search-button,
 #nutri-search-form button{
   border-top-right-radius: 1.9rem;
   border-bottom-right-radius: 1.9rem;
   border-left: none;
+}
+
+.showFilters-false,
+#recipe-search-button,
+#nutri-search-form button{
   color: rgb(0, 175, 255);
 }
 

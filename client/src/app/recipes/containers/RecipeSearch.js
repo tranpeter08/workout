@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import RecipeSrchGrp from './RecipeSearchForm';
+import RecipeSrchForm from './RecipeSearchForm';
 import RecipeResult from '../components/RecipeResult';
 import {queryStr} from '../../misc/utils';
 import {getRecipes, recipeClear} from '../recipes-actions';
 import Pagination from './RecipePaging';
+import '../styling/recipes.css';
 
 class RecipeSearch extends React.Component{
   state = {
@@ -142,8 +143,9 @@ class RecipeSearch extends React.Component{
     const {term} = this.state;
 
     return (
-      <React.Fragment>
-        <RecipeSrchGrp 
+      <section className='recipes-section'>
+        <h2>Recipes</h2>
+        <RecipeSrchForm 
           term={term}
           handleChange={this.handleChange}
           clearFilterState={this.clearFilterState}
@@ -153,7 +155,7 @@ class RecipeSearch extends React.Component{
           loading ? <div>loading...</div> : 
           error ? <div>{error.message}</div> :null
         }
-      </React.Fragment>
+      </section>
     )
   }
 }
