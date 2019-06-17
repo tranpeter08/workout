@@ -5,6 +5,7 @@ import RecipeResult from '../components/RecipeResult';
 import {queryStr} from '../../misc/utils';
 import {getRecipes, recipeClear} from '../recipes-actions';
 import Pagination from './RecipePaging';
+import ErrorMessage, {} from '../../misc/components/ErrorMessage';
 import '../styling/recipes.css';
 
 class RecipeSearch extends React.Component{
@@ -151,10 +152,12 @@ class RecipeSearch extends React.Component{
           clearFilterState={this.clearFilterState}
           handleSubmit={this.handleSubmit}/>
         {this.renderResultsSection()}
-        {
-          loading ? <div>loading...</div> : 
-          error ? <div>{error.message}</div> :null
-        }
+        <div className='recipe-search-status'>
+          {
+            loading ? <span>Searching...</span> : 
+            error ? <ErrorMessage message={error.message} /> : 'test'
+          }
+        </div>
       </section>
     )
   }

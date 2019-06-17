@@ -19,6 +19,11 @@ class RecipeSrchForm extends React.Component{
     this.props.clearFilterState();
   }
 
+  handleFiltersClass = showFilters => {
+    let baseClass = 'recipe-search-filters';
+    return showFilters ? baseClass + ' expanded' : baseClass + ' collapsed';
+  }
+
   render() {
     const {term, handleChange, handleSubmit} = this.props;
     const {showFilters} = this.state;
@@ -66,8 +71,10 @@ class RecipeSrchForm extends React.Component{
 
         </div>
 
-        <fieldset className={ showFilters ? 'recipe-search-filters' : 'recipe-search-filters hidden'}>
-
+        
+        <fieldset 
+          className={this.handleFiltersClass(showFilters)}
+        >
           <legend className='recipe-filters-legend'><h3>Search Filters</h3></legend> 
 
           <div className='filters-container'>
@@ -91,8 +98,8 @@ class RecipeSrchForm extends React.Component{
           >
             Clear Filters
           </button>
-
         </fieldset>
+        
       </form>
     )
   }

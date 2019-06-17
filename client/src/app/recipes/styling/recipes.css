@@ -50,6 +50,19 @@
   padding: 0 1rem 1rem;
   border-radius: .8rem;
   display: flex;
+  overflow: hidden;
+}
+
+.recipe-search-filters.expanded{
+  max-height: 28rem;
+  transition: .3s;
+  visibility: visible;
+}
+
+.recipe-search-filters.collapsed{
+  max-height: 0;
+  visibility: hidden;
+  transition: .3s;
 }
 
 .recipe-search-filters hr{
@@ -131,6 +144,11 @@
 
 #clear-filters-button:hover{
   background-color: rgb(80, 80, 80);
+}
+
+.recipe-search-status{
+  text-align: center;
+  font-size: 2rem;
 }
 
 @media screen and (min-width: 400px) {
