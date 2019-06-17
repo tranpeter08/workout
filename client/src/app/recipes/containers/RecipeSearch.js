@@ -106,7 +106,7 @@ class RecipeSearch extends React.Component{
   )
   
 
-  renderResultsSection = () => {
+  renderResults = () => {
     const {from, to} = this.state;
     const {results, q} = this.props.recipes;
 
@@ -151,11 +151,11 @@ class RecipeSearch extends React.Component{
           handleChange={this.handleChange}
           clearFilterState={this.clearFilterState}
           handleSubmit={this.handleSubmit}/>
-        {this.renderResultsSection()}
+        {this.renderResults()}
         <div className='recipe-search-status'>
           {
             loading ? <span>Searching...</span> : 
-            error ? <ErrorMessage message={error.message} /> : 'test'
+            error ? <ErrorMessage message={error.message} /> : null
           }
         </div>
       </section>

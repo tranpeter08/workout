@@ -45,7 +45,7 @@ class RecipeSrchForm extends React.Component{
       <form aria-live='polite' id='recipe-search-form' onSubmit={handleSubmit}>
 
         <div className='recipe-searchBar'>
-        <button
+          <button
             aria-label={showFilters ? 'Hide Filters' : 'Show Filters'}
             id='recipe-search-filters-button'
             className={showFilters ? 'showFilters-true' : 'showFilters-false' }
@@ -68,14 +68,11 @@ class RecipeSrchForm extends React.Component{
           >
             <i className="fas fa-search"></i>
           </button>
-
         </div>
 
-        
-        <fieldset 
-          className={this.handleFiltersClass(showFilters)}
-        >
-          <legend className='recipe-filters-legend'><h3>Search Filters</h3></legend> 
+        <div className={this.handleFiltersClass(showFilters)}>
+
+          <h3>Search Filters</h3>
 
           <div className='filters-container'>
             <RecipeFilters 
@@ -98,8 +95,8 @@ class RecipeSrchForm extends React.Component{
           >
             Clear Filters
           </button>
-        </fieldset>
-        
+        </div>
+
       </form>
     )
   }
