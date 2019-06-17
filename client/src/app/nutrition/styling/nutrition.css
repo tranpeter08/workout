@@ -38,7 +38,7 @@
 
 #recipe-search-filters-button,
 #recipe-search-button,
-#recipe-search-form input,
+#recipe-search-form input[type=text],
 #nutri-searchMore-button,
 #nutri-search-form button,
 #nutri-search-form input{
@@ -51,7 +51,6 @@
 
 #recipe-search-filters-button,
 #recipe-search-button,
-#recipe-search-form input,
 #nutri-searchMore-button,
 #nutri-search-form button,
 #nutri-search-form input{

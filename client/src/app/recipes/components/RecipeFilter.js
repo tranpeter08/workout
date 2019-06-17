@@ -21,7 +21,7 @@ export const RecipeFilters = props => {
     return checkBxs;
   }
 
-  return <fieldset className='filters'>
+  return <fieldset className='filter'>
     <legend><h4>{legend}</h4></legend>
       {renderChecks(filters, grpName)}
   </fieldset>

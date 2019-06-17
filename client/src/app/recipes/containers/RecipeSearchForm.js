@@ -54,9 +54,8 @@ class RecipeSrchForm extends React.Component{
             type='text'
             value={term}
             aria-label='Search for a recipe'
-            placeholder='Search for a recipe'
+            placeholder='Search recipes'
             onChange={handleChange} />
-
           <button 
             type='submit'
             id='recipe-search-button'
@@ -77,6 +76,7 @@ class RecipeSrchForm extends React.Component{
               filters={dietFilters}
               grpName='diet'
               handleChange={handleChange} />
+            <div className='separator'></div>
             <RecipeFilters
               legend='Health Filters'
               filters={healthFilters}
@@ -84,7 +84,8 @@ class RecipeSrchForm extends React.Component{
               handleChange={handleChange} />
           </div>
 
-          <button 
+          <button
+            id='clear-filters-button'
             type='button' 
             onClick={this.clearFilters}
           >
