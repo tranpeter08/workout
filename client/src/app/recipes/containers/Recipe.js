@@ -32,15 +32,12 @@ class Recipe extends React.Component{
   render() {
     const {location: {state}, loading} = this.props;
     return (
-      <div>
-        <RecipeDetail 
-          details={state}
-          buttonLabel='Save Recipe'
-          handleClick={this.handleSave}
-          isSaved={this.state.isSaved}
-          isDisabled={loading}
-           />
-      </div>
+      <RecipeDetail 
+        details={state}
+        buttonLabel='Save Recipe'
+        handleClick={this.handleSave}
+        isSaved={this.state.isSaved}
+        isDisabled={loading}/>
     )
   }
 }
