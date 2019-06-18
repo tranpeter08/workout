@@ -69,9 +69,7 @@ router.post('/', (req, res, next) => {
       if (resp.statusCode !== 200) {
         return next(resp);
       };
-
-      // console.log('body\n', body);
-      // console.log('RESPONSEe\n', resp);
+      
       return res.json(body)
     }
   )
