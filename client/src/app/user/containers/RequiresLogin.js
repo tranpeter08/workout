@@ -35,7 +35,7 @@ const requiresLogin = Component => {
 
   const mapStateToProps = ({auth}) => ({
     auth: {
-      hasToken: auth.token !== null,
+      hasToken: auth.token !== '',
       loading: auth.loading,
       error: auth.error
     }

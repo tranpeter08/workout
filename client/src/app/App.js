@@ -14,8 +14,8 @@ import NotAuthorized from './auth/container/NotAuthorized';
 class App extends React.Component{
   state = {
     modal: false,
-    interval: 60,
-    timeout: 1
+    interval: 60,   // minutes
+    timeout: 1      // minutes
   };
 
   componentDidUpdate(prevProps) {
@@ -103,6 +103,7 @@ class App extends React.Component{
   };
 
   render() {
+    console.log('app props', this.props)
     return(
         <React.Fragment>
           {this.renderModal()}
@@ -121,8 +122,8 @@ class App extends React.Component{
 };
 
 const mapStateToProps = ({auth, user}, props) => ({
-  loggedIn: user.profile !== null,
-  hasToken: auth.token !== null,
+  loggedIn: user.profile !== '',
+  hasToken: auth.token !== '',
   error: auth.error
 });
 

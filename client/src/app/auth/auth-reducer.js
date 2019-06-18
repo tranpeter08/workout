@@ -7,11 +7,11 @@ import {
   } from './auth-actions';
 
 const initialState = {
-  username: null,
-  userId: null,
+  username: '',
+  userId: '',
   loading: false,
-  error: null,
-  token: null,
+  error: '',
+  token: '',
 };
 
 const authReducer = (state = initialState, action) => {
@@ -22,9 +22,9 @@ const authReducer = (state = initialState, action) => {
     case AUTH_SET:
       return {...state, token};
     case AUTH_CLEAR:
-      return {...state, token: null, username: null, userId: null}
+      return {...state, token: '', username: '', userId: ''}
     case AUTH_SUCCESS:
-      return {...state, username, userId, loading: false, error: null};
+      return {...state, username, userId, loading: false, error: ''};
     case AUTH_ERROR:
       return {...state, error, loading: false}
     default:

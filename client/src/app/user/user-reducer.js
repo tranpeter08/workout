@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   loading: false,
-  error: null,
+  error: '',
   profile: ''
 }
 
@@ -17,9 +17,9 @@ const userReducer = (state = initialState, action) => {
     case USER_REQUEST:
       return {...state, loading: true};
     case USER_SUCCESS:
-      return {...state, loading: false, error: null, profile};
+      return {...state, loading: false, error: '', profile};
     case USER_CLEAR:
-      return {...state, profile: null};
+      return {...state, profile: ''};
     case USER_ERROR:
       return {...state, loading: false, error};
     default:
