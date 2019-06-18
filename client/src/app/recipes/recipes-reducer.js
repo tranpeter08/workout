@@ -12,7 +12,9 @@ const initialState = {
   count:'',
   more: false,
   loading: false,
-  error: ''
+  error: '',
+  from: '',
+  to: ''
 }
 
 const recipesReducer = (state = initialState, action) => {
@@ -20,8 +22,8 @@ const recipesReducer = (state = initialState, action) => {
     case RECIPES_REQUEST:
       return {...state, loading: true};
     case RECIPES_SUCCESS:
-      const {data: {hits, more, count, q}} = action;
-      return {...state, loading: false, results: hits, more, count, q};
+      const {data: {hits, more, count, q, from, to}} = action;
+      return {...state, loading: false, results: hits, more, count, q, from, to};
     case RECIPE_SAVE_SUCCESS:
       return {...state, loading: false};
     case RECIPE_CLEAR:

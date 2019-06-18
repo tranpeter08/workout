@@ -3,16 +3,16 @@ import {connect} from 'react-redux';
 
 const Pagination = props => {
   const {
-    paging: {from, to}, 
-    more, 
-    count, 
-    loading, 
-    handlePaging} = props;
+    recipes: {from, to, more, count, loading}, 
+    handlePaging
+  } = props;
 
   const step = 10;
   const currentPage = from / step + 1;
   const totalPages = count % step === 0 ? 
-    count / step : Math.round(count / step) + 1;
+    count / step 
+    :
+    Math.round(count / step) + 1;
 
   const prevButton = (
     <button
@@ -32,7 +32,7 @@ const Pagination = props => {
     >
       Next <i className="fas fa-caret-right"></i>
     </button>
-  )
+  );
 
   return <nav className='pagination'>
     { from ? prevButton : null }
@@ -41,7 +41,6 @@ const Pagination = props => {
   </nav>
 }
 
-const mapStateToProps = ({recipes: {more, count, loading}}) =>
-  ({more, count, loading});
+const mapStateToProps = ({recipes}) => ({recipes});
 
 export default connect(mapStateToProps)(Pagination);

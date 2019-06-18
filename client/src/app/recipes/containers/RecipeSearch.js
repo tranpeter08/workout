@@ -19,6 +19,13 @@ class RecipeSearch extends React.Component{
     modalData: ''
   }
 
+  componentDidMount() {
+    const {q} = this.props.recipes;
+    if (q) {
+      this.setState({term: q});
+    }
+  }
+
   handleChange = e => {
     const {name, checked, value} = e.target;
     if (name === 'term') {
@@ -56,13 +63,22 @@ class RecipeSearch extends React.Component{
   handleSubmit = e => {
     e.preventDefault();
     this.setState(
-      state => ({q: state.term}),
+      state => ({
+        q: state.term,
+        from: 0,
+        to: 10
+      }),
       this.handleRequest
     )
   }
 
   handleRequest = () => {
     const {modal, modalData, filters, ...params} = this.state;
+    const {q} = this.props.recipes;
+
+    if (!params.q && q) {
+      params.q = q;
+    };
 
     params.diet = this.filterArr('diet');
     params.health = this.filterArr('health');
