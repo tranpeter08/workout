@@ -28,7 +28,7 @@ const RecipeResult = props => {
     <div className='recipeResult-container'>
 
       <div className='recipeResult-img-container'>
-        <img src={image} />
+        <img src={image} alt='Food representing the recipe'/>
       </div>
 
       <div className='recipeResult-detail-container'>

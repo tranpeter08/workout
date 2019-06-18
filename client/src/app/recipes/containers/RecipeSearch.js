@@ -103,7 +103,6 @@ class RecipeSearch extends React.Component{
       {...item} />
   )
   
-
   renderResultsSection = () => {
     const {from, to} = this.state;
     const {results, q} = this.props.recipes;

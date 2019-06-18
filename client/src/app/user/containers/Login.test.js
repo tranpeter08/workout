@@ -2,8 +2,11 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import { Login} from './Login';
+import {logIn} from '../../auth/auth-actions';
 
 describe('<Login />', () => {
+  let username = 'test',
+  password='1234567890'
   const props = {
     auth: {
       error: '',
@@ -24,9 +27,9 @@ describe('<Login />', () => {
     username = 'hello123',
     password = 'person123',
     instance = wrapper.instance();
-    
-    instance.onSubmit(username, password);
-    expect(props.dispatch).toHaveBeenCalled();
+
+    instance.onSubmit({username, password});
+    expect(props.dispatch).toHaveBeenCalledWith(logIn(username, password));
   })
 
   it('displays the error if there is an error', () => {
