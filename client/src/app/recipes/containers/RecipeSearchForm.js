@@ -42,7 +42,7 @@ class RecipeSrchForm extends React.Component{
     ];
 
     return (
-      <form aria-live='polite' id='recipe-search-form' onSubmit={handleSubmit}>
+      <form id='recipe-search-form' onSubmit={handleSubmit}>
 
         <div className='recipe-searchBar'>
           <button
@@ -70,7 +70,9 @@ class RecipeSrchForm extends React.Component{
           </button>
         </div>
 
-        <div className={this.handleFiltersClass(showFilters)}>
+        <div 
+          className={this.handleFiltersClass(showFilters)}
+          aria-hidden={showFilters ? 'false' : 'true'}>
 
           <h3>Search Filters</h3>
 
