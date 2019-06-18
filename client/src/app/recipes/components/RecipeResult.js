@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import '../styling/recipeResult.css';
 
 const RecipeResult = props => {
   const {
@@ -23,14 +24,35 @@ const RecipeResult = props => {
     state: props.recipe
   }
 
-  return <React.Fragment>
-    <img src={image} width='200px' />
-    <h3><Link to={location}>{label}</Link></h3>
-    <span>Calories: {Math.round(calories * 100) / 100}</span><br/>
-    <span>Serves: {servings}</span><br/>
-    <span>{dietLabels.join(', ')}</span><br/>
-    <span>{healthLabels.join(', ')}</span><br/>
-  </React.Fragment>
+  return <li>
+    <div className='recipeResult-container'>
+
+      <div className='recipeResult-img-container'>
+        <img src={image} />
+      </div>
+
+      <div className='recipeResult-detail-container'>
+        <h3><Link to={location}>{label}</Link></h3>
+        <span>
+          <span className='recipeResult-label'>Calories: </span>
+          {Math.round(calories * 100) / 100}
+        </span>
+        <span>
+          <span className='recipeResult-label'>Serves: </span>
+          {servings}
+        </span>
+        <span>
+          <span className='recipeResult-label'>Diet Labels: </span>
+          {dietLabels.join(', ')}
+        </span>
+        <span>
+          <span className='recipeResult-label'>Health Labels: </span>
+          {healthLabels.join(', ')}
+        </span>
+      </div>
+
+    </div>
+  </li>
 }
 
 export default withRouter(RecipeResult);

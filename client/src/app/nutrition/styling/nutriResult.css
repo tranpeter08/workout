@@ -7,16 +7,22 @@
   flex: 1 0 28rem;
   display: flex;
   flex-flow: column;
+}
+
+.recipeResult-container,
+.nutriResult{
   box-shadow: 0 0 .8rem .1rem rgb(145, 145, 145);
 }
 
+.recipeResult-img-container img,
+.recipeResult-img,
+.recipeResult-container,
 .nutriResult-details img,
 .nutriResult-details,
 .nutriResult,
 .nutriResult img{
   border-radius: .8rem;
 }
-
 
 .nutriResult img{
   margin-bottom: 2rem;

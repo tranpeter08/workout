@@ -98,22 +98,20 @@ class RecipeSearch extends React.Component{
   }
 
   mapResult = item => (
-    <li key={item.recipe.uri}>
-      <RecipeResult
-        {...item} />
-      <hr />
-    </li>
+    <RecipeResult
+      key={item.recipe.uri}
+      {...item} />
   )
   
 
-  renderResults = () => {
+  renderResultsSection = () => {
     const {from, to} = this.state;
     const {results, q} = this.props.recipes;
 
     if (results) {
       return (
         <section className='recipe-results'>
-          <h2>Search results for "{q}"</h2>
+          <h3>Search results for "{q}"</h3>
           { 
             results.length > 0 ? 
               <Pagination 
@@ -124,7 +122,8 @@ class RecipeSearch extends React.Component{
           }
           {
             results.length > 0 ? 
-            <ul>{this.renderResults()}</ul> : <p>No search results found...</p>
+              <ul>{this.renderResults()}</ul> : 
+              <p className='no-results'>No search results found...</p>
           }
           { 
             results.length > 0 ? 
@@ -151,7 +150,7 @@ class RecipeSearch extends React.Component{
           handleChange={this.handleChange}
           clearFilterState={this.clearFilterState}
           handleSubmit={this.handleSubmit}/>
-        {this.renderResults()}
+        {this.renderResultsSection()}
         <div className='recipe-search-status'>
           {
             loading ? <span>Searching...</span> : 

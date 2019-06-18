@@ -4,9 +4,23 @@
   padding-bottom: 2rem;
 }
 
+.recipe-results ul,
+.pagination,
+.recipe-results,
+.recipe-search-status{
+  margin-top: 2rem;
+}
+
+.recipe-search-status,
+.pagination,
+.recipe-results h3,
+.recipe-search-filters h3,
+.recipes-section h2{
+  text-align: center;
+}
+
 .recipes-section h2{
   font-size: 3.2rem;
-  text-align: center;
   background: 
     linear-gradient(
       rgba(0, 0,0 ,.8),rgba(0,0,0,.2), 
@@ -31,7 +45,7 @@
 }
 
 #recipe-search-filters-button.showFilters-true{
-  color: rgb(0, 96, 141);
+  color: rgb(0, 0, 0);
   background-color: rgb(211, 211, 211);
   border-right: 1px solid rgb(180, 180, 180);
 }
@@ -65,10 +79,11 @@
   max-height: 0;
   visibility: hidden;
   transition: .3s;
+  padding-bottom: 0;
+  margin: 0;
 }
 
 .recipe-search-filters h3{
-  text-align: center;
   padding-top: 1rem;
 }
 
@@ -141,9 +156,32 @@
 }
 
 .recipe-search-status{
-  text-align: center;
   font-size: 2rem;
-  margin-top: 2rem;
+}
+
+.pagination button,
+.pagination{
+  font-size: 1.6rem;
+}
+
+.pagination button{
+  background: none;
+  border: none;
+  border-radius: .8rem;
+  padding: .4rem .8rem;
+  color: rgb(25, 80, 120)
+}
+
+#pagination-prev{
+  margin-right: 1rem;
+}
+
+#pagination-next{
+  margin-left: 1rem;
+}
+
+.recipe-results{
+  padding: 0 2rem;
 }
 
 @media screen and (min-width: 400px) {

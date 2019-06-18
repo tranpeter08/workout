@@ -45,7 +45,7 @@
   border-style: solid;
   border-width: 1px;
   border-color: rgb(182, 181, 181);
-  font-size: 2.2rem;
+  font-size: 2rem;
   background-color: white;
 }
 
@@ -71,10 +71,11 @@
   border-left: none;
 }
 
+.recipeResult-detail-container h3,
 .showFilters-false,
 #recipe-search-button,
 #nutri-search-form button{
-  color: rgb(0, 175, 255);
+  color: rgb(25, 80, 120);
 }
 
 .nutrition-section ul{
@@ -87,6 +88,7 @@
   padding: 0 1rem;
 }
 
+.recipe-results h3,
 .nutri-search-results h3{
   font-size: 2.4rem;
   padding: 0 1rem;
@@ -117,15 +119,15 @@
   color: rgb(25, 80, 120);
 }
 
+.recipeResult-detail-container a:visited,
 .to-top-anchor:visited{
-  
   color: rgb(25, 80, 120);
 }
 
+.pagination button:hover,
+.showFilters-false:hover,
+#recipe-search-button:hover,
+#nutri-search-form button:hover,
 .to-top-anchor:hover{
   color: rgb(0, 175, 255);
 }
-
-/* .nutri-search-results li{
-  flex: 1 0 100%;
-} */

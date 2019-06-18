@@ -14,19 +14,31 @@ const Pagination = props => {
   const totalPages = count % step === 0 ? 
     count / step : Math.round(count / step) + 1;
 
-  return <React.Fragment>
-    <button 
+  const prevButton = (
+    <button
+      id='pagination-prev' 
       onClick={() => handlePaging(-step)} 
-      disabled={!from || loading}>
-      Prev
+      disabled={loading}
+    >
+      <i className="fas fa-caret-left"></i> Prev
     </button>
-    <span>Page {currentPage} of {totalPages} </span>
-    <button 
+  );
+
+  const nextButton = (
+    <button
+      id='pagination-next' 
       onClick={() => handlePaging(step)} 
-      disabled={!more || loading}>
-      Next
+      disabled={loading}
+    >
+      Next <i className="fas fa-caret-right"></i>
     </button>
-  </React.Fragment>
+  )
+
+  return <nav className='pagination'>
+    { from ? prevButton : null }
+    <span>Page {currentPage} of {totalPages} </span>
+    { more ? nextButton : null }
+  </nav>
 }
 
 const mapStateToProps = ({recipes: {more, count, loading}}) =>
