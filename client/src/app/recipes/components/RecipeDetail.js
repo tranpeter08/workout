@@ -24,7 +24,7 @@ export default class RecipeDetail extends React.Component{
       <section className='recipeDetail'>
         <section className='recipeDetail-container1'>
           <img src={image} alt='Food' />
-          <small>Source: {source}</small>
+          <small>Source: <em>{source}</em></small>
         
           <RecipeButton 
             buttonLabel={buttonLabel} 
@@ -35,9 +35,11 @@ export default class RecipeDetail extends React.Component{
 
         <section className='recipeDetail-container2'>
           <h2>{label}</h2>
-          <p>Total Calories: {Math.round(calories)}</p>
-          <p>Calories Per Serving: {Math.round(calories / servings)}</p>
-          <p>Servings: {servings}</p>
+          <div className='recipeDetail-text-container'>
+            <p><span>Total Calories: </span>{Math.round(calories)}</p>
+            <p><span>Calories Per Serving: </span>{Math.round(calories / servings)}</p>
+            <p><span>Servings: </span>{servings}</p>
+          </div>
         </section>
 
         <div className='recipeDetail-container3'>

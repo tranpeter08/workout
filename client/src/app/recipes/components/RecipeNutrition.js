@@ -1,8 +1,10 @@
 import React from 'react';
+import RecipeNutriLine from './RecipeNutritionLine';
+import RecipeNutriSub from './RecipeNutritionSub';
 
 class RecipeNutri extends React.Component{ 
   state = {
-    value: this.props.data.servings
+    value: 1
   }
 
   renderNutri = () => {
@@ -10,58 +12,44 @@ class RecipeNutri extends React.Component{
 
     return digest.map((line, index) => {
       if (line.sub) {
-        return this.nutriFactWithSub(line, index);
+        return <RecipeNutriSub key={index} line={line} />
       }
-      return this.nutriFact(line, index);
+      return <li key={index} >
+        <RecipeNutriLine {...line} />
+      </li>;
     });
   }
 
-  nutriText = ({label, total, daily, unit}) => {
-    const {value} = this.state;
-    return (
-      <span>
-        <span>{label}</span>{' '}
-        <span>{Math.round(total / value)}{unit}</span>{' '}
-        <span>{daily ? Math.round(daily / value) + '%' : '-'}</span>
-      </span>
-  )};
-
-  nutriFact = (line, i) => (
-    <li key={i}>
-      {this.nutriText(line)}
-    </li>
-  );
-
-  nutriFactWithSub = (line, i) => (
-    <li key={i}>
-      <details>
-        <summary>
-          {this.nutriText(line)}
-        </summary>
-        <ul>
-          {line.sub.map(this.nutriFact)}
-        </ul>
-      </details>
-    </li>
-  );
+  handleChange = ({target: {value}}) => {
+    this.setState({value});
+  }
 
   renderOptions = () => (
-    <select onChange={({target: {value}}) => this.setState({value})}>
-      <option value={this.props.data.servings}>Serving</option>
+    <select onChange={this.handleChange} value={this.state.value} >
       <option value={1}>Recipe</option>
+      <option value={this.props.data.servings}>Serving</option>
     </select>
   );
 
   render() {
     return (
-      <section>
-        <h3>Nutrition Facts Per {this.renderOptions()}</h3>
-        <ul> <span>Nutrient | Weight | Daily%</span>
-          {this.renderNutri()}
+      <section className='recipeDetail-nutrition'>
+        <h3><label>Nutrition Facts Per {this.renderOptions()}</label></h3>
+        <h4>
+          <div className='nutrient-label'>Nutrient</div>
+          <div className='nutrient-qty'>Weight</div>
+          <div className='nutrient-daily'>Daily%</div>        
+        </h4>
+        <ul> 
+          <RecipeNutriContext.Provider value={this.state.value}>
+            {this.renderNutri()}
+          </RecipeNutriContext.Provider>
         </ul>
       </section>
     )
   }
 }
+
+export const RecipeNutriContext = React.createContext();
 
 export default RecipeNutri;

@@ -5,7 +5,10 @@ export default function RecipeButton(props) {
   return (
     <React.Fragment>
     { isSaved ?  
-        <p>(check)Recipe saved to My Recipes</p>
+        <p>
+          <i className="saved-icon far fa-check-circle"></i>{' '}
+          Recipe saved!
+        </p>
         :
         <button 
           onClick={handleClick} 

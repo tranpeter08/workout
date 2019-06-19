@@ -43,7 +43,6 @@
 
 .recipeResult-detail-container a{
   font: inherit;
-  color: inherit;
 }
 
 .recipeResult-detail-container a:hover{
@@ -54,6 +53,7 @@
   display: block;
 }
 
+.recipeDetail-container2 span,
 .recipeResult-container .recipeResult-label{
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 800;
