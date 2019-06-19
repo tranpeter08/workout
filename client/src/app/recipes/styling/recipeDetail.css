@@ -37,6 +37,7 @@
 }
 
 .recipeDetail-container3 li,
+.recipeDetail-container1 p,
 .recipeDetail-container1 button{
   margin-top: 1rem;
 }
@@ -102,8 +103,8 @@
   font-size: 1.8rem;
 }
 
-.recipeDetail-nutrition{
-  font-size: 1.6rem;
+.ingrdnts-list-container{
+  padding-left: 2.2rem;
 }
 
 .recipeDetail-container3 ul{
@@ -111,9 +112,12 @@
   /* margin-left: 2.2rem; */
 }
 
-
 .recipeDetail-container3{
   flex: 1 1 50%;
+}
+
+.recipeDetail-nutrition{
+  font-size: 1.6rem;
 }
 
 .recipeDetail-nutrition{
@@ -146,14 +150,37 @@
   overflow: auto;
 }
 
+.recipeDetail-nutrition li{
+  margin-top: .5rem;
+}
+
 .recipeDetail-nutrition li,
 .recipeDetail-nutrition h4{
   display: flex;
 }
 
-.recipeDetail-text-container,
+.recipeDetail-nutrition .caret{
+  background: none;
+  border: none;
+  padding: .4rem .8rem;
+}
+
+.caret .caret-icon{
+  transition: .3s;
+  transform: rotate(0deg);
+}
+
+.caret.expanded .caret-icon{
+  transition: .3s;
+  transform: rotate(90deg);
+}
+
+.sub-line .nutrient-label{
+  font-style: italic;
+}
+
 .nutrient-qty,
-.nutrient-daily
+.nutrient-daily,
 .nutrient-label{
   display: inline-block;
 }
@@ -177,6 +204,10 @@
   .nutrient-qty,
   .nutrient-daily{
   width: 12rem;
+  }
+
+  .recipeDetail-nutrition .caret{
+    font-size: 1.6rem;
   }
 }
 

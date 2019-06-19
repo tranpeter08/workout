@@ -12,23 +12,35 @@ export default class RecipeNutriSub extends React.Component{
 
   renderSubs(sub) {
     if (this.state.showSub) {
-      return sub.map((line, i) => <li key={i}><RecipeNutriLine {...line} /></li>)
+      return sub.map((line, i) => 
+        <li 
+          key={i+'sub'}  
+          className='sub-line'
+        >
+          <RecipeNutriLine {...line} />
+        </li>
+      )
     }
+  }
+
+  handleClassName() {
+    let className = 'caret';
+    return this.state.showSub ? className + ' expanded' : className;
   }
 
   render() {
     const {line} = this.props;
     return (
-      <div>
+      <React.Fragment>
       <li>
-        <button className='caret' onClick={this.handleShowSub}>
-          Caret
+        <button className={this.handleClassName()} onClick={this.handleShowSub}>
+          <i className="caret-icon fas fa-caret-right"></i>
         </button>
         <RecipeNutriLine {...line} />
         
       </li>
       {this.renderSubs(line.sub)}
-      </div>
+      </React.Fragment>
       )
   }
 }

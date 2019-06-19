@@ -8,9 +8,11 @@ const RecipeIngrdnts = ({ingredientLines}) => {
   return (
     <section>
       <h3>Ingredients</h3>
-      <ul>
-        {renderIngrdnts()}
-      </ul>
+      <div className='ingrdnts-list-container'>
+        <ul>
+          {renderIngrdnts()}
+        </ul>
+      </div>
     </section>
   )
 }
