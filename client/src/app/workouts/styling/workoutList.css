@@ -1,15 +1,9 @@
 /* workoutList.css */
 
-/* .workouts-section h2{
-  background: 
-    url(../workouts.jpg)
-    center / cover
-    no-repeat;
-} */
-
 .workouts-section, .exercises-section{
   margin: 2rem;
   background-color: white;
+  border-radius: 0.8rem;
 }
 
 .workouts-section h2, 
@@ -17,6 +11,21 @@
   font-size: 2.4rem;
   text-align: center;
   padding: 2rem;
+  color: white;
+  text-shadow: 0 0 .4rem black;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
+}
+
+.workouts-section h2{
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.8),rgba(0,0,0,.2), 
+      rgba(0, 0, 0, .8)
+    ),
+    url('./dumbells-rack.jpg')
+    bottom 10% center / cover
+    no-repeat;
 }
 
 .workouts-section ul,
@@ -24,7 +33,7 @@
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
-  padding: 1rem 1rem 2rem;
+  padding: 0 1rem 2rem;
 }
 
 .workouts-section li,

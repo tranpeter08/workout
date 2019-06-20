@@ -11,6 +11,7 @@
   margin-top: 2rem;
 }
 
+.no-results,
 .recipe-search-status,
 .pagination,
 .recipe-results h3,
@@ -95,10 +96,12 @@
   border:  none;
 }
 
-.recipe-search-filters h3, h4{
+.recipe-search-filters h3, 
+.recipe-search-filters h4{
   font-family: 'Pontano Sans', sans-serif;
 }
 
+.no-results,
 .recipe-search-filters h3{
   font-size: 2rem;
 }
@@ -141,6 +144,7 @@
   font-size: 1.6rem;
 }
 
+.recipeResult-container button,
 #clear-filters-button{
   background-color: black;
   color: white;

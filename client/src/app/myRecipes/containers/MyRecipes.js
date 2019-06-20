@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import RecipeResult from '../../recipes/components/RecipeResult';
 import {getMyRecipes, deleteRecipe} from '../myRecipes-actions';
+import '../styling/myRecipes.css';
 
 class MyRecipes extends React.Component{
   componentDidMount() {
@@ -16,29 +17,31 @@ class MyRecipes extends React.Component{
 
   renderResults = () => {
     return this.props.myRecipes.recipes.map(item =>
-      <li key={item.uri}>
-        <RecipeResult  recipe={item} />
-        <button onClick={() => this.handleRemove(item.uri)}>
-          Remove from My Recipes
-        </button>
-        <hr/>
-      </li>
+      <RecipeResult 
+        key={item.uri} 
+        recipe={item} 
+        handleRemove={this.handleRemove} />
     )
   }
 
   render() {
-    return <React.Fragment>
-      <h2>MY Saved RECIPES</h2>
-      <section>
-          {this.props.myRecipes.recipes.length > 0 ? 
-            <ul>{this.renderResults()}</ul> 
-            : 
-            <p>You have no recipes saved. 
-                {' '}<Link to='/recipes/search'>Search</Link> for recipes and add them here.
-            </p>
-          }
-      </section>
-    </React.Fragment>
+    const {url} = this.props.match;
+    let urlArr = url.split('/');
+    urlArr.splice(-1, 1, 'search');
+
+    return <section className='myRecipes'>
+      <h2>My Recipes</h2>
+      {
+        this.props.myRecipes.recipes.length > 0 ? 
+          <ul>{this.renderResults()}</ul> 
+          : 
+          <p className='no-recipes'>
+            You have no recipes saved.{' '}
+            <Link to={urlArr.join('/')}>Search</Link>{' '}
+            for recipes and add them here.
+          </p>
+      }
+    </section>
   }
 }
 

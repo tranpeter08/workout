@@ -5,6 +5,10 @@ import RecipeButton from './RecipeButton';
 import '../styling/recipeDetail.css';
 
 export default class RecipeDetail extends React.Component{
+  componentDidMount() {
+    window.scrollTo({top: 0, left: 0, behavior: 'auto'});
+  }
+
   render() {
     const {
       details: {

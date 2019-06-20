@@ -63,13 +63,15 @@ export class UserInfo extends React.Component {
           <p>Height: {this.normalizeHeight()}</p>
           <p>Weight: {weight} {weightUnit}</p>
           <p>Body Fat: {bodyFat}%</p>
-          <button 
-            type='button'
-            onClick={this.toggleForm}
-            aria-label='Edit Profile'
-          >
-            <i className="edit-profile-icon far fa-edit"></i>
-          </button>
+          <div className='profile-button-container'>
+            <button 
+              type='button'
+              onClick={this.toggleForm}
+              aria-label='Edit Profile'
+            >
+              <i className="edit-profile-icon far fa-edit"></i>
+            </button>
+          </div>
         </div>
       );
     }
@@ -83,16 +85,18 @@ export class UserInfo extends React.Component {
       error
     } = this.props.user;
 
-    if (error && error.code === 401) {
+    if (!error) {
       return <Redirect to='/unauthorized' />
     }
 
     return (
       <section className='userInfo-section'>
         {this.renderForm(profile)}
-        <img className='userInfo-img' src='https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg' alt='User' />
-        {this.renderUserInfo(profile)}
-        {error && <ErrorMessage message={error.message} />}
+        {/* <img className='userInfo-img' src='https://cdn.pixabay.com/photo/2014/10/22/17/25/stretching-498256_1280.jpg' alt='User' /> */}
+        <div className='profile-container'>
+          {this.renderUserInfo(profile)}
+          {error && <ErrorMessage message={error.message} />}
+        </div>
       </section>
     )
   }

@@ -42,6 +42,10 @@
   margin-top: 1rem;
 }
 
+.recipeDetail-container1 p{
+  padding: .3rem 0;
+}
+
 .recipeDetail-container1 button{
   padding: .4rem .8rem;
   background-color: rgb(25, 80, 120);
@@ -94,7 +98,7 @@
   margin-bottom: 2rem;
 }
 
-.recipeDetail-container3 ul,
+.ingrdnts-list-container,
 .recipeDetail-text-container{
   margin: auto;
 }
@@ -109,7 +113,6 @@
 
 .recipeDetail-container3 ul{
   list-style-type: circle;
-  /* margin-left: 2.2rem; */
 }
 
 .recipeDetail-container3{
@@ -121,7 +124,7 @@
 }
 
 .recipeDetail-nutrition{
-  flex: 2 1 30rem;
+  flex: 2 1 31rem;
 }
 
 .recipeDetail-nutrition{
@@ -203,7 +206,7 @@
 
   .nutrient-qty,
   .nutrient-daily{
-  width: 12rem;
+    width: 12rem;
   }
 
   .recipeDetail-nutrition .caret{

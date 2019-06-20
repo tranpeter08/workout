@@ -25,7 +25,7 @@ class RecipeSrchForm extends React.Component{
   }
 
   render() {
-    const {term, handleChange, handleSubmit} = this.props;
+    const {term, handleChange, handleSubmit, loading} = this.props;
     const {showFilters} = this.state;
     const dietFilters = [
       'balanced',
@@ -65,6 +65,7 @@ class RecipeSrchForm extends React.Component{
             type='submit'
             id='recipe-search-button'
             aria-label='Search'
+            disabled={!term || loading}
           >
             <i className="fas fa-search"></i>
           </button>

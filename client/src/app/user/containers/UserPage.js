@@ -15,24 +15,24 @@ export class UserPage extends React.Component {
   render() {
     const {path} = this.props.match;
 
-      return (
-        <main className='userPage-main'>
-          <Switch>
-            <Route path={`${path}/recipes/myRecipes/details`} component={MyRecipe} />
-            <Route path={`${path}/recipes/myRecipes`} component={MyRecipes} />
-            <Route path={`${path}/recipes/search/details`} component={Recipe} />
-            <Route path={`${path}/recipes/search`} component={RecipeSearch} />
-            <Route path={`${path}/nutrition`} component={Nutrition} />
-            <Route path={`${path}`} component={UserInfo} />
-          </Switch>
-          <Switch>
-            <Route 
-              path={`${path}/workouts/:workoutName/exercises`}
-              component={ExerciseList} />
-            <Route path={`${path}/workouts`} component={WorkoutList} />
-          </Switch>
-        </main>
-      )
+    return (
+      <main className='userPage-main'>
+        <Switch>
+          <Route path={`${path}/recipes/myRecipes/details`} component={MyRecipe}/>
+          <Route path={`${path}/recipes/myRecipes`} component={MyRecipes} />
+          <Route path={`${path}/recipes/search/details`} component={Recipe} />
+          <Route path={`${path}/recipes/search`} component={RecipeSearch} />
+          <Route path={`${path}/nutrition`} component={Nutrition} />
+          <Route path={`${path}`} component={UserInfo} />
+        </Switch>
+        <Switch>
+          <Route 
+            path={`${path}/workouts/:workoutName/exercises`}
+            component={ExerciseList} />
+          <Route path={`${path}/workouts`} component={WorkoutList} />
+        </Switch>
+      </main>
+    )
   }
 };
 

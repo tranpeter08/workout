@@ -1,9 +1,6 @@
 /* recipeResults.css */
 
 .recipe-results li{
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
   margin-top: 2rem;
 }
 
@@ -12,12 +9,19 @@
   display: flex;
   flex-flow: row wrap;
   max-width: 80rem;
+  margin: auto;
 }
 
 .recipeResult-container,
 .recipeResult-detail-container,
 .recipeResult-img-container{
   padding: 1rem;
+}
+
+
+.recipeResult-detail-container{
+  display: flex;
+  flex-flow: column;
 }
 
 .recipeResult-img-container,
@@ -58,4 +62,18 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 800;
   display: inline;
+}
+
+.remove-button-container{
+  margin-top: auto;
+  text-align: center;
+}
+
+.recipeResult-container button{
+  font-size: 1.6rem;
+}
+
+.recipeResult-container button:hover{
+  background-color: red;
+  color: black;
 }

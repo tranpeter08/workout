@@ -1,0 +1,23 @@
+.notAuthorized-main{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notAuthorized-container{
+  text-align: center;
+}
+
+.notAuthorized-icon{
+  font-size: 6rem;
+}
+
+.notAuthorized-main h2{
+  font-size: 3rem;
+  padding: 2rem;
+}
+
+.notAuthorized-main p{
+  font-size: 2.4rem;
+}

@@ -13,7 +13,8 @@ const RecipeResult = props => {
       dietLabels,
       uri
     },
-    match: {url}
+    match: {url},
+    handleRemove
   } = props;
 
   const recipeId = uri.split('#')[1];
@@ -23,6 +24,9 @@ const RecipeResult = props => {
     search: recipeId,
     state: props.recipe
   }
+
+  const removeButton = 
+    <button onClick={() => handleRemove(uri)}>Remove Recipe</button>;
 
   return <li>
     <div className='recipeResult-container'>
@@ -49,6 +53,7 @@ const RecipeResult = props => {
           <span className='recipeResult-label'>Health Labels: </span>
           {healthLabels.join(', ')}
         </span>
+        <div className='remove-button-container'>{handleRemove ? removeButton : null}</div>
       </div>
 
     </div>

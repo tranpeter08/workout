@@ -162,6 +162,7 @@ class RecipeSearch extends React.Component{
         <h2>Recipes</h2>
         <RecipeSrchForm 
           term={term}
+          loading={loading}
           handleChange={this.handleChange}
           clearFilterState={this.clearFilterState}
           handleSubmit={this.handleSubmit}/>
