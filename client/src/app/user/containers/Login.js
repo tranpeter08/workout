@@ -18,7 +18,6 @@ export class Login extends Component {
   componentDidUpdate(prevProps) {
     const {error} = this.props.auth;
     if (prevProps.auth.error !== error) {
-      console.log(error)
       if (error.location) {
         document.getElementsByName(error.location)[0].focus();
       };
