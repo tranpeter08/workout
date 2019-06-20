@@ -176,11 +176,11 @@
   color: rgb(25, 80, 120)
 }
 
-#pagination-prev{
+.pagination-prev{
   margin-right: 1rem;
 }
 
-#pagination-next{
+.pagination-next{
   margin-left: 1rem;
 }
 

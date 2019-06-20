@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field} from 'redux-form';
-
 import WorkoutInput from '../components/WorkoutInput';
-import {required, notEmpty} from '../../user/validators';
+import {notEmpty} from '../../user/validators';
 import {createWorkout, editWorkout, clearErrors} from '../workout-actions';
 import '../styling/workoutForm.css'
 
@@ -60,22 +59,10 @@ class WorkoutForm extends Component {
 
   render() {
     const {
-      action, 
-      workoutName, 
       handleSubmit,
       workout: {error, loading},
       anyTouched
       } = this.props;
-
-    const statusMessage = () => {
-      if (loading) {
-        return 'Submitting...'
-      }
-
-      if (anyTouched && error) {
-        return `${error.message}`
-      }
-    };
 
     return (
       <form 
@@ -83,7 +70,6 @@ class WorkoutForm extends Component {
         onSubmit={handleSubmit(values => this.onSubmit(values))}
         ref={this.node}
       >
-        {/* <h3 >{action} {workoutName? workoutName : 'a workout'}</h3> */}
         <Field
           name='workoutName'
           label='Workout Name'

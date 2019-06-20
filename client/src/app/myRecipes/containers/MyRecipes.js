@@ -11,7 +11,10 @@ class MyRecipes extends React.Component{
   }
 
   handleRemove = uri => {
-    let recipes = this.props.myRecipes.recipes.filter(item => item.uri != uri);
+    let recipes = this.props.myRecipes.recipes.filter(item => 
+      item.uri !== uri
+    )
+    ;
     this.props.dispatch(deleteRecipe(uri, recipes));
   }
 

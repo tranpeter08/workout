@@ -85,7 +85,7 @@ export class UserInfo extends React.Component {
       error
     } = this.props.user;
 
-    if (!error) {
+    if (error && error.code === 401) {
       return <Redirect to='/unauthorized' />
     }
 

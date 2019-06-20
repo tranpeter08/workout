@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import RecipeSrchForm from './RecipeSearchForm';
 import RecipeResult from '../components/RecipeResult';
 import {queryStr} from '../../misc/utils';
-import {getRecipes, recipeClear} from '../recipes-actions';
+import {getRecipes} from '../recipes-actions';
 import Pagination from './RecipePaging';
 import ErrorMessage, {} from '../../misc/components/ErrorMessage';
 import '../styling/recipes.css';

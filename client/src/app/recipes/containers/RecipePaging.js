@@ -16,7 +16,7 @@ const Pagination = props => {
 
   const prevButton = (
     <button
-      id='pagination-prev' 
+      className='pagination-prev' 
       onClick={() => handlePaging(-step)} 
       disabled={loading}
     >
@@ -26,7 +26,7 @@ const Pagination = props => {
 
   const nextButton = (
     <button
-      id='pagination-next' 
+      className='pagination-next' 
       onClick={() => handlePaging(step)} 
       disabled={loading}
     >
