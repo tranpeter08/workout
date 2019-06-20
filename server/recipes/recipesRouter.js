@@ -4,6 +4,7 @@ const config = require('../config');
 const request = require('request');
 const {queryStr} = require('../utils');
 const {Recipe} = require('./model');
+const { jwtAuth } = require('../auth');
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ const RECIPES_ROOT_URL = 'https://api.edamam.com/search';
 const app_id = config.EDAMAM_RECIPES_ID;
 const app_key = config.EDAMAM_RECIPES_KEY;
 
-router.get('/', (req, res, next) => {
+router.get('/', jwtAuth, (req, res, next) => {
   const params = {
     ...req.query,
     app_id,
@@ -29,7 +30,6 @@ router.get('/', (req, res, next) => {
     RECIPES_ROOT_URL + '?' + searchQ,
     options,
     (err, resp, body) => {
-      console.log('body\n', body)
       if (err) {
         console.log('EDAMAM ERROR \n', err);
         return res.status(500).send({message: 'Internal Server Error'});
@@ -46,7 +46,7 @@ router.get('/', (req, res, next) => {
   )
 })
 
-router.get('/:username', (req, res) => {
+router.get('/:username', jwtAuth, (req, res) => {
   const {username} = req.params;
   return Recipe.find({username})
   .then(recipes => 
@@ -58,7 +58,7 @@ router.get('/:username', (req, res) => {
   .catch(err => res.json(err));
 });
 
-router.post('/:username/test', (req, res) => {
+router.post('/:username/test', jwtAuth, (req, res) => {
   const {uri} = req.body;
   const {username} = req.params;
   return Recipe.findOne({uri, username})
@@ -71,7 +71,7 @@ router.post('/:username/test', (req, res) => {
     .catch(error => res.json({error}))
 })
 
-router.post('/:username', (req, res) => {
+router.post('/:username', jwtAuth, (req, res) => {
   const {params: {username}, body: {uri}} = req;
   return Recipe.findOne({uri, username})
     .count()
@@ -84,7 +84,7 @@ router.post('/:username', (req, res) => {
     .catch(err => res.json({message: err.message}))
 });
 
-router.delete('/:username', (req, res) => {
+router.delete('/:username', jwtAuth, (req, res) => {
   const {uri} = req.body;
   return Recipe.findOneAndDelete({uri})
     .then(item => !item ? 

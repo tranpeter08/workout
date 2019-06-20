@@ -1,13 +1,14 @@
 const express = require('express');
 const request = require('request');
 const config = require('../config');
+const { jwtAuth } = require('../auth');
 
 const router = express.Router({mergeParams: true});
 
 let links;
 const NUTRIENT_ROOT_URL = 'https://api.edamam.com/api/food-database/'
 
-router.get('/', (req, res, next) => {
+router.get('/', jwtAuth, (req, res, next) => {
   const {ingr} = req.query;
   
   const searchQuery = {
@@ -46,7 +47,7 @@ router.get('/', (req, res, next) => {
   );
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', jwtAuth,(req, res, next) => {
   const options = {
     json: true,
     qs: {
@@ -75,7 +76,7 @@ router.post('/', (req, res, next) => {
   )
 })
 
-router.get('/next', (req, res, next) => {
+router.get('/next', jwtAuth, (req, res, next) => {
   if (!links) {
     return res.status(404).send({message: 'Not found'});
   }
