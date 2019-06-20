@@ -1,25 +1,21 @@
 'use strict';
 const express = require('express');
-
+const {jwtAuth} = require('../auth');
 const { Profile } = require('../users/model');
 const { Workout } = require('./model');
 const { Exercise } = require('../exercises/model');
-
 const { createError, handleError, sendRes} = require('../utils');
 
 const router = express.Router({mergeParams: true});
 
-// create new workout
-router.post('/', (req, res) => {
+router.post('/', jwtAuth,(req, res) => {
   const {workoutName} = req.body;
   const _workoutName = workoutName.trim();
   const {userId} = req.params;
-  console.log('===REQ PARAMS ===\n', req.params)
   return Profile
     .findOne({userId})
     .populate('workouts')
     .then(user => {
-      // find out if workname already exists for this user
       let result = user.workouts.find(workout => {
         return workout.workoutName === _workoutName;
       });
@@ -51,23 +47,19 @@ router.post('/', (req, res) => {
     });
 });
 
-
-//get all workouts
-router.get('/', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
   return Profile
     .findOne({userId: req.params.userId})
     .populate('workouts')
     .then(user => {
-      console.log('=== USER WORKOUTS ===', user);
       return res.status(200).json(user.workouts);
     })
     .catch(err => {
-      return res.status(500).json({message: 'something went wrong'});
+      return res.status(500).json({message: 'Internal server error.'});
     });
 })
 
-// get all exercises for a workout
-router.get('/:workoutId', (req, res) => {
+router.get('/:workoutId', jwtAuth, (req, res) => {
   return Workout
     .findById(req.params.workoutId)
     .populate('exercises')
@@ -83,9 +75,7 @@ router.get('/:workoutId', (req, res) => {
     });
 });
 
-// update workout
-// validate if workout exists
-router.put('/:workoutId',(req, res) =>{
+router.put('/:workoutId', jwtAuth, (req, res) =>{
   const { workoutName } = req.body;
   const {userId, workoutId} = req.params;
   if(!workoutName || workoutName && workoutName.trim() === ""){
@@ -95,13 +85,10 @@ router.put('/:workoutId',(req, res) =>{
     .findOne({userId})
     .populate('workouts')
     .then(user => {
-      // find out if workname already exists for this user
       let result = user.workouts.find(workout => {
         return workout.workoutName === workoutName;
       });
-      if(result && result._id.toString() !== workoutId){
-        console.log('update workout result \n', result._id)
-        console.log('update workout result \n', workoutId)
+      if (result && result._id.toString() !== workoutId){
         return createError(
           'validationError', 
           `Workout "${workoutName}" already exists for this user`,
@@ -112,11 +99,11 @@ router.put('/:workoutId',(req, res) =>{
         .findByIdAndUpdate(workoutId, {workoutName})
     }) 
     .then(result => {
-      if(!result){
+      if (!result) {
         return Promise.reject({
           reason: 'validationError',
           message: 'workout not found',
-          code: 400
+          code: 404
         });
       }
       return res.status(200).json({message: 'workout updated successfully!'});
@@ -126,12 +113,11 @@ router.put('/:workoutId',(req, res) =>{
       if(err.reason === 'validationError'){
         return res.status(err.code).json({message: err.message});
       }
-      return res.status(500).json({message: 'Something went wrong...'});
+      return res.status(500).json({message: 'Internal server error.'});
     });
 });
 
-// delete workout with exercises
-router.delete('/:workoutId', (req, res) => {
+router.delete('/:workoutId', jwtAuth, (req, res) => {
   const {workoutId, userId} = req.params;
 
   return Profile

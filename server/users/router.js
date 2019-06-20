@@ -86,8 +86,7 @@ router.post('/', validateUser, validateProfile, (req, res) => {
     });
 });
 
-// update user password or email
-router.put('/:userId', jwtAuth,(req, res) => {
+router.put('/:userId', jwtAuth, (req, res) => {
   return User
     .findByIdAndUpdate(
       req.params.userId,
@@ -103,19 +102,13 @@ router.put('/:userId', jwtAuth,(req, res) => {
 
 });
 
-// get profile
 router.get('/profile/:userId/', jwtAuth, (req, res) => {
   return Profile
     .findOne({userId: req.params.userId})
-    .populate({
-      path: 'workouts',
-      populate: {path: 'exercises'}
-    })
     .then(profile => {
       if (!profile) {
         createError('validationError', 'profile not found', 404);
       }
-      console.log('get profile\n', profile);
       return res.status(200).json(profile);
     })
     .catch(err => {
@@ -123,7 +116,6 @@ router.get('/profile/:userId/', jwtAuth, (req, res) => {
     })
 })
 
-//update profile
 router.put('/profile/:userId/', jwtAuth, validateProfile, (req, res) => {
 
   return Profile

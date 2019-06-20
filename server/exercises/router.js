@@ -3,11 +3,11 @@ const express = require('express');
 const { Workout } = require('../workouts/model');
 const { Exercise } = require('./model');
 const { createError, handleError, sendRes } = require('../utils');
+const { jwtAuth } = require('../auth');
+
 const router = express.Router({mergeParams: true});
 
-// create exercise
-router.post('/', (req, res) => {
-  console.log('=== REQ BODY ====\n', req.body)
+router.post('/', jwtAuth, (req, res) => {
   const {exerciseName} = req.body;
   const {workoutId} = req.params;
   return Workout
@@ -20,7 +20,6 @@ router.post('/', (req, res) => {
       let result = workout.exercises.find(exercise => {
         return exercise.exerciseName === exerciseName;
       });
-      console.log('=== RESULT ===', result)
       if(result){
         return createError(
           'validationError',
@@ -33,7 +32,6 @@ router.post('/', (req, res) => {
         .create(req.body);
     })
     .then(newExercise => {
-      console.log('=== NEW EXERCISE ===\n', newExercise)
       return Workout
         .findById(workoutId)
         .then(workout => {
@@ -59,8 +57,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// get single exercise
-router.get('/:exerciseId', (req, res) => {
+router.get('/:exerciseId', jwtAuth, (req, res) => {
   return Exercise
     .findById(req.params.exerciseId)
     .then(exercise => {
@@ -74,8 +71,7 @@ router.get('/:exerciseId', (req, res) => {
     });
 });
 
-// update exercise
-router.put('/:exerciseId', (req, res) => {
+router.put('/:exerciseId', jwtAuth, (req, res) => {
   const { exerciseName } = req.body;
   const {workoutId, exerciseId}  = req.params;
 
@@ -94,7 +90,6 @@ router.put('/:exerciseId', (req, res) => {
       return Exercise.findByIdAndUpdate(exerciseId, req.body);
     })
     .then(result => {
-      console.log('=== UPDATE EXERCISE RESULT ===\n', result)
       if (!result) {
         return createError('validationError', 'exercise not found', 404);
       }
@@ -105,8 +100,7 @@ router.put('/:exerciseId', (req, res) => {
     });
 });
 
-// delete single exercise
-router.delete('/:exerciseId', (req, res) => {
+router.delete('/:exerciseId', jwtAuth, (req, res) => {
     const {workoutId, exerciseId} = req.params;
     return Workout
       .findById(workoutId)
@@ -114,18 +108,15 @@ router.delete('/:exerciseId', (req, res) => {
         if (!workout) {
           return createError('validationError', 'workout not found', 404);
         }
-        console.log('=== WORKOUT EXERCISES ===\n', workout);
         workout.exercises.remove({_id: exerciseId});
         workout.save();
         return workout;
       })
       .then(workout => {
-        console.log('=== WORKOUT EXERCISE REMOVE ===\n', workout);
         return Exercise
           .findByIdAndDelete(exerciseId);
       })
       .then(result => {
-        console.log('=== EXERCISE DELETE ===\n', result);
         if (!result) {
           return createError('validationError', 'Exercise not found', 404);
         }

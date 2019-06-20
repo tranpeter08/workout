@@ -111,11 +111,6 @@ ProfileSchema.methods.serialize = function() {
   };
 };
 
-// ProfileSchema.pre('findOne', function(next) {
-//   this.populate('user', '-password',);
-//   next();
-// })
-
 UserSchema.methods.validatePassword = function(password) {
   return bcrypt.compare(password, this.password);
 };
@@ -123,11 +118,6 @@ UserSchema.methods.validatePassword = function(password) {
 UserSchema.statics.hashPassword = function(password) {
   return bcrypt.hash(password, 10);
 }
-
-// UserSchema.pre('findOne', function(next){
-//   this.populate('workouts');
-//   next();
-// });
 
 const User = mongoose.model('User', UserSchema);
 const Profile = mongoose.model('Profile', ProfileSchema);
