@@ -46,4 +46,4 @@ router.get('/test', jwtAuth, (req, res) => {
   res.json({isValid: true})
 })
 
-module.exports = {router, jwtAuth};
+module.exports = {router, jwtAuth, createAuthToken};

@@ -29,7 +29,6 @@ const localStrategy = new LocalStrategy((username, password, done) => {
         })
       }
       return done(null, user);
-      // passport returns a user object
     })
     .catch(err => {
       if(err.reason === 'LoginError') {

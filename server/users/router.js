@@ -3,7 +3,7 @@ const express = require('express');
 const request = require('request');
 const multer = require('multer');
 const { User, Profile } = require('./model');
-const { jwtAuth } = require('../auth')
+const { jwtAuth, createAuthToken } = require('../auth');
 const { validateUser, validateProfile } = require('./validate');
 const { createError, handleError, sendRes } = require('../utils');
 
@@ -37,7 +37,7 @@ router.post('/upload', (req, res) => {
 
 router.post('/', validateUser, validateProfile, (req, res) => {
   const {username, password, email, profile} = req.body;
-
+  let authToken;
   return User
     .findOne({email})
     .then(user => {
@@ -71,11 +71,12 @@ router.post('/', validateUser, validateProfile, (req, res) => {
         });
     })
     .then(user => {
+      authToken = createAuthToken(user.serialize());
       return Profile
         .create({userId: user._id, ...profile});
     })
     .then(profile => {
-      return res.status(201).json(profile);
+      return res.status(201).json({authToken});
     })
     .catch(err => {
       if(err.reason === 'validationError') {
@@ -131,7 +132,6 @@ router.put('/profile/:userId/', jwtAuth, validateProfile, (req, res) => {
     });
 });
 
-// TODO: route for new password request
 router.post('/lost-credentials', (req, res) => {
   const { username, email } = req.body;
 
