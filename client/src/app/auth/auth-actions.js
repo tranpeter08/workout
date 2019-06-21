@@ -68,6 +68,31 @@ export const logIn = (username, password) => dispatch => {
   });
 }
 
+export const createUser = data => dispatch => {
+  dispatch(authRequest());
+  return fetch(
+    `${API_BASE_URL}/users`, 
+    fetchOptions('POST', data, true)
+    )
+    .then(res => normalizeRes(res))
+    .then(({authToken}) => {
+      dispatch(storeToken(authToken, dispatch));
+    })
+    .catch(error => {
+      dispatch(authError(error));
+      if (error.reason === 'validationError') {
+        console.error('ERROR:', error);
+        return Promise.reject( 
+          new SubmissionError({
+            [error.location[0]]: error.message,
+            _error: 'Validation error...'
+          })
+        );
+      }
+      return error;
+    });
+}
+
 export const authPersist = token => dispatch => {
   storeToken(token, dispatch);
 }
@@ -78,7 +103,7 @@ export const logOut = () => dispatch => {
 }
 
 export const refreshToken = () => dispatch => {
-  dispatch(authRequest);
+  dispatch(authRequest());
   return fetch(
     `${API_BASE_URL}/auth/refresh`,
     fetchOptions('POST')

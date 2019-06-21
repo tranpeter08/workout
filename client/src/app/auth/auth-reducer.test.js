@@ -3,11 +3,11 @@ import {authSuccess} from './auth-actions';
 import reducer from './auth-reducer';
 
 const initialState = {
-  username: null,
-  userId: null,
+  username: '',
+  userId: '',
   loading: false,
-  error: null,
-  token: null,
+  error: '',
+  token: '',
 };
 
 describe('authReducer', ()=> {
@@ -17,15 +17,14 @@ describe('authReducer', ()=> {
 
   it('should return the correct state on AUTH_REQUEST', () => {
     let username='test',
-      password='1234567890';
+      userId='1234567890';
 
-    let updatedState = {...initialState, username, password}
+    let updatedState = {...initialState, username, userId}
 
     expect(reducer(undefined, authSuccess('hello', '54321')))
-      .not.toBe({updatedState});
+      .not.toEqual({updatedState});
 
-    expect(reducer(undefined, authSuccess(username, password)))
-      .toBe(updatedState);
+    expect(reducer(undefined, authSuccess(username, userId)))
+      .toEqual(updatedState);
   });
-
-})
+});

@@ -16,7 +16,7 @@ import {
   matching, 
   isTrimmed,
 } from '../validators';
-import {createUser} from '../user-actions';
+import {createUser} from '../../auth/auth-actions';
 import '../style/register.css';
 
 import UserInputs from '../components/UserInputs';

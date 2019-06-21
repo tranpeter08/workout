@@ -1,7 +1,6 @@
 import {
   USER_REQUEST, 
-  USER_SUCCESS, 
-  USER_CLEAR,
+  USER_SUCCESS,
   USER_ERROR
 } from './user-actions';
 
@@ -18,8 +17,6 @@ const userReducer = (state = initialState, action) => {
       return {...state, loading: true};
     case USER_SUCCESS:
       return {...state, loading: false, error: '', profile};
-    case USER_CLEAR:
-      return {...state, profile: ''};
     case USER_ERROR:
       return {...state, loading: false, error};
     default:
