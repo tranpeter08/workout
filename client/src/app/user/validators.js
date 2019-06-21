@@ -4,18 +4,21 @@ export const notEmpty = value => !value ? null : value.trim() === '' ?
   '*Cannot be empty' : null;
 
 export const isTrimmed = value => value.trim() !== value? 
-  '*Cannot start or end with whitespace':null;
+  '*Cannot start or end with whitespace' : null;
 
 export const noSpaceInside = value => 
   value.split(' ').length > 1 ? '*Cannot have spaces between characters' : null;
 
-const length = (min, max) => value => {
+export const length = (min, max) => value => {
   if(min && value.length < min) {
     return `*Must be at least ${min} characters`;
-  }
+  };
+
   if(max && value.length > max) {
-    return `*Must be less than than ${max}`
-  }
+    return `*Must be less than than ${max}`;
+  };
+
+  return null;
 };
 
 export const usernameLength = length(8, 20);
