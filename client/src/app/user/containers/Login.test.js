@@ -3,6 +3,9 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import { Login} from './Login';
 import {logIn} from '../../auth/auth-actions';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import {AUTH_REQUEST} from '../../auth/auth-actions';
 
 describe('<Login />', () => {
   const props = {
@@ -21,13 +24,22 @@ describe('<Login />', () => {
   });
 
   it('onSubmit dispatches', () => {
-    let wrapper = shallow(<Login {...props} />),
+    const middlewares = [thunk];
+    const mockStore = configureMockStore(middlewares);
+    const store = mockStore({auth: {loading: '', error: '', username: ''}})
+    let wrapper = shallow(<Login {...props} dispatch={store.dispatch} />),
     username = 'hello123',
     password = 'person123',
     instance = wrapper.instance();
 
+    const expectedActions = [
+      {type: AUTH_REQUEST}
+    ];
+    
     instance.onSubmit({username, password});
+    expect(store.getActions()).toEqual(expectedActions);
     // expect(props.dispatch).toHaveBeenCalledWith(logIn(username, password));
+    // check instead for authRuquest action
   })
 
   it('displays the error if there is an error', () => {

@@ -5,7 +5,7 @@ import {fetchOptions, normalizeRes} from '../misc/utils';
 
 export const USER_REQUEST = 'USER_REQUEST';
 export const userRequest = () => ({type: USER_REQUEST});
-
+// add actions for each 
 export const USER_SUCCESS = 'USER_SUCCESS';
 export const userSuccess = profile => ({type: USER_SUCCESS, profile});
 
@@ -43,10 +43,12 @@ export const userError = (error) => ({
 
 export const getProfile = () => (dispatch, getState) => {
   dispatch(userRequest());
+  // separate action for get profile
   const {userId} = getState().auth;
   return fetch(`${API_BASE_URL}/users/profile/${userId}`, fetchOptions('GET'))
     .then(normalizeRes)
     .then(profile => {
+      // 
       dispatch(userSuccess(profile));
       return true;
     })
@@ -58,7 +60,8 @@ export const getProfile = () => (dispatch, getState) => {
 }
 
 export const updateProfile = data => (dispatch, getState) => {
-  dispatch(userRequest());
+  dispatch(userRequest()); 
+  // separate action for update;
   const {userId} = getState().auth;
   return fetch(
     `${API_BASE_URL}/users/profile/${userId}`,
