@@ -29,6 +29,8 @@ export const matching = (value, allValues) => {
   if ('password' in allValues && value !== allValues['password']) {
     return '*Passwords do not match' 
   }
+
+  return null;
 };
 
 export const selected = inputName => (value, allValues) => {

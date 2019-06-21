@@ -70,37 +70,47 @@ describe('validators', () => {
         return str;
       };
 
-      let validate = length(min, max);
+      const validate = num => length(min, max)(stringLength(num));
 
-      expect(validate(stringLength(5))).not.toEqual(warningMin);
-      expect(validate(stringLength(5))).not.toEqual(warningMax);
-      expect(validate(stringLength(5))).toBeNull();
+      expect(validate(5)).not.toEqual(warningMin);
+      expect(validate(5)).not.toEqual(warningMax);
+      expect(validate(5)).toBeNull();
 
-      expect(validate(stringLength(4))).not.toEqual(warningMax);
-      expect(validate(stringLength(4))).not.toBeNull();
-      expect(validate(stringLength(4))).toEqual(warningMin);
+      expect(validate(4)).not.toEqual(warningMax);
+      expect(validate(4)).not.toBeNull();
+      expect(validate(4)).toEqual(warningMin);
 
-      expect(validate(stringLength(11))).not.toEqual(warningMin);
-      expect(validate(stringLength(11))).not.toBeNull();
-      expect(validate(stringLength(11))).toEqual(warningMax);
+      expect(validate(11)).not.toEqual(warningMin);
+      expect(validate(11)).not.toBeNull();
+      expect(validate(11)).toEqual(warningMax);
     });
   });
 
-  describe('noSpaceInside', () => {
+  describe('matching', () => {
     it('returns the right warning', () => {
-      let warning = '';
+      let 
+        warning = '*Passwords do not match',
+        confirmPassword = '',
+        allValues = {};
 
-      // expect(isTrimmed('')).toBeNull();
+      expect(matching(confirmPassword, allValues)).toBeNull();
+      expect(matching(confirmPassword, allValues)).not.toEqual(warning);
+
+      allValues.password = '1234';
+
+      expect(matching(confirmPassword, allValues)).not.toBeNull();
+      expect(matching(confirmPassword, allValues)).toEqual(warning);
+
+      confirmPassword = '12345';
+
+      expect(matching(confirmPassword, allValues)).not.toBeNull();
+      expect(matching(confirmPassword, allValues)).toEqual(warning);
+
+      confirmPassword = allValues.password;
+
+      expect(matching(confirmPassword, allValues)).toBeNull();
+      expect(matching(confirmPassword, allValues)).not.toEqual(warning);
     });
   });
 
-  describe('noSpaceInside', () => {
-    it('returns the right warning', () => {
-      let warning = '';
-
-      // expect(isTrimmed('')).toBeNull();
-    });
-  });
-
-  
 });
