@@ -5,9 +5,19 @@ import {fetchOptions, normalizeRes} from '../misc/utils';
 import {saveToken, deleteToken} from '../misc/local-storage';
 import {resetApp} from '../root-actions';
 
-export const AUTH_REQUEST = 'AUTH_REQUEST';
-export const authRequest = () => ({
-  type: AUTH_REQUEST
+export const AUTH_LOGIN_REQUEST = 'AUTH_LOGIN_REQUEST';
+export const authLoginRequest = () => ({
+  type: AUTH_LOGIN_REQUEST
+});
+
+export const AUTH_CREATE_USER_REQUEST = 'AUTH_CREATE_USER_REQUEST';
+export const authCreateUserReq = () => ({
+  type: AUTH_CREATE_USER_REQUEST
+});
+
+export const AUTH_REFRESH_REQUEST = 'AUTH_REFRESH_REQUEST';
+export const authRefreshRequest = () => ({
+  type: AUTH_REFRESH_REQUEST
 });
 
 export const AUTH_SET = 'AUTH_SET';
@@ -35,14 +45,15 @@ export const authError = error => ({
 });
 
 const storeToken = (token, dispatch) => {
-  const decodedJwt = jwtDecode(token).payload;
+  const {username , userId} = jwtDecode(token).payload;
+
   saveToken(token);
   dispatch(authSet(token));
-  dispatch(authSuccess(decodedJwt.username, decodedJwt.userId));
+  dispatch(authSuccess(username, userId));
 }
 
 export const logIn = (username, password) => dispatch => {
-  dispatch(authRequest());
+  dispatch(authLoginRequest());
   return fetch(
     `${API_BASE_URL}/auth/login`,
     fetchOptions('POST', {username, password}, true)
@@ -69,14 +80,14 @@ export const logIn = (username, password) => dispatch => {
 }
 
 export const createUser = data => dispatch => {
-  dispatch(authRequest());
+  dispatch(authCreateUserReq());
   return fetch(
     `${API_BASE_URL}/users`, 
     fetchOptions('POST', data, true)
     )
-    .then(res => normalizeRes(res))
+    .then(normalizeRes)
     .then(({authToken}) => {
-      dispatch(storeToken(authToken, dispatch));
+      storeToken(authToken, dispatch);
     })
     .catch(error => {
       dispatch(authError(error));
@@ -103,7 +114,7 @@ export const logOut = () => dispatch => {
 }
 
 export const refreshToken = () => dispatch => {
-  dispatch(authRequest());
+  dispatch(authRefreshRequest());
   return fetch(
     `${API_BASE_URL}/auth/refresh`,
     fetchOptions('POST')
