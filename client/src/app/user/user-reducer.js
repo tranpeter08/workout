@@ -1,6 +1,8 @@
 import {
-  USER_REQUEST, 
-  USER_SUCCESS,
+  GET_PROFILE_REQUEST,
+  GET_PROFILE_SUCCESS,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
   USER_ERROR
 } from './user-actions';
 
@@ -12,16 +14,21 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   const {profile, error} = action;
+
   switch(action.type) {
-    case USER_REQUEST:
+    case GET_PROFILE_REQUEST:
       return {...state, loading: true};
-    case USER_SUCCESS:
+    case GET_PROFILE_SUCCESS:
       return {...state, loading: false, error: '', profile};
+    case UPDATE_PROFILE_REQUEST:
+      return {...state, loading: true};
+    case UPDATE_PROFILE_SUCCESS:
+      return {...state,loading: true, error: ''};
     case USER_ERROR:
       return {...state, loading: false, error};
     default:
       return state;
-  }
+  };
 }
 
 export default userReducer;

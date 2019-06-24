@@ -37,10 +37,10 @@ export class NotAuthorized extends React.Component{
     return (
       <main className='notAuthorized-main'>
       <div className='notAuthorized-container'>
-      <i className="notAuthorized-icon fas fa-exclamation-triangle"></i>
+        <i className="notAuthorized-icon fas fa-exclamation-triangle"></i>
         <h2>ERROR 401</h2>
         <p>Unauthorized access! Logging out...</p>
-        </div>
+      </div>
       </main>
     )
   }

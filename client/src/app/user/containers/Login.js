@@ -100,8 +100,8 @@ export const mapStateToProps = ( state, props) => {
 export const FormLogin = reduxForm({
   form: 'logIn',
   initialValues: {
-    'username': 'petertran',
-    'password': '1234567890'
+    'username': 'petertran00',
+    'password': 'petertran00'
   }
 })(Login);
 

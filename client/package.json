@@ -34,6 +34,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "dotenv": "^8.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
     "fetch-mock": "^7.3.3",

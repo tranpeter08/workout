@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import RecipeSrchForm from './RecipeSearchForm';
 import RecipeResult from '../components/RecipeResult';
 import {queryStr} from '../../misc/utils';
@@ -156,6 +157,10 @@ class RecipeSearch extends React.Component{
   render() {
     const {loading, error} = this.props.recipes;
     const {term} = this.state;
+
+    if (error.code === 401) {
+      return <Redirect to='/unauthorized' />
+    }
 
     return (
       <section className='recipes-section'>

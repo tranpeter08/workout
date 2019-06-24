@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter, Switch} from 'react-router-dom';
 import Navigation from './navigation/containers/Navigation';
 import Landing from './landing/components/Landing';
 import Login from './user/containers/Login';
@@ -10,6 +10,7 @@ import RefreshModal from './RefreshModal';
 import {logOut, refreshToken} from './auth/auth-actions';
 import {Footer} from './footer/Footer';
 import NotAuthorized from './auth/container/NotAuthorized';
+import NotFound from './misc/components/NotFound';
 
 class App extends React.Component{
   state = {
@@ -17,6 +18,12 @@ class App extends React.Component{
     interval: 60,   // minutes
     timeout: 1      // minutes
   };
+
+  componentDidMount() {
+    if (this.props.hasToken){
+      this.props.dispatch(refreshToken());
+    }
+  }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.loggedIn && this.props.loggedIn) {
@@ -109,11 +116,15 @@ class App extends React.Component{
           <header>
             <Navigation />
           </header>
-          <Route exact path='/' component={Landing} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
-          <Route path='/user/:username' component={UserPage} />
-          <Route path='/unauthorized' component={NotAuthorized} />
+          <Switch>
+            <Route exact path='/' component={Landing} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
+            <Route path='/user/:username' component={UserPage} />
+            <Route path='/unauthorized' component={NotAuthorized} />
+            <Route path='' component={NotFound}/>
+
+          </Switch>
           <Footer />
         </React.Fragment>
     );

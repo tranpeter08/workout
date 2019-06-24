@@ -36,7 +36,7 @@ class ExerciseList extends Component {
 
     return(
       <section className='exercises-section'>
-        <h2>Exercises for "{workoutName}"</h2>
+        <h2 className='exercises-section-h2'>Exercises for "{workoutName}"</h2>
         <button 
           className='exercises-back-button' 
           onClick={() => goBack()}

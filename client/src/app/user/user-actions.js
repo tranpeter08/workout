@@ -1,13 +1,18 @@
-import {SubmissionError} from 'redux-form';
-import {logIn} from '../auth/auth-actions';
 import {API_BASE_URL} from '../misc/config';
 import {fetchOptions, normalizeRes} from '../misc/utils';
 
-export const USER_REQUEST = 'USER_REQUEST';
-export const userRequest = () => ({type: USER_REQUEST});
-// add actions for each 
-export const USER_SUCCESS = 'USER_SUCCESS';
-export const userSuccess = profile => ({type: USER_SUCCESS, profile});
+export const GET_PROFILE_REQUEST = 'GET_PROFILE_REQUEST';
+export const getProfileRequest = () => ({type: GET_PROFILE_REQUEST});
+
+export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';
+export const getProfileSuccess = profile => 
+  ({type: GET_PROFILE_SUCCESS, profile});
+
+export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
+export const updateProfileRequest = () => ({type: UPDATE_PROFILE_REQUEST});
+
+export const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS';
+export const updateProfileSuccess = () => ({type: UPDATE_PROFILE_SUCCESS});
 
 export const USER_ERROR = 'USER_ERROR';
 export const userError = (error) => ({
@@ -15,41 +20,14 @@ export const userError = (error) => ({
   error
 });
 
-// export const createUser = data => dispatch => {
-//   dispatch(userRequest());
-//   return fetch(
-//     `${API_BASE_URL}/users`, 
-//     fetchOptions('POST', data, true)
-//     )
-//     .then(res => normalizeRes(res))
-//     .then(profile => {
-//       dispatch(userSuccess(profile));
-//       dispatch(logIn(data.username, data.password));
-//     })
-//     .catch(error => {
-//       dispatch(userError(error));
-//       if (error.reason === 'validationError') {
-//         console.error('ERROR:', error);
-//         return Promise.reject( 
-//           new SubmissionError({
-//             [error.location[0]]: error.message,
-//             _error: 'Validation error...'
-//           })
-//         );
-//       }
-//       return error;
-//     });
-// }
-
 export const getProfile = () => (dispatch, getState) => {
-  dispatch(userRequest());
+  dispatch(getProfileRequest());
   // separate action for get profile
   const {userId} = getState().auth;
   return fetch(`${API_BASE_URL}/users/profile/${userId}`, fetchOptions('GET'))
     .then(normalizeRes)
     .then(profile => {
-      // 
-      dispatch(userSuccess(profile));
+      dispatch(getProfileSuccess(profile));
       return true;
     })
     .catch(error => {
@@ -60,15 +38,17 @@ export const getProfile = () => (dispatch, getState) => {
 }
 
 export const updateProfile = data => (dispatch, getState) => {
-  dispatch(userRequest()); 
-  // separate action for update;
+  dispatch(updateProfileRequest());
   const {userId} = getState().auth;
   return fetch(
     `${API_BASE_URL}/users/profile/${userId}`,
     fetchOptions('PUT', data)
   )
   .then(normalizeRes)
-  .then(profile => dispatch(getProfile()))
+  .then(() => {
+    dispatch(updateProfileSuccess());
+    dispatch(updateProfile());
+  })
   .catch(err => {
     dispatch(userError(err));
     console.error('UPDATE PROFILE ERROR:', err);

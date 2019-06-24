@@ -1,5 +1,7 @@
 import {
-  AUTH_REQUEST,
+  AUTH_LOGIN_REQUEST,
+  AUTH_CREATE_USER_REQUEST,
+  AUTH_REFRESH_REQUEST,
   AUTH_SET,
   AUTH_CLEAR,
   AUTH_SUCCESS,
@@ -17,7 +19,11 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   const {username, userId, error, token} = action;
   switch(action.type){
-    case AUTH_REQUEST:
+    case AUTH_LOGIN_REQUEST:
+      return {...state, loading: true};
+    case AUTH_CREATE_USER_REQUEST:
+      return {...state, loading: true};
+    case AUTH_REFRESH_REQUEST:
       return {...state, loading: true};
     case AUTH_SET:
       return {...state, token};

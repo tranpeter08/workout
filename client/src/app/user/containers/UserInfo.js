@@ -28,21 +28,35 @@ export class UserInfo extends React.Component {
       null
   }
 
-  normalizeHeight() {
-    const {height, heightUnit, inches} = this.props.user.profile;
-    if (heightUnit === 'ft' && !inches) {
-      return `${height}'`
-    }
-
-    if (!height && inches) {
-      return `${inches}"`
-    }
+  normalizeHeight({height, heightUnit, inches}) {
     
-    if (heightUnit === 'ft') {
+    if (heightUnit === 'ft' && inches) {
       return `${height}' ${inches}"`
     }
 
-    return `${height} ${heightUnit}`
+    if (heightUnit === 'ft' && height && !inches) {
+      return `${height}'`
+    };
+
+    if (!height && inches) {
+      return `${inches}"`
+    };
+    
+    if (!height) {
+      return '';
+    }
+
+    // `6' ; 6'6" ; 6cm ; 6" ; ''`
+
+    return `${height} ${heightUnit}`;
+  }
+
+  normalizeWeight({weight, weightUnit}) {
+    if (!weight) {
+      return '';
+    }
+
+    return `${weight} ${weightUnit}`; 
   }
 
   renderUserInfo(profile) {
@@ -50,9 +64,7 @@ export class UserInfo extends React.Component {
       const {
         bodyFat, 
         firstName, 
-        lastName, 
-        weight, 
-        weightUnit
+        lastName
       } = profile;
 
       const name = `${firstName || ''} ${lastName || ''}`;
@@ -60,8 +72,8 @@ export class UserInfo extends React.Component {
       return (
         <div className='userInfo-detail-container'>
           <h2>{name.trim()}</h2>
-          <p>Height: {this.normalizeHeight()}</p>
-          <p>Weight: {weight} {weightUnit}</p>
+          <p>Height: {this.normalizeHeight(profile)}</p>
+          <p>Weight: {this.normalizeWeight(profile)}</p>
           <p>Body Fat: {bodyFat}%</p>
           <div className='profile-button-container'>
             <button 
